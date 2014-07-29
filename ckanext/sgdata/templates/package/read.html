@@ -1,0 +1,10 @@
+{% ckan_extends %}
+
+{% block package_notes %}
+  {% if c.pkg_notes_formatted %}
+    <div class="notes embedded-content">
+      <h2>Purpose</h2>
+      {{ c.pkg_notes_formatted }}
+    </div>
+  {% endif %}
+{% endblock %}

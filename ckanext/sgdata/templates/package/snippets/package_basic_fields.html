@@ -1,0 +1,7 @@
+{% ckan_extends %}
+
+{% block package_basic_fields_description %}
+  {{ form.markdown('notes', id='field-notes', label=_('Purpose'),
+                   placeholder=_('eg. Data on Electricity Generation as well as Licensed Electrical Workers are collected for regulatory purposes.'),
+                   value=data.notes, error=errors.notes) }}
+{% endblock %}
