@@ -1,0 +1,284 @@
+{% import 'macros/form.html' as form %}
+{% set action = c.form_action or '' %}
+
+{% macro required(is_required) %}
+  {% if is_required %}<span title="{{ _("This field is required") }}" class="control-required">*</span> {% endif %}
+{% endmacro %}
+
+{% macro textarea(name, label, help='', rows=5, cols=20, is_required=False, disabled=False) -%}
+  <div class="control-group control-full">
+    <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
+    <div class="controls editor">
+      <textarea id="field-{{ name }}" rows="{{ rows }}" cols="{{ cols }}"
+                name="{{ name }}" style="margin-bottom:0;"
+                {% if disabled %}disabled{% endif %}>{{ data[name] }}</textarea>
+      {% if errors[name] and errors[name] is iterable %}
+        <span class="error-block">{{ errors[name]|join(', ') }}</span>
+      {% endif %}
+      {% if help %}
+        <span class="editor-info-block">
+          {{ help }}
+        </span>
+      {% endif %}
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro datepicker(name, label, disabled=False) -%}
+  <div class="control-group">
+    <label class="control-label" for="field-{{ name }}">{{ label }}</label>
+    <div class="controls">
+      <input type="date" id="field-{{ name }}" class="datepicker"
+      value="{{ data[name] }}" {% if disabled %}disabled{% endif %}>
+      <span class="help-block">The date on which the metadata will be made available.</span>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro select(name, label, options, is_required=False, disabled=False) -%}
+  <div class="control-group">
+    <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
+    <div class="controls">
+      <select id="field-{{ name }}" {% if disabled %}disabled{% endif %}>
+        {% for option in options %}
+          <option {% if data[name] and data[name] == option %}selected{% endif %}>
+            {{ option }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro input(name, label, type='text', placeholder='', help='', is_required=False, disabled=False, classes='', attrs='') -%}
+  {% set error = errors[name] %}
+  <div class="control-group{% if error %}error{% endif %}{% if classes %} {{ classes }}{% endif %}">
+    <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
+    <div class="controls">
+      <input type="{{ type }}" id="field-{{ name }}" name="{{ name }}"
+             style="margin-bottom:0;"
+             {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
+             value="{{ data[name] }}"
+             {% if disabled %}disabled{% endif %}
+             {% if attrs %}{{ attrs }}{% endif %}>
+      {% if error and error is iterable %}<span class="error-block">{{ error|join(', ') }}</span>{% endif %}
+      {% if help %}
+        <span class="help-block">{{ help }}</span>
+      {% endif %}
+    </div>
+  </div>
+{% endmacro %}
+
+<form class="dataset-form" method="post" action="{{ action }}" data-module="basic-form">
+  {% block stages %}
+    {{ h.snippet('package/snippets/stages.html', stages=stage) }}
+  {% endblock %}
+
+  <input type="hidden" name="_ckan_phase" value="dataset_new_1" />
+  {# pkg_name used in 3 stage edit #}
+  <input type="hidden" name="pkg_name" value="{{ data.id }}" />
+
+  {{ form.errors(error_summary) }}
+
+  <p class="control-required-message">
+    <span class="control-required">*</span> {{ _("Denotes required fields.") }}
+  </p>
+
+  {{ input('title', 'Title', is_required=True,
+           placeholder=_('eg. Business Expectations for the Services Sector (Forecast for Next Six Months)'),
+           classes="control-full control-large",
+           attrs="'data-module'='slug-preview-target'") }}
+
+  {% set prefix = h.url_for(controller='package', action='read', id='') %}
+  {% set domain = h.url_for(controller='package', action='read', id='', qualified=true) %}
+  {% set domain = domain|replace("http://", "")|replace("https://", "") %}
+  {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<dataset>'} %}
+  {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-dataset'), value=data.name, error=errors['URL'], attrs=attrs, is_required=true) }}
+
+  {% set dataset_is_draft = data.get('state', 'draft').startswith('draft') or data.get('state', 'none') ==  'none' %}
+  {% set dataset_has_organization = data.owner_org or data.group_id %}
+  {% set organizations_available = h.organizations_available('create_dataset') %}
+  {% set user_is_sysadmin = h.check_access('sysadmin') %}
+  {% set show_organizations_selector = organizations_available and (user_is_sysadmin or dataset_is_draft) %}
+  {% set show_visibility_selector = dataset_has_organization or (organizations_available and (user_is_sysadmin or dataset_is_draft)) %}
+  {% set can_create_unowned_datasets = h.check_config_permission('create_unowned_dataset') %}
+  {% if show_organizations_selector %}
+    {% set existing_org = data.owner_org or data.group_id %}
+    <div class="control-group">
+      <label for="field-organizations" class="control-label">{{ _('Metadata Creation Agency') }}</label>
+      <div class="controls">
+        <select id="field-organizations" name="owner_org" data-module="autocomplete" {% if organizations_available|length <= 1 and not can_create_unowned_datasets %}disabled{% endif %}>
+          {% if can_create_unowned_datasets %}
+             <option value="" {% if not selected_org and data.id %} selected="selected" {% endif %}>{{ _('No agency') }}</option>
+          {% endif %}
+          {% for organization in organizations_available %}
+            {# get out first org from users list only if there is not an existing org #}
+            {% set selected_org = (existing_org and existing_org == organization.id) or (not existing_org and not data.id and organization.id == organizations_available[0].id) %}
+            <option value="{{ organization.id }}" {% if selected_org %} selected="selected" {% endif %}>{{ organization.title }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if show_visibility_selector %}
+    {% block package_metadata_fields_visibility %}
+      <div class="control-group">
+        <label for="field-private" class="control-label">{{ _('Visibility') }}</label>
+        <div class="controls">
+          <select id="field-private" name="private">
+            {% for option in [('True', _('Private')), ('False', _('Public'))] %}
+            <option value="{{ option[0] }}" {% if option[0] == data.private|trim %}selected="selected"{% endif %}>{{ option[1] }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    {% endblock %}
+  {% endif %}
+
+  {{ textarea('notes', _('Purpose'),
+              help=_('Circumstance, context, and perspective under which data is defined or used. E.g., Data on Electricity Generation as well as Licensed Electrical Workers are collected for regulatory purposes.'))}}
+
+  <div class="control-group">
+    <label class="control-label" for="field-reference-period-start">Reference Period</label>
+    <div class="controls">
+      <input type="date" id="field-reference-period-start" class="datepicker" disabled> to <input type="date" id="field-reference-end" class="datepicker" disabled>
+      <span class="help-block">The period of time or point in time to which the data is intended to refer.</span>
+    </div>
+  </div>
+
+  {# TODO: Default value for this should be today. #}
+  {{ datepicker('available-from', 'Available From', disabled=True) }}
+
+  {{ select('first_level_category', '1st Level Category',
+            [_('Business Statistics'),], is_required=True, disabled=True) }}
+  {{ select('second_level_category', '2nd Level Category',
+            [_('Business Expectations for the Services Sector - Forecast by Industry'),],
+            is_required=True, disabled=True)}}
+  {{ select('third_level_category', '3rd Level Category',
+            [_('General Business Expectations by Industry'),],
+            is_required=True, disabled=True)}}
+
+  {{ select('type_of_data_collection', 'Type of Data Collection',
+            [_('Survey Data Collection'),
+             _('Administrative Data Collection'),
+             _('Mix of Survey and Administrative Data Collection')],
+             is_required=True, disabled=True) }}
+  {{ select('status', 'Status',
+            [_('Active'), _('Discontinued'), _('Replaced'), _('To be Collected')],
+            is_required=True, disabled=True) }}
+  {{ select('frequency', 'Frequency',
+            [_('Daily'), _('Weekly'), _('Monthly'), _('Quarterly'), _('Half Yearly'), _('Annually'), _('Ad-Hoc'), _('Others')],
+            is_required=True, disabled=True) }}
+
+  {{ textarea('administrative_source', 'Survey / Administrative Source',
+              _('The source of the data - the name of the survey or '
+                'administrative register. For survey source, indicate the '
+                'name of the survey, e.g., Quarterly Business Expectations '
+                'Survey for the Services Sector. For administrative source, '
+                'indicate the name of system where individual records are '
+                'stored or maintained.'),
+              is_required=True)}}
+
+  {{ textarea('coverage', 'Coverage',
+              _('The definition of the population that statistics aim to cover. The term "coverage" encompasses the descriptions of key dimensions delimiting the statistics produced, e.g. geographical, institutional, product, economic sector, industry, occupation, transaction, etc., as well as relevant exceptions and exclusions.  It describes data compiled rather than characteristics of the survey. E.g., for Business Expectations Survey for Services Sector, the survey covers all enterprises engaged in services activities but excludes government ministries & departments, statutory boards, independent artistes and other individual self-employed persons (e.g. taxi drivers, hawkers). Firms in the community, social & personal services are also excluded. Sample size is about 1.5% of the population.'),
+              is_required=True, disabled=True)}}
+
+  <div class="control-group control-full{% if errors.keywords %} error{% endif %}">
+    <label class="control-label" for="field-tags">{{ required(True) }}Keywords</label>
+    <div class="controls">
+      <input id="field-tags" type="text" name="tag_string"
+             value="{{ data.tag_string }}"
+             placeholder="{{ _('eg. services, business expectations, industry, BES') }}"
+             data-module="autocomplete" data-module-tags
+             data-module-source="/api/2/util/tag/autocomplete?incomplete=?">
+      {% if errors.keywords and errors.keywords is iterable %}
+        <span class="error-block" style="width:504px;">{{ errors.keywords|join(', ') }}</span>
+      {% endif %}
+      <span class="help-block">One or more words that capture the essence of the data or its metadata profile for easy retrieval.</span>
+    </div>
+  </div>
+
+  {{ select('security_classification', 'Security Classification',
+            [_('Unclassified'), _('Restricted'), _('Confidential'),
+             _('Secret')], is_required=True, disabled=True) }}
+  {{ select('data-granularity', 'Data Granularity',
+            [_('Aggregated Data'), _('Individual Record')],
+            is_required=True, disabled=True) }}
+  {{ select('publish-on-data-gov-sg', 'Publish on Data.gov.sg', ['Yes', 'No'],
+            is_required=True, disabled=True) }}
+
+  {{ textarea('conditions-of-use', 'Conditions of Use',
+              _('The means and conditions under which data can be viewed or used. It also refers to terms, copyright issues and confidentiality constraints related to how the data can be used. E.g., Data can be released to Government Ministries without consultation. Approval is needed for Statutory Boards.'),
+              is_required=True, disabled=True)}}
+
+  {# TODO: Add optional dropdown autocompletes to this. #}
+  {{ input('unit-of-measure', 'Unit of Measure',
+           is_required=True, disabled=True,
+           help=_('The unit in which the data values are measured. The unit of measure is a quantity or increment by which something is counted or described, such as kg, mm, °C, °F, monetary units such as SGD or US dollar, simple number counts or index numbers.')) }}
+
+  {{ textarea('comments', 'Comments',
+              _('Supplementary descriptive text which can be attached to data or metadata. This includes text that is intended to provide users with explicit information on the appropriate use of the statistics within the limitations imposed by the definition or main concepts, scope and coverage, collection methodology etc. E.g., Base year, statistical standards/classification.  Comments can also includes details of where Technical Notes can be found, e.g., the website where it is hosted.'),
+              disabled=True)}}
+
+  {{ input('agency-record-identifier', 'Agency Record Identifier',
+           disabled=True,
+           help=_('An alpha-numeric sequence which public sector agencies are currently using within their agencies to uniquely identify the associated data.')) }}
+
+  {{ input('data-provider', 'Data Provider / Distributor',
+           is_required=True, disabled=True,
+           help=_('The agency which produces the data or metadata. E.g. labour productivity is computed and disseminated by DOS but it is based on data from MOM which is the compiling agency.')) }}
+
+  {{ input('contact-name', 'Contact Name', is_required=True, disabled=True) }}
+  {{ input('contact-designation', 'Contact Designation', is_required=True,
+           disabled=True) }}
+  {{ input('contact-department', 'Contact Department', is_required=True,
+           disabled=True) }}
+  {{ input('contact-telephone-number', 'Contact Telephone Number',
+           is_required=True, type='tel', disabled=True) }}
+  {{ input('contact-email-address', 'Contact Email Address', is_required=True,
+           type='email', disabled=True) }}
+
+  {{ input('alternate-contact-name', 'Alternate Contact Name',
+           is_required=True, disabled=True) }}
+  {{ input('alternate-contact-designation', 'Alternate Contact Designation',
+           is_required=True, disabled=True) }}
+  {{ input('alternate-contact-department', 'Alternate Contact Department',
+           is_required=True, disabled=True) }}
+  {{ input('alternate-contact-telephone-number',
+           'Alternate Contact Telephone Number', is_required=True,
+           type='tel', disabled=True) }}
+  {{ input('alternate-contact-email-address',
+           'Alternate Contact Email Address', is_required=True,
+           type='email', disabled=True) }}
+
+  {{ input('data-compiler', 'Data Compiler / Source (if different from Data Provider / Distributor)',
+           help=_('The agency compiling the data being reported.'),
+           disabled=True) }}
+  {{ input('compiler-contact-name', 'Contact Name', disabled=True) }}
+  {{ input('compiler-contact-designation', 'Contact Designation',
+           disabled=True) }}
+  {{ input('compiler-contact-department', 'Contact Department',
+           disabled=True) }}
+  {{ input('compiler-contact-telephone-number', 'Contact Telephone Number',
+           type='tel', disabled=True) }}
+  {{ input('compiler-contact-email-address', 'Contact Email Address',
+           type='email', disabled=True) }}
+
+  <div class="form-actions">
+    <p class="action-info small">
+      {%- trans -%}
+      Important: By submitting content, you
+      agree to release your contributions under the Open Database
+      License.
+      {%- endtrans -%}
+    </p>
+    {% block delete_button %}
+      {% if h.check_access('package_delete', {'id': data.id}) and not data.state == 'deleted' %}
+        {% set locale = h.dump_json({'content': _('Are you sure you want to delete this dataset?')}) %}
+        <a class="btn btn-danger pull-left" href="{% url_for controller='package', action='delete', id=data.id %}" data-module="confirm-action" data-module-i18n="{{ locale }}">{% block delete_button_text %}{{ _('Delete') }}{% endblock %}</a>
+      {% endif %}
+    {% endblock %}
+    <button class="btn btn-primary" type="submit" name="save">{% block save_button_text %}{{ _('Next: Link to data files') }}{% endblock %}</button>
+  </div>
+</form>
