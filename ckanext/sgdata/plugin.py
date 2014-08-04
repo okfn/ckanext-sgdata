@@ -115,7 +115,7 @@ def _get_tags_from_vocabulary(name, initial_tags):
 
 
 def types_of_data_collection():
-    return _get_tags_from_vocabulary('types_of_data_collection',
+    return _get_tags_from_vocabulary('type_of_data_collection',
                                      ('Survey Data Collection',
                                      'Administrative Data Collection',
                                      'Mix of Survey and Administrative Data Collection'))
@@ -125,6 +125,28 @@ def statuses():
     return _get_tags_from_vocabulary('status',
                                      ('Active', 'Discontinued', 'Replaced',
                                      'To be Collected'))
+
+
+def frequencies():
+    return _get_tags_from_vocabulary(
+        'frequency', ('Daily', 'Weekly', 'Monthly', 'Quarterly',
+        'Half Yearly', 'Annually', 'Ad-Hoc', 'Others'))
+
+
+def security_classifications():
+    return _get_tags_from_vocabulary(
+        'security_classification', ('Unclassified', 'Restricted',
+        'Confidential', 'Secret'))
+
+
+def data_granularities():
+    return _get_tags_from_vocabulary(
+        'data_granularity', ('Aggregated Data', 'Individual Record'))
+
+
+def publish_on_data_gov_sg():
+    return _get_tags_from_vocabulary(
+        'publish_on_data_gov_sg', ('Yes', 'No'))
 
 
 class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
@@ -178,6 +200,26 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
             toolkit.get_validator('not_empty'),
             toolkit.get_converter('convert_to_tags')('status')]
 
+        schema['frequency'] = [
+            toolkit.get_validator('not_missing'),
+            toolkit.get_validator('not_empty'),
+            toolkit.get_converter('convert_to_tags')('frequency')]
+
+        schema['security_classification'] = [
+            toolkit.get_validator('not_missing'),
+            toolkit.get_validator('not_empty'),
+            toolkit.get_converter('convert_to_tags')('security_classification')]
+
+        schema['data_granularity'] = [
+            toolkit.get_validator('not_missing'),
+            toolkit.get_validator('not_empty'),
+            toolkit.get_converter('convert_to_tags')('data_granularity')]
+
+        schema['publish_on_data_gov_sg'] = [
+            toolkit.get_validator('not_missing'),
+            toolkit.get_validator('not_empty'),
+            toolkit.get_converter('convert_to_tags')('publish_on_data_gov_sg')]
+
     def create_package_schema(self):
         schema = super(SGDatasetForm, self).create_package_schema()
         self._customize_package_schema(schema)
@@ -214,6 +256,22 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
             toolkit.get_converter('convert_from_tags')('status'),
             toolkit.get_validator('ignore_missing')]
 
+        schema['frequency'] = [
+            toolkit.get_converter('convert_from_tags')('frequency'),
+            toolkit.get_validator('ignore_missing')]
+
+        schema['security_classification'] = [
+            toolkit.get_converter('convert_from_tags')('security_classification'),
+            toolkit.get_validator('ignore_missing')]
+
+        schema['data_granularity'] = [
+            toolkit.get_converter('convert_from_tags')('data_granularity'),
+            toolkit.get_validator('ignore_missing')]
+
+        schema['publish_on_data_gov_sg'] = [
+            toolkit.get_converter('convert_from_tags')('publish_on_data_gov_sg'),
+            toolkit.get_validator('ignore_missing')]
+
         return schema
 
     # IRoutes
@@ -242,7 +300,12 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     def get_helpers(self):
         return {'today': today,
                 'types_of_data_collection': types_of_data_collection,
-                'statuses': statuses}
+                'statuses': statuses,
+                'frequencies': frequencies,
+                'security_classifications': security_classifications,
+                'data_granularities': data_granularities,
+                'publish_on_data_gov_sg': publish_on_data_gov_sg,
+                }
 
 
 class SGDataPackageController(toolkit.BaseController):

@@ -194,8 +194,8 @@
             value=data.get('status')[0]) }}
 
   {{ select('frequency', 'Frequency',
-            [_('Daily'), _('Weekly'), _('Monthly'), _('Quarterly'), _('Half Yearly'), _('Annually'), _('Ad-Hoc'), _('Others')],
-            is_required=True, disabled=True) }}
+            h.frequencies(), is_required=True,
+            value=data.get('frequency')[0]) }}
 
   {{ textarea('administrative_source', 'Survey / Administrative Source',
               _('The source of the data - the name of the survey or '
@@ -226,13 +226,16 @@
   </div>
 
   {{ select('security_classification', 'Security Classification',
-            [_('Unclassified'), _('Restricted'), _('Confidential'),
-             _('Secret')], is_required=True, disabled=True) }}
-  {{ select('data-granularity', 'Data Granularity',
-            [_('Aggregated Data'), _('Individual Record')],
-            is_required=True, disabled=True) }}
-  {{ select('publish-on-data-gov-sg', 'Publish on Data.gov.sg', ['Yes', 'No'],
-            is_required=True, disabled=True) }}
+            h.security_classifications(), is_required=True,
+            value=data.get('security_classification')[0]) }}
+
+  {{ select('data_granularity', 'Data Granularity',
+            h.data_granularities(), is_required=True,
+            value=data.get('data_granularity')[0]) }}
+
+  {{ select('publish_on_data_gov_sg', 'Publish on Data.gov.sg',
+            h.publish_on_data_gov_sg(), is_required=True,
+            value=data.get('publish_on_data_gov_sg')[0]) }}
 
   {{ textarea('conditions-of-use', 'Conditions of Use',
               _('The means and conditions under which data can be viewed or used. It also refers to terms, copyright issues and confidentiality constraints related to how the data can be used. E.g., Data can be released to Government Ministries without consultation. Approval is needed for Statutory Boards.'),

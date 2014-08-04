@@ -38,4 +38,24 @@
     <h2>Status</h2>
     {{ pkg.status[0] }}
   {% endif %}
+
+  {% if pkg.get('frequency') %}
+    <h2>Frequency</h2>
+    {{ pkg.frequency[0] }}
+  {% endif %}
+
+  {% if pkg.get('security_classification') %}
+    <h2>Security Classification</h2>
+    {{ pkg.security_classification[0] }}
+  {% endif %}
+
+  {% if pkg.get('data_granularity') %}
+    <h2>Data Granularity</h2>
+    {{ pkg.data_granularity[0] }}
+  {% endif %}
+
+  {% if pkg.get('publish_on_data_gov_sg') %}
+    <h2>Publish on Data.gov.sg</h2>
+    {{ pkg.publish_on_data_gov_sg[0] }}
+  {% endif %}
 {% endblock %}
