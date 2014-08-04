@@ -52,7 +52,7 @@
 
 {% macro input(name, label, type='text', placeholder='', help='', is_required=False, disabled=False, classes='', attrs='') -%}
   {% set error = errors[name] %}
-  <div class="control-group{% if error %}error{% endif %}{% if classes %} {{ classes }}{% endif %}">
+  <div class="control-group{% if error %} error{% endif %}{% if classes %} {{ classes }}{% endif %}">
     <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
     <div class="controls">
       <input type="{{ type }}" id="field-{{ name }}" name="{{ name }}"
@@ -84,16 +84,16 @@
     <span class="control-required">*</span> {{ _("Denotes required fields.") }}
   </p>
 
-  {{ input('title', 'Title', is_required=True,
-           placeholder=_('eg. Business Expectations for the Services Sector (Forecast for Next Six Months)'),
-           classes="control-full control-large",
-           attrs="'data-module'='slug-preview-target'") }}
-
+  {{ form.input('title', id='field-title', label=_('Title'),
+                placeholder=_('eg. Business Expectations for the Services Sector (Forecast for Next Six Months)'),
+                value=data.title, error=errors.title,
+                classes=['control-full', 'control-large'],
+                attrs={'data-module': 'slug-preview-target'}) }}
   {% set prefix = h.url_for(controller='package', action='read', id='') %}
   {% set domain = h.url_for(controller='package', action='read', id='', qualified=true) %}
   {% set domain = domain|replace("http://", "")|replace("https://", "") %}
   {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<dataset>'} %}
-  {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-dataset'), value=data.name, error=errors['URL'], attrs=attrs, is_required=true) }}
+  {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-dataset'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
 
   {% set dataset_is_draft = data.get('state', 'draft').startswith('draft') or data.get('state', 'none') ==  'none' %}
   {% set dataset_has_organization = data.owner_org or data.group_id %}
