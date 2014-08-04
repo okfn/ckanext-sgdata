@@ -33,4 +33,9 @@
     <h2>Type of Data Collection</h2>
     {{ pkg.type_of_data_collection[0] }}
   {% endif %}
+
+  {% if pkg.get('status') %}
+    <h2>Status</h2>
+    {{ pkg.status[0] }}
+  {% endif %}
 {% endblock %}

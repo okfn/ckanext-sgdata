@@ -188,9 +188,11 @@
   {{ select('type_of_data_collection', 'Type of Data Collection',
             h.types_of_data_collection(), is_required=True,
             value=data.get('type_of_data_collection')[0]) }}
+
   {{ select('status', 'Status',
-            [_('Active'), _('Discontinued'), _('Replaced'), _('To be Collected')],
-            is_required=True, disabled=True) }}
+            h.statuses(), is_required=True,
+            value=data.get('status')[0]) }}
+
   {{ select('frequency', 'Frequency',
             [_('Daily'), _('Weekly'), _('Monthly'), _('Quarterly'), _('Half Yearly'), _('Annually'), _('Ad-Hoc'), _('Others')],
             is_required=True, disabled=True) }}

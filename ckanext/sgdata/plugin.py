@@ -83,37 +83,48 @@ def today():
     return datetime.datetime.now().strftime('%m/%d/%Y')
 
 
-def create_type_of_data_collection_vocabulary():
+def _create_vocabulary(name, tags):
     user = toolkit.get_action('get_site_user')({'ignore_auth': True}, {})
     context = {'user': user['name']}
     try:
-        data = {'id': 'type_of_data_collection'}
+        data = {'id': name}
         toolkit.get_action('vocabulary_show')(context, data)
-        logging.info("type_of_data_collection vocabulary already exists, "
-                     "skipping.")
+        logging.info("{name} vocabulary already exists, skipping.".format(
+            name=name))
     except toolkit.ObjectNotFound:
-        logging.info("Creating vocabulary 'type_of_data_collection'")
-        data = {'name': 'type_of_data_collection'}
+        logging.info("Creating vocabulary '{name}'".format(name=name))
+        data = {'name': name}
         vocab = toolkit.get_action('vocabulary_create')(context, data)
 
-        for tag in ('Survey Data Collection',
-                    'Administrative Data Collection',
-                    'Mix of Survey and Administrative Data Collection'):
+        for tag in tags:
             logging.info(
-                "Adding tag {0} to vocab 'type_of_data_collection'".format(
-                    tag))
+                "Adding tag {tag} to vocab {vocab}".format(tag=tag,
+                                                           vocab=name))
             data = {'name': tag, 'vocabulary_id': vocab['id']}
             toolkit.get_action('tag_create')(context, data)
 
 
-def types_of_data_collection():
-    create_type_of_data_collection_vocabulary()
+def _get_tags_from_vocabulary(name, initial_tags):
+    _create_vocabulary(name, initial_tags)
     try:
-        types_of_data_collection = toolkit.get_action('tag_list')(
-            data_dict={'vocabulary_id': 'type_of_data_collection'})
-        return types_of_data_collection
+        tags = toolkit.get_action('tag_list')(
+            data_dict={'vocabulary_id': name})
+        return tags
     except toolkit.ObjectNotFound:
-        return None
+        return []
+
+
+def types_of_data_collection():
+    return _get_tags_from_vocabulary('types_of_data_collection',
+                                     ('Survey Data Collection',
+                                     'Administrative Data Collection',
+                                     'Mix of Survey and Administrative Data Collection'))
+
+
+def statuses():
+    return _get_tags_from_vocabulary('status',
+                                     ('Active', 'Discontinued', 'Replaced',
+                                     'To be Collected'))
 
 
 class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
@@ -162,6 +173,11 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
             toolkit.get_validator('not_empty'),
             toolkit.get_converter('convert_to_tags')('type_of_data_collection')]
 
+        schema['status'] = [
+            toolkit.get_validator('not_missing'),
+            toolkit.get_validator('not_empty'),
+            toolkit.get_converter('convert_to_tags')('status')]
+
     def create_package_schema(self):
         schema = super(SGDatasetForm, self).create_package_schema()
         self._customize_package_schema(schema)
@@ -194,6 +210,10 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
             toolkit.get_converter('convert_from_tags')('type_of_data_collection'),
             toolkit.get_validator('ignore_missing')]
 
+        schema['status'] = [
+            toolkit.get_converter('convert_from_tags')('status'),
+            toolkit.get_validator('ignore_missing')]
+
         return schema
 
     # IRoutes
@@ -221,7 +241,8 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
 
     def get_helpers(self):
         return {'today': today,
-                'types_of_data_collection': types_of_data_collection}
+                'types_of_data_collection': types_of_data_collection,
+                'statuses': statuses}
 
 
 class SGDataPackageController(toolkit.BaseController):
