@@ -12,4 +12,15 @@
     <h2>Survey / Administrative Source</h2>
     {{ pkg.administrative_source }}
   </div>
+
+  {% if pkg.get('reference-period-start') and pkg.get('reference-period-end') %}
+    <h2>Reference Period</h2>
+    From {{ pkg['reference-period-start'] }} to {{ pkg['reference-period-end'] }}
+  {% elif pkg.get('reference-period-start') %}
+    <h2>Reference Period</h2>
+    {{ pkg['reference-period-start'] }}
+  {% elif pkg.get('reference-period-end') %}
+    <h2>Reference Period</h2>
+    {{ pkg['reference-period-end'] }}
+  {% endif %}
 {% endblock %}

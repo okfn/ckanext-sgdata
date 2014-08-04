@@ -142,8 +142,33 @@
   <div class="control-group">
     <label class="control-label" for="field-reference-period-start">Reference Period</label>
     <div class="controls">
-      <input type="date" id="field-reference-period-start" class="datepicker" disabled> to <input type="date" id="field-reference-end" class="datepicker" disabled>
-      <span class="help-block">The period of time or point in time to which the data is intended to refer.</span>
+      <div style="float:left;">
+        <input style="margin-bottom:0;" type="date"
+               name="reference-period-start"
+               id="field-reference-period-start" class="datepicker"
+               value="{{ data['reference-period-start'] }}">
+        {% if errors['reference-period-start'] %}
+          <span class="error-block" style="width:204px;">
+            {{ errors['reference-period-start']|join(', ') }}
+          </span>
+        {% endif %}
+      </div>
+      <div style="float:left; margin-left:10px; margin-right:10px;">to</div>
+      <div style="float:left;">
+        <input style="margin-bottom:0;" type="date" name="reference-period-end"
+               id="field-reference-period-end" class="datepicker"
+               value="{{ data['reference-period-end'] }}">
+        {% if errors['reference-period-end'] %}
+          <span class="error-block" style="width:204px;">
+            {{ errors['reference-period-end']|join(', ') }}
+          </span>
+        {% endif %}
+      </div>
+      <div style="clear:both;"></div>
+      <span class="help-block">
+        The period of time or point in time to which the data is intended to
+        refer.
+      </span>
     </div>
   </div>
 

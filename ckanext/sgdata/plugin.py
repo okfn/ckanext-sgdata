@@ -1,3 +1,5 @@
+import datetime
+
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as helpers
@@ -18,13 +20,36 @@ def _change_error_dict(err):
 
     return errors
 
+
+def _custom_validation(data_dict):
+
+    errors = {}
+
+    if not data_dict.get('tags'):
+        errors['keywords'] = ['Missing value']
+
+    if (data_dict.get('reference-period-start')
+            and data_dict.get('reference-period-end')):
+
+        # TODO: Handle invalid date strings.
+        start = datetime.datetime.strptime(data_dict['reference-period-start'],
+                                           '%m/%d/%Y')
+        end = datetime.datetime.strptime(data_dict['reference-period-end'],
+                                         '%m/%d/%Y')
+
+        if start > end:
+            errors['reference-period-start'] = [
+                'Start date must be before end date']
+            errors['reference-period-end'] = [
+                'End date must be after start date']
+
+    return errors
+
+
 def package_create(context, data_dict):
     import ckan.logic.action.create
 
-    error_dict = {}
-
-    if not data_dict.get('tags'):
-        error_dict['keywords'] = ['Missing value']
+    error_dict = _custom_validation(data_dict)
 
     try:
         result = ckan.logic.action.create.package_create(context, data_dict)
@@ -40,10 +65,7 @@ def package_create(context, data_dict):
 def package_update(context, data_dict):
     import ckan.logic.action.update
 
-    error_dict = {}
-
-    if not data_dict.get('tags'):
-        error_dict['keywords'] = ['Missing value']
+    error_dict = _custom_validation(data_dict)
 
     try:
         result = ckan.logic.action.update.package_update(context, data_dict)
@@ -85,6 +107,10 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
             toolkit.get_validator('not_missing'),
             toolkit.get_validator('not_empty'),
             toolkit.get_converter('convert_to_extras')]
+        schema['reference-period-start'] = [
+            toolkit.get_converter('convert_to_extras')]
+        schema['reference-period-end'] = [
+            toolkit.get_converter('convert_to_extras')]
 
     def create_package_schema(self):
         schema = super(SGDatasetForm, self).create_package_schema()
@@ -99,6 +125,10 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     def show_package_schema(self):
         schema = super(SGDatasetForm, self).show_package_schema()
         schema['administrative_source'] = [
+            toolkit.get_converter('convert_from_extras')]
+        schema['reference-period-start'] = [
+            toolkit.get_converter('convert_from_extras')]
+        schema['reference-period-end'] = [
             toolkit.get_converter('convert_from_extras')]
         return schema
 
