@@ -78,11 +78,16 @@ def package_update(context, data_dict):
     return result
 
 
+def today():
+    return datetime.datetime.now().strftime('%m/%d/%Y')
+
+
 class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IDatasetForm)
     plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(plugins.IActions)
+    plugins.implements(plugins.ITemplateHelpers)
 
     # IConfigurer
 
@@ -156,6 +161,11 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         return {'package_create': package_create,
                 'package_update': package_update,
                 }
+
+    # ITemplateHelpers
+
+    def get_helpers(self):
+        return {'today': today}
 
 
 class SGDataPackageController(toolkit.BaseController):
