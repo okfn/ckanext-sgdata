@@ -28,4 +28,9 @@
     <h2>Available From</h2>
     {{ pkg['available-from'] }}
   {% endif %}
+
+  {% if pkg.get('type_of_data_collection') %}
+    <h2>Type of Data Collection</h2>
+    {{ pkg.type_of_data_collection[0] }}
+  {% endif %}
 {% endblock %}

@@ -1,4 +1,5 @@
 import datetime
+import logging
 
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
@@ -82,6 +83,39 @@ def today():
     return datetime.datetime.now().strftime('%m/%d/%Y')
 
 
+def create_type_of_data_collection_vocabulary():
+    user = toolkit.get_action('get_site_user')({'ignore_auth': True}, {})
+    context = {'user': user['name']}
+    try:
+        data = {'id': 'type_of_data_collection'}
+        toolkit.get_action('vocabulary_show')(context, data)
+        logging.info("type_of_data_collection vocabulary already exists, "
+                     "skipping.")
+    except toolkit.ObjectNotFound:
+        logging.info("Creating vocabulary 'type_of_data_collection'")
+        data = {'name': 'type_of_data_collection'}
+        vocab = toolkit.get_action('vocabulary_create')(context, data)
+
+        for tag in ('Survey Data Collection',
+                    'Administrative Data Collection',
+                    'Mix of Survey and Administrative Data Collection'):
+            logging.info(
+                "Adding tag {0} to vocab 'type_of_data_collection'".format(
+                    tag))
+            data = {'name': tag, 'vocabulary_id': vocab['id']}
+            toolkit.get_action('tag_create')(context, data)
+
+
+def types_of_data_collection():
+    create_type_of_data_collection_vocabulary()
+    try:
+        types_of_data_collection = toolkit.get_action('tag_list')(
+            data_dict={'vocabulary_id': 'type_of_data_collection'})
+        return types_of_data_collection
+    except toolkit.ObjectNotFound:
+        return None
+
+
 class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IDatasetForm)
@@ -108,16 +142,25 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
             toolkit.get_validator('not_missing'),
             toolkit.get_validator('not_empty'),
             unicode]
+
         schema['administrative_source'] = [
             toolkit.get_validator('not_missing'),
             toolkit.get_validator('not_empty'),
             toolkit.get_converter('convert_to_extras')]
+
         schema['reference-period-start'] = [
             toolkit.get_converter('convert_to_extras')]
+
         schema['reference-period-end'] = [
             toolkit.get_converter('convert_to_extras')]
+
         schema['available-from'] = [
             toolkit.get_converter('convert_to_extras')]
+
+        schema['type_of_data_collection'] = [
+            toolkit.get_validator('not_missing'),
+            toolkit.get_validator('not_empty'),
+            toolkit.get_converter('convert_to_tags')('type_of_data_collection')]
 
     def create_package_schema(self):
         schema = super(SGDatasetForm, self).create_package_schema()
@@ -131,14 +174,26 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
 
     def show_package_schema(self):
         schema = super(SGDatasetForm, self).show_package_schema()
+
+        schema['tags']['__extras'].append(toolkit.get_converter(
+            'free_tags_only'))
+
         schema['administrative_source'] = [
             toolkit.get_converter('convert_from_extras')]
+
         schema['reference-period-start'] = [
             toolkit.get_converter('convert_from_extras')]
+
         schema['reference-period-end'] = [
             toolkit.get_converter('convert_from_extras')]
+
         schema['available-from'] = [
             toolkit.get_converter('convert_from_extras')]
+
+        schema['type_of_data_collection'] = [
+            toolkit.get_converter('convert_from_tags')('type_of_data_collection'),
+            toolkit.get_validator('ignore_missing')]
+
         return schema
 
     # IRoutes
@@ -165,7 +220,8 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     # ITemplateHelpers
 
     def get_helpers(self):
-        return {'today': today}
+        return {'today': today,
+                'types_of_data_collection': types_of_data_collection}
 
 
 class SGDataPackageController(toolkit.BaseController):

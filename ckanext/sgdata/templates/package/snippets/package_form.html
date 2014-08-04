@@ -36,13 +36,14 @@
   </div>
 {% endmacro %}
 
-{% macro select(name, label, options, is_required=False, disabled=False) -%}
+{% macro select(name, label, options, is_required=False, disabled=False, value='') -%}
   <div class="control-group">
     <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
     <div class="controls">
-      <select id="field-{{ name }}" {% if disabled %}disabled{% endif %}>
+      <select id="field-{{ name }}" name="{{ name }}"
+              {% if disabled %}disabled{% endif %}>
         {% for option in options %}
-          <option {% if data[name] and data[name] == option %}selected{% endif %}>
+          <option {% if option == value %}selected{% endif %}>
             {{ option }}
           </option>
         {% endfor %}
@@ -185,10 +186,8 @@
             is_required=True, disabled=True)}}
 
   {{ select('type_of_data_collection', 'Type of Data Collection',
-            [_('Survey Data Collection'),
-             _('Administrative Data Collection'),
-             _('Mix of Survey and Administrative Data Collection')],
-             is_required=True, disabled=True) }}
+            h.types_of_data_collection(), is_required=True,
+            value=data.get('type_of_data_collection')[0]) }}
   {{ select('status', 'Status',
             [_('Active'), _('Discontinued'), _('Replaced'), _('To be Collected')],
             is_required=True, disabled=True) }}
