@@ -23,4 +23,9 @@
     <h2>Reference Period</h2>
     {{ pkg['reference-period-end'] }}
   {% endif %}
+
+  {% if pkg.get('available-from') %}
+    <h2>Available From</h2>
+    {{ pkg['available-from'] }}
+  {% endif %}
 {% endblock %}

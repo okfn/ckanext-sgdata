@@ -28,8 +28,9 @@
   <div class="control-group">
     <label class="control-label" for="field-{{ name }}">{{ label }}</label>
     <div class="controls">
-      <input type="date" id="field-{{ name }}" class="datepicker"
-      value="{{ data[name] }}" {% if disabled %}disabled{% endif %}>
+      <input type="date" id="field-{{ name }}" name="{{ name }}"
+             class="datepicker" value="{{ data[name] }}"
+             {% if disabled %}disabled{% endif %}>
       <span class="help-block">The date on which the metadata will be made available.</span>
     </div>
   </div>
@@ -173,7 +174,7 @@
   </div>
 
   {# TODO: Default value for this should be today. #}
-  {{ datepicker('available-from', 'Available From', disabled=True) }}
+  {{ datepicker('available-from', 'Available From') }}
 
   {{ select('first_level_category', '1st Level Category',
             [_('Business Statistics'),], is_required=True, disabled=True) }}

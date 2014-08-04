@@ -111,6 +111,8 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
             toolkit.get_converter('convert_to_extras')]
         schema['reference-period-end'] = [
             toolkit.get_converter('convert_to_extras')]
+        schema['available-from'] = [
+            toolkit.get_converter('convert_to_extras')]
 
     def create_package_schema(self):
         schema = super(SGDatasetForm, self).create_package_schema()
@@ -129,6 +131,8 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         schema['reference-period-start'] = [
             toolkit.get_converter('convert_from_extras')]
         schema['reference-period-end'] = [
+            toolkit.get_converter('convert_from_extras')]
+        schema['available-from'] = [
             toolkit.get_converter('convert_from_extras')]
         return schema
 
