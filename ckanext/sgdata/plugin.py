@@ -182,6 +182,15 @@ def publish_on_data_gov_sg():
         'Yes - publish metadata only'))
 
 
+def last_update_by(pkg_dict):
+    activities = toolkit.get_action('package_activity_list')(
+            context={}, data_dict={'id': pkg_dict['id']})
+    user_id = activities[0]['user_id']
+    user_dict = toolkit.get_action('user_show')(
+            context={}, data_dict={'id': user_id})
+    return user_dict
+
+
 class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IDatasetForm)
@@ -348,6 +357,7 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                 'security_classifications': security_classifications,
                 'data_granularities': data_granularities,
                 'publish_on_data_gov_sg': publish_on_data_gov_sg,
+                'last_update_by': last_update_by,
                 }
 
 

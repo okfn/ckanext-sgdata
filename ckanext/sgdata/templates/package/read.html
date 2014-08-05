@@ -74,4 +74,8 @@
   <h2>Last Metadata Update Date</h2>
   {{ h.render_datetime(pkg.metadata_modified) }}
 
+  <h2>Last Update By</h2>
+  {% set last_updater = h.last_update_by(pkg) %}
+  <a href="{{ h.url_for(controller='user', action='read', id=last_updater.name) }}">{{ last_updater.display_name }}</a>
+
 {% endblock %}
