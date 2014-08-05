@@ -36,7 +36,7 @@
   </div>
 {% endmacro %}
 
-{% macro select(name, label, options, is_required=False, disabled=False, value='') -%}
+{% macro select(name, label, options, is_required=False, disabled=False, value='', help='') -%}
   <div class="control-group">
     <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
     <div class="controls">
@@ -48,6 +48,7 @@
           </option>
         {% endfor %}
       </select>
+      {% if help %}<span class="help-block">{{ help }}</span>{% endif %}
     </div>
   </div>
 {% endmacro %}
@@ -63,7 +64,7 @@
              value="{{ data[name] }}"
              {% if disabled %}disabled{% endif %}
              {% if attrs %}{{ attrs }}{% endif %}>
-      {% if error and error is iterable %}<span class="error-block">{{ error|join(', ') }}</span>{% endif %}
+      {% if error and error is iterable %}<span class="error-block" style="width:204px;">{{ error|join(', ') }}</span>{% endif %}
       {% if help %}
         <span class="help-block">{{ help }}</span>
       {% endif %}
@@ -90,7 +91,8 @@
                 placeholder=_('eg. Business Expectations for the Services Sector (Forecast for Next Six Months)'),
                 value=data.title, error=errors.title,
                 classes=['control-full', 'control-large'],
-                attrs={'data-module': 'slug-preview-target'}) }}
+                attrs={'data-module': 'slug-preview-target'},
+                is_required=True) }}
   {% set prefix = h.url_for(controller='package', action='read', id='') %}
   {% set domain = h.url_for(controller='package', action='read', id='', qualified=true) %}
   {% set domain = domain|replace("http://", "")|replace("https://", "") %}
@@ -107,7 +109,7 @@
   {% if show_organizations_selector %}
     {% set existing_org = data.owner_org or data.group_id %}
     <div class="control-group">
-      <label for="field-organizations" class="control-label">{{ _('Metadata Creation Agency') }}</label>
+      <label for="field-organizations" class="control-label">{{ required(True) }}{{ _('Metadata Creation Agency') }}</label>
       <div class="controls">
         <select id="field-organizations" name="owner_org" data-module="autocomplete" {% if organizations_available|length <= 1 and not can_create_unowned_datasets %}disabled{% endif %}>
           {% if can_create_unowned_datasets %}
@@ -119,6 +121,7 @@
             <option value="{{ organization.id }}" {% if selected_org %} selected="selected" {% endif %}>{{ organization.title }}</option>
           {% endfor %}
         </select>
+        <span class="help-block">{{ _('The agency of the data manager who published the data.') }}</span>
       </div>
     </div>
   {% endif %}
@@ -187,15 +190,18 @@
 
   {{ select('type_of_data_collection', 'Type of Data Collection',
             h.types_of_data_collection(), is_required=True,
-            value=data.get('type_of_data_collection')[0]) }}
+            value=data.get('type_of_data_collection')[0],
+            help=_('The main process used in the collection of statistical data by the compiling agency.')) }}
 
   {{ select('status', 'Status',
             h.statuses(), is_required=True,
-            value=data.get('status')[0]) }}
+            value=data.get('status')[0],
+            help=_('The current state of the data.')) }}
 
   {{ select('frequency', 'Frequency',
             h.frequencies(), is_required=True,
-            value=data.get('frequency')[0]) }}
+            value=data.get('frequency')[0],
+            help=_('The time interval at which observations occur.')) }}
 
   {{ textarea('administrative_source', 'Survey / Administrative Source',
               _('The source of the data - the name of the survey or '
@@ -208,7 +214,7 @@
 
   {{ textarea('coverage', 'Coverage',
               _('The definition of the population that statistics aim to cover. The term "coverage" encompasses the descriptions of key dimensions delimiting the statistics produced, e.g. geographical, institutional, product, economic sector, industry, occupation, transaction, etc., as well as relevant exceptions and exclusions.  It describes data compiled rather than characteristics of the survey. E.g., for Business Expectations Survey for Services Sector, the survey covers all enterprises engaged in services activities but excludes government ministries & departments, statutory boards, independent artistes and other individual self-employed persons (e.g. taxi drivers, hawkers). Firms in the community, social & personal services are also excluded. Sample size is about 1.5% of the population.'),
-              is_required=True, disabled=True)}}
+              is_required=True)}}
 
   <div class="control-group control-full{% if errors.keywords %} error{% endif %}">
     <label class="control-label" for="field-tags">{{ required(True) }}Keywords</label>
@@ -227,72 +233,70 @@
 
   {{ select('security_classification', 'Security Classification',
             h.security_classifications(), is_required=True,
-            value=data.get('security_classification')[0]) }}
+            value=data.get('security_classification')[0],
+            help=_('The extent to which the unauthorised disclosure of the data could be prejudicial or harmful to the interests of the source or other relevant parties.')) }}
 
   {{ select('data_granularity', 'Data Granularity',
             h.data_granularities(), is_required=True,
-            value=data.get('data_granularity')[0]) }}
+            value=data.get('data_granularity')[0],
+            help=('The level of granularity of the data. Aggregated data is the result of transforming unit level data into quantitative measures for a set of characteristics of a population. Individual record refers to non-aggregated obervations or measurements of characteristics of an individual or entity (e.g., specific records which could relate to a person, company or activity, such as details of individual NRIC holders; profiles of individual businesses and companies, etc).')) }}
 
   {{ select('publish_on_data_gov_sg', 'Publish on Data.gov.sg',
             h.publish_on_data_gov_sg(), is_required=True,
-            value=data.get('publish_on_data_gov_sg')[0]) }}
+            value=data.get('publish_on_data_gov_sg')[0],
+            help=('Whether the metadata can be shared with the public.')) }}
 
-  {{ textarea('conditions-of-use', 'Conditions of Use',
+  {{ textarea('conditions_of_use', 'Conditions of Use',
               _('The means and conditions under which data can be viewed or used. It also refers to terms, copyright issues and confidentiality constraints related to how the data can be used. E.g., Data can be released to Government Ministries without consultation. Approval is needed for Statutory Boards.'),
-              is_required=True, disabled=True)}}
+              is_required=True)}}
 
   {# TODO: Add optional dropdown autocompletes to this. #}
-  {{ input('unit-of-measure', 'Unit of Measure',
-           is_required=True, disabled=True,
+  {{ input('unit_of_measure', 'Unit of Measure',
+           is_required=True,
            help=_('The unit in which the data values are measured. The unit of measure is a quantity or increment by which something is counted or described, such as kg, mm, °C, °F, monetary units such as SGD or US dollar, simple number counts or index numbers.')) }}
 
   {{ textarea('comments', 'Comments',
-              _('Supplementary descriptive text which can be attached to data or metadata. This includes text that is intended to provide users with explicit information on the appropriate use of the statistics within the limitations imposed by the definition or main concepts, scope and coverage, collection methodology etc. E.g., Base year, statistical standards/classification.  Comments can also includes details of where Technical Notes can be found, e.g., the website where it is hosted.'),
-              disabled=True)}}
+              _('Supplementary descriptive text which can be attached to data or metadata. This includes text that is intended to provide users with explicit information on the appropriate use of the statistics within the limitations imposed by the definition or main concepts, scope and coverage, collection methodology etc. E.g., Base year, statistical standards/classification.  Comments can also includes details of where Technical Notes can be found, e.g., the website where it is hosted.'))}}
 
-  {{ input('agency-record-identifier', 'Agency Record Identifier',
-           disabled=True,
+  {{ input('agency_record_identifier', 'Agency Record Identifier',
            help=_('An alpha-numeric sequence which public sector agencies are currently using within their agencies to uniquely identify the associated data.')) }}
 
-  {{ input('data-provider', 'Data Provider / Distributor',
-           is_required=True, disabled=True,
+  {{ input('data_provider', 'Data Provider / Distributor',
+           is_required=True,
            help=_('The agency which produces the data or metadata. E.g. labour productivity is computed and disseminated by DOS but it is based on data from MOM which is the compiling agency.')) }}
 
-  {{ input('contact-name', 'Contact Name', is_required=True, disabled=True) }}
-  {{ input('contact-designation', 'Contact Designation', is_required=True,
-           disabled=True) }}
-  {{ input('contact-department', 'Contact Department', is_required=True,
-           disabled=True) }}
-  {{ input('contact-telephone-number', 'Contact Telephone Number',
-           is_required=True, type='tel', disabled=True) }}
-  {{ input('contact-email-address', 'Contact Email Address', is_required=True,
-           type='email', disabled=True) }}
+  {{ input('data_provider_contact_name', 'Contact Name', is_required=True) }}
+  {{ input('data_provider_contact_designation', 'Contact Designation',
+           is_required=True) }}
+  {{ input('data_provider_contact_department', 'Contact Department',
+           is_required=True) }}
+  {{ input('data_provider_contact_telephone_number',
+           'Contact Telephone Number', is_required=True, type='tel') }}
+  {{ input('data_provider_contact_email_address', 'Contact Email Address',
+           is_required=True, type='email') }}
 
-  {{ input('alternate-contact-name', 'Alternate Contact Name',
-           is_required=True, disabled=True) }}
-  {{ input('alternate-contact-designation', 'Alternate Contact Designation',
-           is_required=True, disabled=True) }}
-  {{ input('alternate-contact-department', 'Alternate Contact Department',
-           is_required=True, disabled=True) }}
-  {{ input('alternate-contact-telephone-number',
+  {{ input('data_provider_alternate_contact_name', 'Alternate Contact Name',
+           is_required=True) }}
+  {{ input('data_provider_alternate_contact_designation',
+           'Alternate Contact Designation', is_required=True) }}
+  {{ input('data_provider_alternate_contact_department',
+           'Alternate Contact Department', is_required=True) }}
+  {{ input('data_provider_alternate_contact_telephone_number',
            'Alternate Contact Telephone Number', is_required=True,
-           type='tel', disabled=True) }}
-  {{ input('alternate-contact-email-address',
+           type='tel') }}
+  {{ input('data_provider_alternate_contact_email_address',
            'Alternate Contact Email Address', is_required=True,
-           type='email', disabled=True) }}
+           type='email') }}
 
-  {{ input('data-compiler', 'Data Compiler / Source (if different from Data Provider / Distributor)',
-           help=_('The agency compiling the data being reported.'),
-           disabled=True) }}
-  {{ input('compiler-contact-name', 'Contact Name', disabled=True) }}
-  {{ input('compiler-contact-designation', 'Contact Designation',
-           disabled=True) }}
-  {{ input('compiler-contact-department', 'Contact Department',
-           disabled=True) }}
-  {{ input('compiler-contact-telephone-number', 'Contact Telephone Number',
-           type='tel', disabled=True) }}
-  {{ input('compiler-contact-email-address', 'Contact Email Address',
-           type='email', disabled=True) }}
+  {{ input('data_compiler', 'Data Compiler / Source (if different from Data Provider / Distributor)',
+           help=_('The agency compiling the data being reported.')) }}
+  {{ input('data_compiler_contact_name', 'Contact Name') }}
+  {{ input('data_compiler_contact_designation', 'Contact Designation') }}
+  {{ input('data_compiler_contact_department', 'Contact Department') }}
+  {{ input('data_compiler_contact_telephone_number', 'Contact Telephone Number',
+           type='tel') }}
+  {{ input('data_compiler_contact_email_address', 'Contact Email Address',
+           type='email') }}
 
   <div class="form-actions">
     <p class="action-info small">

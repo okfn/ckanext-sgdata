@@ -6,6 +6,37 @@ import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as helpers
 
 
+SIMPLE_MANDATORY_TEXT_FIELDS = (
+    'administrative_source',
+    'coverage',
+    'conditions_of_use',
+    'unit_of_measure',
+    'data_provider',
+    'data_provider_contact_name',
+    'data_provider_contact_designation',
+    'data_provider_contact_department',
+    'data_provider_contact_telephone_number',
+    'data_provider_contact_email_address',
+    'data_provider_alternate_contact_name',
+    'data_provider_alternate_contact_designation',
+    'data_provider_alternate_contact_department',
+    'data_provider_alternate_contact_telephone_number',
+    'data_provider_alternate_contact_email_address'
+    )
+
+
+SIMPLE_OPTIONAL_TEXT_FIELDS = (
+    'comments',
+    'agency_record_identifier',
+    'data_compiler',
+    'data_compiler_contact_name',
+    'data_compiler_contact_designation',
+    'data_compiler_contact_department',
+    'data_compiler_contact_telephone_number',
+    'data_compiler_contact_email_address',
+    )
+
+
 def _change_error_dict(err):
     errors = err.error_dict.copy()
 
@@ -118,7 +149,8 @@ def types_of_data_collection():
     return _get_tags_from_vocabulary('type_of_data_collection',
                                      ('Survey Data Collection',
                                      'Administrative Data Collection',
-                                     'Mix of Survey and Administrative Data Collection'))
+                                     'Mix of Survey and Administrative Data Collection',
+                                     'Others'))
 
 
 def statuses():
@@ -146,7 +178,8 @@ def data_granularities():
 
 def publish_on_data_gov_sg():
     return _get_tags_from_vocabulary(
-        'publish_on_data_gov_sg', ('Yes', 'No'))
+        'publish_on_data_gov_sg', ('No', 'Yes, publish both metadata and data',
+        'Yes, publish metadata only'))
 
 
 class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
@@ -176,10 +209,17 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
             toolkit.get_validator('not_empty'),
             unicode]
 
-        schema['administrative_source'] = [
-            toolkit.get_validator('not_missing'),
-            toolkit.get_validator('not_empty'),
-            toolkit.get_converter('convert_to_extras')]
+        for field in SIMPLE_MANDATORY_TEXT_FIELDS:
+            schema[field] = [
+                toolkit.get_validator('not_missing'),
+                toolkit.get_validator('not_empty'),
+                toolkit.get_converter('convert_to_extras')]
+
+        for field in SIMPLE_OPTIONAL_TEXT_FIELDS:
+            schema[field] = [
+                toolkit.get_validator('ignore_missing'),
+                toolkit.get_converter('convert_to_extras')
+                ]
 
         schema['reference-period-start'] = [
             toolkit.get_converter('convert_to_extras')]
@@ -236,8 +276,11 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         schema['tags']['__extras'].append(toolkit.get_converter(
             'free_tags_only'))
 
-        schema['administrative_source'] = [
-            toolkit.get_converter('convert_from_extras')]
+        for field in (SIMPLE_MANDATORY_TEXT_FIELDS +
+                      SIMPLE_OPTIONAL_TEXT_FIELDS):
+            schema[field] = [
+                toolkit.get_converter('convert_from_extras'),
+                toolkit.get_validator('ignore_missing')]
 
         schema['reference-period-start'] = [
             toolkit.get_converter('convert_from_extras')]

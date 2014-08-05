@@ -24,38 +24,47 @@
     {{ pkg['reference-period-end'] }}
   {% endif %}
 
-  {% if pkg.get('available-from') %}
-    <h2>Available From</h2>
-    {{ pkg['available-from'] }}
-  {% endif %}
+  {% for name, title in (('type_of_data_collection', 'Type of Data Collection'),
+                         ('status', 'Status'),
+                         ('frequency', 'Frequency'),
+                         ('security_classification', 'Security Classification'),
+                         ('data_granularity', 'Data Granularity'),
+                         ('publish_on_data_gov_sg', 'Publish on Data.gov.sg'),
+                         ) %}
+    {% if pkg.get(name) %}
+      <h2>{{ title }}</h2>
+        {{ pkg[name][0] }}
+    {% endif %}
+  {% endfor %}
 
-  {% if pkg.get('type_of_data_collection') %}
-    <h2>Type of Data Collection</h2>
-    {{ pkg.type_of_data_collection[0] }}
-  {% endif %}
+  {% for name, title in (('coverage', 'Coverage'),
+                         ('conditions_of_use', 'Conditions of Use'),
+                         ('comments', 'Comments'),
+                         ('unit_of_measure', 'Unit of Measure'),
+                         ('available-from', 'Available From'),
+                         ('agency_record_identifier', 'Agency Record Identifier'),
+                         ('data_provider', 'Data Provider / Distributor'),
+                         ('data_provider_contact_name', 'Contact Name'),
+                         ('data_provider_contact_designation', 'Contact Designation'),
+                         ('data_provider_contact_department', 'Contact Department'),
+                         ('data_provider_contact_telephone_number', 'Contact Telephone Number'),
+                         ('data_provider_contact_email_address', 'Contact Email Address'),
+                         ('data_provider_alternate_contact_name', 'Alternate Contact Name'),
+                         ('data_provider_alternate_contact_designation', 'Alternate Contact Designation'),
+                         ('data_provider_alternate_contact_department', 'Alternate Contact Department'),
+                         ('data_provider_alternate_contact_telephone_number', 'Alternate Contact Telephone Number'),
+                         ('data_provider_alternate_contact_email_address', 'Alternate Contact Email Address'),
+                         ('data_compiler', 'Data Compiler / Source'),
+                         ('data_compiler_contact_name', 'Contact Name'),
+                         ('data_compiler_contact_designation', 'Contact Designation'),
+                         ('data_compiler_contact_department', 'Contact Department'),
+                         ('data_compiler_contact_telephone_number', 'Contact Telephone Number'),
+                         ('data_compiler_contact_email_address', 'Contact Email Address'),
+                         ) %}
+    {% if pkg.get(name) %}
+      <h2>{{ title }}</h2>
+        {{ pkg[name] }}
+    {% endif %}
+  {% endfor %}
 
-  {% if pkg.get('status') %}
-    <h2>Status</h2>
-    {{ pkg.status[0] }}
-  {% endif %}
-
-  {% if pkg.get('frequency') %}
-    <h2>Frequency</h2>
-    {{ pkg.frequency[0] }}
-  {% endif %}
-
-  {% if pkg.get('security_classification') %}
-    <h2>Security Classification</h2>
-    {{ pkg.security_classification[0] }}
-  {% endif %}
-
-  {% if pkg.get('data_granularity') %}
-    <h2>Data Granularity</h2>
-    {{ pkg.data_granularity[0] }}
-  {% endif %}
-
-  {% if pkg.get('publish_on_data_gov_sg') %}
-    <h2>Publish on Data.gov.sg</h2>
-    {{ pkg.publish_on_data_gov_sg[0] }}
-  {% endif %}
 {% endblock %}
