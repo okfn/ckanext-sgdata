@@ -65,6 +65,13 @@
       <h2>{{ title }}</h2>
         {{ pkg[name] }}
     {% endif %}
+
   {% endfor %}
+
+  <h2>Metadata Creation Date</h2>
+  {{ h.render_datetime(pkg.metadata_created) }}
+
+  <h2>Last Metadata Update Date</h2>
+  {{ h.render_datetime(pkg.metadata_modified) }}
 
 {% endblock %}
