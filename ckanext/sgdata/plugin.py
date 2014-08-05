@@ -178,8 +178,8 @@ def data_granularities():
 
 def publish_on_data_gov_sg():
     return _get_tags_from_vocabulary(
-        'publish_on_data_gov_sg', ('No', 'Yes, publish both metadata and data',
-        'Yes, publish metadata only'))
+        'publish_on_data_gov_sg', ('No', 'Yes - publish both metadata and data',
+        'Yes - publish metadata only'))
 
 
 class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
