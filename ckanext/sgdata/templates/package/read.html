@@ -68,6 +68,9 @@
 
   {% endfor %}
 
+  <h2>Category</h2>
+  {{ h.category(pkg.category) }}
+
   <h2>Metadata Creation Date</h2>
   {{ h.render_datetime(pkg.metadata_created) }}
 

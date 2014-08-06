@@ -1,0 +1,426 @@
+1,Population and Household Characteristics,1.01,Indicators on Population
+1,Population and Household Characteristics,1.02,Basic Demographic Characteristics
+1,Population and Household Characteristics,1.03,Fertility
+1,Population and Household Characteristics,1.04,Live-Births
+1,Population and Household Characteristics,1.05,Still-Births
+1,Population and Household Characteristics,1.06,Deaths
+1,Population and Household Characteristics,1.07,Marriages
+1,Population and Household Characteristics,1.08,Divorces
+1,Population and Household Characteristics,1.09,Singles
+1,Population and Household Characteristics,1.1,Elderly Population
+1,Population and Household Characteristics,1.11,"Education, Language and Religion"
+1,Population and Household Characteristics,1.12,Transport and Overseas Travel
+1,Population and Household Characteristics,1.13,Economic Characteristics
+1,Population and Household Characteristics,1.14,Geographic Distribution
+1,Population and Household Characteristics,1.15,Household and Housing
+1,Population and Household Characteristics,1.16,Electorate Information
+1,Population and Household Characteristics,1.17,People Hub Data
+1,Population and Household Characteristics,1.18,"Student's Pass, Visit Pass and Visas"
+2,Manpower,2.01,Labour Force
+2,Manpower,2.02,Central Provident Fund
+2,Manpower,2.03,"Labour Turnover, Retrenchments, Job Vacancies and Employment Service"
+2,Manpower,2.04,Skills Training
+2,Manpower,2.05,"Employment, Hours Worked and Conditions of Employment"
+2,Manpower,2.06,Labour Relations
+2,Manpower,2.07,Workplace Safety and Health
+2,Manpower,2.08,Employment of Seniors
+2,Manpower,2.09,Stock
+3,Education,3.01,Indicators on Education and Literacy
+3,Education,3.02,Government Expenditure on Education
+3,Education,3.03,Government Recurrent Expenditure on Education Per Student
+3,Education,3.04,"Students, Graduates and Teachers/ Lecturers in Educational Institutions, Exclude Private Schools"
+3,Education,3.05,Students and Teachers in Private Regular Schools
+3,Education,3.06,Enrolment in MOE Pre-schools
+3,Education,3.07,Enrolment in Primary Schools
+3,Education,3.08,Enrolment in Secondary Schools
+3,Education,3.09,Enrolment in Junior Colleges and Pre-Universities
+3,Education,3.1,Intake of Students/Trainees in ITE
+3,Education,3.11,Students/Trainees Who Completed Programmes in ITE
+3,Education,3.12,Training Places Taken Up by Workers in ITE
+3,Education,3.13,Workers Who Completed Programmes in ITE
+3,Education,3.14,Enrolment in Polytechnics
+3,Education,3.15,Graduates from Polytechnics
+3,Education,3.16,Information on Student and Graduate Services in Polytechnics
+3,Education,3.17,Enrolment in National Institute of Education
+3,Education,3.18,Enrolment in Universities
+3,Education,3.19,Graduates from Universities
+3,Education,3.2,"Intake, Enrolment and Graduates of LASALLE and NAFA"
+3,Education,3.21,Student Participation in Local/ Overseas Attachments/ Exchanges
+3,Education,3.22,Educational Collaborations Between Local and Overseas Educational Institutions
+3,Education,3.23,Examinations Data
+3,Education,3.24,Courses and Training Offered
+3,Education,3.25,Information on Scholars
+3,Education,3.26,Information on Scholarships
+3,Education,3.27,Information on School Financial Matters
+3,Education,3.28,General Information on Educational Institutions
+4,Health,4.01,Health Status - Mortality
+4,Health,4.02,Health Status - Notifications of Notifiable Diseases
+4,Health,4.03,Health Care Prevention - Vaccinations & Immunisations of Children
+4,Health,4.04,Disease Prevention - Obesity Among School Children
+4,Health,4.05,Health Care Resources - Manpower
+4,Health,4.06,Health Care Resources - Infrastructure
+4,Health,4.07,Health Care Utilisation - Hospital Admissions
+4,Health,4.08,Health Care Utilisation - A & E and Outpatient Attendance
+4,Health,4.09,Health Care Financing
+4,Health,4.1,Government Expenditure on Health
+4,Health,4.11,Health Related Licenses
+4,Health,4.12,Immunisation by Public and Private Sectors
+4,Health,4.13,Immunisation Coverage for Children at 2 Years of Age
+4,Health,4.14,Student Health
+4,Health,4.15,"Common Health Problems of Students Examined Per 10,000 Males and Females Examined"
+4,Health,4.16,National Health
+5,Household Income and Household Expenditure,5.01,Household Characteristics
+5,Household Income and Household Expenditure,5.02,Household Income from Work by Characteristics of Households
+5,Household Income and Household Expenditure,5.03,Household Income from Work by Deciles
+5,Household Income and Household Expenditure,5.04,Inequality Measures of Household Income from Work
+6,Society and Community,6.01,Religion Related Services and Assistance
+6,Society and Community,6.02,Zakat Administration
+6,Society and Community,6.03,Haj Applicants/ Pilgrims
+6,Society and Community,6.04,Madrasah Teachers/ Students
+6,Society and Community,6.05,Grassroots Organisations and Leaders
+6,Society and Community,6.06,"PA Activities, Courses and Membership"
+6,Society and Community,6.07,Volunteers and Volunteer Groups
+6,Society and Community,6.08,Family Services
+6,Society and Community,6.09,Social Assistance and Support
+6,Society and Community,6.1,Social Attitudes
+6,Society and Community,6.11,Marriage and Parenthood
+6,Society and Community,6.12,Child Welfare and Youth
+6,Society and Community,6.13,Sheltered Homes/ Welfare Homes
+6,Society and Community,6.14,Charities and Institutions of a Public Character
+6,Society and Community,6.15,Gambling and Related Issues
+6,Society and Community,6.16,Work-Life Harmony
+6,Society and Community,6.17,"Senior Citizens - Financial, Physical and Social Health"
+6,Society and Community,6.18,Social Service Sector Manpower and Scholarships
+6,Society and Community,6.19,National Council of Social Service
+6,Society and Community,6.2,Lasting Power of Attorney
+7,Housing and Urban Planning,7.01,Household and Housing
+7,Housing and Urban Planning,7.02,Properties Under the Management of Housing & Development Board
+7,Housing and Urban Planning,7.03,Housing & Development Board Resale Market Statistics
+7,Housing and Urban Planning,7.04,Urban Planning
+7,Housing and Urban Planning,7.05,Car Park and Parking Fines Information
+7,Housing and Urban Planning,7.06,Real Estate Data
+7,Housing and Urban Planning,7.07,Flatted Factory Space
+7,Housing and Urban Planning,7.08,Standard Factory Space
+7,Housing and Urban Planning,7.09,Industrial Land
+7,Housing and Urban Planning,7.1,Land Administration Data
+7,Housing and Urban Planning,7.11,Technopreneur Space
+7,Housing and Urban Planning,7.12,Business Park Space
+7,Housing and Urban Planning,7.13,Business Park Land
+7,Housing and Urban Planning,7.14,Flatted Factory
+7,Housing and Urban Planning,7.15,Workshop
+7,Housing and Urban Planning,7.16,Warehouse
+7,Housing and Urban Planning,7.17,Caveat Property
+7,Housing and Urban Planning,7.18,Key Performance Indicators for Prepared Industrial Land (PIL)
+7,Housing and Urban Planning,7.19,Key Performance Indicators for Ready-Built Facilities (RBF)
+7,Housing and Urban Planning,7.2,Gross Allocation By Industry
+7,Housing and Urban Planning,7.21,Returns By Industry
+7,Housing and Urban Planning,7.22,Productivity Table For Manufacturing Sector
+8,"Justice, Crime and Crisis Management",8.01,"Bankruptcy Petitions and Applications, Orders Made and Discharges"
+8,"Justice, Crime and Crisis Management",8.02,"Compulsory Winding Up Applications, Orders Made and Dissolution of Companies"
+8,"Justice, Crime and Crisis Management",8.03,Estate Information
+8,"Justice, Crime and Crisis Management",8.04,Moneylenders' and Pawnbrokers' Licences Details
+8,"Justice, Crime and Crisis Management",8.05,Crime Statistics
+8,"Justice, Crime and Crisis Management",8.06,Emergency and Crisis Management
+8,"Justice, Crime and Crisis Management",8.07,Prisoners Data
+8,"Justice, Crime and Crisis Management",8.08,Caseload Figures
+8,"Justice, Crime and Crisis Management",8.09,Information on Legal Entities
+8,"Justice, Crime and Crisis Management",8.1,Immigration Offences
+9,Culture and Recreation,9.01,Media Licensing and Permit Particulars
+9,Culture and Recreation,9.02,The Arts and Cultural Heritage
+9,Culture and Recreation,9.03,"National Library Membership, Book Collection and Loan of Library Materials"
+9,Culture and Recreation,9.04,Recreation Activities and Membership
+9,Culture and Recreation,9.05,Sports Facilities and Participation
+9,Culture and Recreation,9.06,Sports and Community Bonding
+9,Culture and Recreation,9.07,National Monuments
+9,Culture and Recreation,9.08,Media Personnel and Organisations
+9,Culture and Recreation,9.09,Information on National Parks
+9,Culture and Recreation,9.1,Media Classification Details
+10,Macroeconomic Statistics,10.01,Indigenous GNI and Per Capita Indigenous GNI and GDP
+10,Macroeconomic Statistics,10.02,Per Capita GNI and Per Capita GDP
+10,Macroeconomic Statistics,10.03,Principal Manufacturing Statistics
+10,Macroeconomic Statistics,10.04,Gross Operating Surplus Per Unit Output Ratio of Manufacturing
+10,Macroeconomic Statistics,10.05,Selected Averages and Ratios in the Manufacturing Sector
+10,Macroeconomic Statistics,10.06,Principal Services Statistics
+10,Macroeconomic Statistics,10.07,Singapore Investment Abroad
+10,Macroeconomic Statistics,10.08,Total External Trade by Type
+10,Macroeconomic Statistics,10.09,Composite Leading Index
+11,Economic Accounts: National Accounts and Input-Output Tables,11.01,Income Components of Gross Domestic Product
+11,Economic Accounts: National Accounts and Input-Output Tables,11.02,Expenditure on Gross Domestic Product
+11,Economic Accounts: National Accounts and Input-Output Tables,11.03,Changes in Total Demand
+11,Economic Accounts: National Accounts and Input-Output Tables,11.04,Contribution to Growth in Total Demand
+11,Economic Accounts: National Accounts and Input-Output Tables,11.05,Gross Fixed Capital Formation
+11,Economic Accounts: National Accounts and Input-Output Tables,11.06,Deflators of Expenditure on Gross Domestic Product
+11,Economic Accounts: National Accounts and Input-Output Tables,11.07,Private Consumption Expenditure
+11,Economic Accounts: National Accounts and Input-Output Tables,11.08,"Output, Saving and Investment"
+11,Economic Accounts: National Accounts and Input-Output Tables,11.09,Multifactor Productivity: Contributions to Growth in Real GDP
+11,Economic Accounts: National Accounts and Input-Output Tables,11.1,Gross Domestic Product by Industry
+11,Economic Accounts: National Accounts and Input-Output Tables,11.11,Gross Domestic Product Deflators by Industry
+11,Economic Accounts: National Accounts and Input-Output Tables,11.12,Contribution to Growth in Gross Domestic Product by Industry
+11,Economic Accounts: National Accounts and Input-Output Tables,11.13,Changes in Labour Productivity by Industry
+11,Economic Accounts: National Accounts and Input-Output Tables,11.14,Changes in Value Added Per Hour Worked by Industry
+11,Economic Accounts: National Accounts and Input-Output Tables,11.15,Share of Nominal Gross Value Added by Industry
+11,Economic Accounts: National Accounts and Input-Output Tables,11.16,Input-Output Tables (2005 and 2007)
+11,Economic Accounts: National Accounts and Input-Output Tables,11.17,"Supply and Use, and Input-Output Tables"
+11,Economic Accounts: National Accounts and Input-Output Tables,11.18,Compensation of Employees by Industry
+11,Economic Accounts: National Accounts and Input-Output Tables,11.19,Gross Operating Surplus by Industry
+11,Economic Accounts: National Accounts and Input-Output Tables,11.2,Other Taxes Less Subsidies on Production by Industry
+11,Economic Accounts: National Accounts and Input-Output Tables,11.21,Gross Capital Stock
+11,Economic Accounts: National Accounts and Input-Output Tables,11.22,Net Capital Stock
+12,"Balance of Payments, Investments and International Trade",12.01,Balance of Payments
+12,"Balance of Payments, Investments and International Trade",12.02,"Singapore's Balance of Payments, Additional Details of the Financial Account"
+12,"Balance of Payments, Investments and International Trade",12.03,Singapore International Investment Position
+12,"Balance of Payments, Investments and International Trade",12.04,Number of Affiliates Set Up Abroad by Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.05,Direct Equity Investment Abroad by Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.06,Total Direct Investment Abroad by Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.07,Stock of Singapore Direct Investment Abroad by Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.08,Direct Equity Investment Abroad by Region/ Country and Activity in Singapore
+12,"Balance of Payments, Investments and International Trade",12.09,Total Direct Investment Abroad by Region/ Country and Activity in Singapore
+12,"Balance of Payments, Investments and International Trade",12.1,Direct Equity Investment Abroad by Activity in Singapore and Activity Abroad
+12,"Balance of Payments, Investments and International Trade",12.11,Total Direct Investment Abroad by Activity in Singapore and Activity Abroad
+12,"Balance of Payments, Investments and International Trade",12.12,Direct Equity Investment Abroad by Region/ Country and Activity Abroad
+12,"Balance of Payments, Investments and International Trade",12.13,Total Direct Investment Abroad by Region/ Country and Activity Abroad
+12,"Balance of Payments, Investments and International Trade",12.14,Principal Statistics of Equity Investment in Singapore
+12,"Balance of Payments, Investments and International Trade",12.15,Stock of Foreign Direct Investment by Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.16,Foreign Equity Investment by Activity in Singapore and Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.17,Foreign Direct Equity Investment by Activity in Singapore and Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.18,Foreign Portfolio Equity Investment by Activity in Singapore and Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.19,Foreign Direct Investment by Activity in Singapore and Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.2,Foreign Equity Investment by Activity in Singapore
+12,"Balance of Payments, Investments and International Trade",12.21,Foreign Direct Equity Investment by Activity in Singapore
+12,"Balance of Payments, Investments and International Trade",12.22,Foreign Portfolio Equity Investment by Activity in Singapore
+12,"Balance of Payments, Investments and International Trade",12.23,Foreign Direct Investment by Activity in Singapore
+12,"Balance of Payments, Investments and International Trade",12.24,Earnings of Foreign Equity Investment by Activity in Singapore and Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.25,Earnings of Foreign Direct Equity Investment by Activity in Singapore and Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.26,Earnings of Foreign Portfolio Equity Investment by Activity in Singapore and Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.27,Earnings of Foreign Direct Investment by Activity in Singapore and Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.28,Earnings of Foreign Equity Investment by Activity in Singapore
+12,"Balance of Payments, Investments and International Trade",12.29,Earnings of Foreign Direct Equity Investment by Activity in Singapore
+12,"Balance of Payments, Investments and International Trade",12.3,Earnings of Foreign Portfolio Equity Investment by Activity in Singapore
+12,"Balance of Payments, Investments and International Trade",12.31,Earnings of Foreign Direct Investment by Activity in Singapore
+12,"Balance of Payments, Investments and International Trade",12.32,Returns on Foreign Equity Investment by Activity in Singapore and Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.33,Returns on Foreign Direct Equity Investment by Activity in Singapore and Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.34,Returns on Foreign Portfolio Equity Investment by Activity in Singapore and Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.35,Returns on Foreign Direct Investment by Activity in Singapore and Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.36,Returns on Foreign Equity Investment by Activity in Singapore
+12,"Balance of Payments, Investments and International Trade",12.37,Returns on Foreign Direct Equity Investment by Activity in Singapore
+12,"Balance of Payments, Investments and International Trade",12.38,Returns on Foreign Portfolio Equity Investment Activity in Singapore
+12,"Balance of Payments, Investments and International Trade",12.39,Returns on Foreign Direct Investment by Activity in Singapore
+12,"Balance of Payments, Investments and International Trade",12.4,Fixed Assets Investments Commitments in Manufacturing and Services
+12,"Balance of Payments, Investments and International Trade",12.41,Total Business Spending Commitments in Manufacturing and Services
+12,"Balance of Payments, Investments and International Trade",12.42,Total Business Expenditure Commitments in Manufacturing and Services
+12,"Balance of Payments, Investments and International Trade",12.43,Skilled Profile (by Occupation) Commitments in Manufacturing and Services
+12,"Balance of Payments, Investments and International Trade",12.44,Value Added Commitments in Manufacturing and Services by Industry
+12,"Balance of Payments, Investments and International Trade",12.45,Import of Services by Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.46,Import of Services by Services Category
+12,"Balance of Payments, Investments and International Trade",12.47,Export of Services by Region/ Country
+12,"Balance of Payments, Investments and International Trade",12.48,Export of Services by Services Category
+12,"Balance of Payments, Investments and International Trade",12.49,Customs Data
+12,"Balance of Payments, Investments and International Trade",12.5,External Trade
+12,"Balance of Payments, Investments and International Trade",12.51,Imports of Goods
+12,"Balance of Payments, Investments and International Trade",12.52,Exports of Goods
+12,"Balance of Payments, Investments and International Trade",12.53,Singapore External Debt Statistics
+13,Business Statistics,13.01,Formation of Companies by Industry
+13,Business Statistics,13.02,Cessation of Companies by Industry
+13,Business Statistics,13.03,Formation of Businesses by Industry
+13,Business Statistics,13.04,Cessation of Businesses by Industry
+13,Business Statistics,13.05,Business and People Information
+13,Business Statistics,13.06,Business Expectations of the Manufacturing Sector - Forecast by Industry
+13,Business Statistics,13.07,Business Expectations of the Manufacturing Sector - Weightage by Industry
+13,Business Statistics,13.08,Most Important Single Factors Limiting Export Orders in Manufacturing
+13,Business Statistics,13.09,Business Expectations for the Services Sector - Forecast by Industry
+13,Business Statistics,13.1,Business Expectations for the Services Sector - Expected Performance by Industry
+13,Business Statistics,13.11,Total Assets by Industry
+13,Business Statistics,13.12,Liabilities by Industry
+13,Business Statistics,13.13,Interest Paid by Industry
+13,Business Statistics,13.14,Profit Paid Before Tax by Industry
+13,Business Statistics,13.15,Dividends Paid by Industry
+13,Business Statistics,13.16,Shareholders' Equity by Industry
+13,Business Statistics,13.17,Total Equity by Industry
+13,Business Statistics,13.18,Equity Ratio of Companies by Industry
+13,Business Statistics,13.19,Current Ratio of Companies by Industry
+13,Business Statistics,13.2,Return on Equity by Industry
+13,Business Statistics,13.21,Return on Asset by Industry
+13,Business Statistics,13.22,Financial Leverage by Industry
+14,"Agriculture, Animal Production and Fisheries",14.01,Principal Statistics of Farm Production
+14,"Agriculture, Animal Production and Fisheries",14.02,Principal Crops
+14,"Agriculture, Animal Production and Fisheries",14.03,Livestock Slaughtered
+14,"Agriculture, Animal Production and Fisheries",14.04,Fish Supply and Auction
+14,"Agriculture, Animal Production and Fisheries",14.05,Other Farm Production
+14,"Agriculture, Animal Production and Fisheries",14.06,Ex-Farm Price for Primary Produce
+14,"Agriculture, Animal Production and Fisheries",14.07,Per Capita Consumption
+14,"Agriculture, Animal Production and Fisheries",14.08,Farming Activities and Farming Area in Singapore
+14,"Agriculture, Animal Production and Fisheries",14.09,Trade Documentation and Import Inspection Figures
+14,"Agriculture, Animal Production and Fisheries",14.1,Illegal Imports Intercepted
+15,Energy,15.01,Electricity
+15,Energy,15.02,Gas
+15,Energy,15.03,Petroleum
+15,Energy,15.04,Renewable
+16,Manufacturing,16.01,Overall Manufacturing
+16,Manufacturing,16.02,Manufacturing by Industry
+16,Manufacturing,16.03,Manufacturing by Cluster
+16,Manufacturing,16.04,Index of Industrial Production
+17,Construction,17.01,Construction Demand - Contracts Awarded by Sector and Type of Work
+17,Construction,17.02,Construction Demand Forecast
+17,Construction,17.03,Construction Output - Progress Payments Certified by Sector and Type of Work
+17,Construction,17.04,Demand for Construction Materials
+17,Construction,17.05,"Selected Projects Awarded by Cost, Development Time, Consultant and Contractor"
+17,Construction,17.06,Construction Cost for Different Types of Development
+17,Construction,17.07,Construction Approval
+17,Construction,17.08,Contractors Registry
+17,Construction,17.09,"Enquiry of Buildings, Facilities"
+17,Construction,17.1,Information on Construction Quality
+17,Construction,17.11,Builders Registry
+17,Construction,17.12,Consultancy Registry
+18,Transportation and Storage,18.01,Indicators of Transport and Storage Services
+18,Transportation and Storage,18.02,Outbound Departures of Singapore Residents by Mode of Transport
+18,Transportation and Storage,18.03,Sea Cargo and Shipping
+18,Transportation and Storage,18.04,Aircraft Arrivals & Departures
+18,Transportation and Storage,18.05,"Air Passenger Arrivals, Departures and Transits"
+18,Transportation and Storage,18.06,Air Cargo Discharged & Loaded
+18,Transportation and Storage,18.07,Airmail Discharged & Loaded
+18,Transportation and Storage,18.08,Air Cargo Discharged & Loaded by Region and Selected Country
+18,Transportation and Storage,18.09,Air Passenger Arrivals & Departures by Region and Selected Country
+18,Transportation and Storage,18.1,Air Accidents & Incidents
+18,Transportation and Storage,18.11,Road Accidents and Casualties
+18,Transportation and Storage,18.12,Vehicles Involved in Road Accidents
+18,Transportation and Storage,18.13,Driver Licences
+18,Transportation and Storage,18.14,Motor Vehicle Population
+18,Transportation and Storage,18.15,Traffic Offence Details
+18,Transportation and Storage,18.16,Public Transport Information
+18,Transportation and Storage,18.17,Public Roads
+18,Transportation and Storage,18.18,Road Traffic Conditions
+18,Transportation and Storage,18.19,Road and Traffic Facilities
+18,Transportation and Storage,18.2,Pedestrian Facilities
+18,Transportation and Storage,18.21,Motor Vehicle Annual Mileage
+18,Transportation and Storage,18.22,Public Transport Capacity
+18,Transportation and Storage,18.23,Public Transport Utilisation
+18,Transportation and Storage,18.24,Commuter Facilities
+18,Transportation and Storage,18.25,Rapid Transit System
+18,Transportation and Storage,18.26,Average Fuel Consumption
+18,Transportation and Storage,18.27,Immigration Checkpoints
+19,Tourism,19.01,Visitor Arrivals by Region/ Country of Residence
+19,Tourism,19.02,Visitor Profile
+19,Tourism,19.03,Tourism Receipts
+19,Tourism,19.04,Hotel and Food & Beverage
+19,Tourism,19.05,Incoming Passenger Carriers Flights and Seat Capacity
+19,Tourism,19.06,Cruise
+19,Tourism,19.07,Singapore Outbound Statistics
+19,Tourism,19.08,Information for Travellers
+19,Tourism,19.09,Events in Singapore
+20,"Banking, Insurance and Financial Statistics",20.01,Currency in Circulation
+20,"Banking, Insurance and Financial Statistics",20.02,Money Supply
+20,"Banking, Insurance and Financial Statistics",20.03,Monetary Survey
+20,"Banking, Insurance and Financial Statistics",20.04,Official Foreign Reserves
+20,"Banking, Insurance and Financial Statistics",20.05,Monetary Authorities: Asset and Liabilities
+20,"Banking, Insurance and Financial Statistics",20.06,Banks: Assets and Liabilities of Domestic Banking Units
+20,"Banking, Insurance and Financial Statistics",20.07,Banks: Deposits (Excluding S$NCDS) of Domestic Banking Units by Types of Non-Bank Customers
+20,"Banking, Insurance and Financial Statistics",20.08,Banks: Loans and Advances of Domestic Banking Units to Non-Bank Customers by Industrial Classification
+20,"Banking, Insurance and Financial Statistics",20.09,Banks: Loans and Advances of Asian Currency Units to Non-Bank Customers by Industrial Classification
+20,"Banking, Insurance and Financial Statistics",20.1,Banks: Limits Granted and Advances of Domestic Banking Units to Non-Bank Customers by Industrial Classification
+20,"Banking, Insurance and Financial Statistics",20.11,Banks: Types of Loans and Advances of Domestic Banking Units to Non-Bank Customers
+20,"Banking, Insurance and Financial Statistics",20.12,Banks: Statutory Liquidity Position of Domestic Banking Units
+20,"Banking, Insurance and Financial Statistics",20.13,Banks: Domestic Banking Units External Assets and Liabilities
+20,"Banking, Insurance and Financial Statistics",20.14,Asian Dollar Market: Assets and Liabilities of Asian Currency Units
+20,"Banking, Insurance and Financial Statistics",20.15,Asian Dollar Market: Maturities of Assets and Liabilities of Asian Currency Units
+20,"Banking, Insurance and Financial Statistics",20.16,Asian Dollar Market: Interbank and Non- Bank Funds by Selected Regions
+20,"Banking, Insurance and Financial Statistics",20.17,Credit and Charge Cards
+20,"Banking, Insurance and Financial Statistics",20.18,Finance Companies: Assets and Liabilities
+20,"Banking, Insurance and Financial Statistics",20.19,Finance Companies: Loans and Advances
+20,"Banking, Insurance and Financial Statistics",20.2,Merchant Banks: Assets and Liabilities of Domestic and Asian Currency Unit Operations
+20,"Banking, Insurance and Financial Statistics",20.21,Insurance Companies: Assets
+20,"Banking, Insurance and Financial Statistics",20.22,Life Insurance Companies - New Business
+20,"Banking, Insurance and Financial Statistics",20.23,Life Insurance Companies - Business in Force
+20,"Banking, Insurance and Financial Statistics",20.24,General Insurance Companies: Premiums and Claims
+20,"Banking, Insurance and Financial Statistics",20.25,Exchange Rates (Average of Period)
+20,"Banking, Insurance and Financial Statistics",20.26,Foreign Exchange Market
+20,"Banking, Insurance and Financial Statistics",20.27,Domestic Interest Rates
+20,"Banking, Insurance and Financial Statistics",20.28,Banks Interest Rates
+20,"Banking, Insurance and Financial Statistics",20.29,Finance Companies Interest Rates
+20,"Banking, Insurance and Financial Statistics",20.3,"Singapore Government Securities (SGS): Issuance, Redemption, Outstanding Amount"
+20,"Banking, Insurance and Financial Statistics",20.31,Singapore Government Securities (SGS): Prices and Yields
+20,"Banking, Insurance and Financial Statistics",20.32,Singapore Government Securities (SGS): Average Daily Turnover Volume
+20,"Banking, Insurance and Financial Statistics",20.33,Financial Institutions in Singapore
+20,"Banking, Insurance and Financial Statistics",20.34,"Central Provident Fund Contributions, Withdrawals and Amount Due to Members"
+20,"Banking, Insurance and Financial Statistics",20.35,Withdrawals From Central Provident Fund by Type
+20,"Banking, Insurance and Financial Statistics",20.36,Pledges at Pawnshops
+20,"Banking, Insurance and Financial Statistics",20.37,Household Sector Balance Sheet
+20,"Banking, Insurance and Financial Statistics",20.38,Bank Exposures
+20,"Banking, Insurance and Financial Statistics",20.39,Combined Assets and Liabilities of DBUs and ACUs
+21,Other Services,21.01,Wholesale Trade
+21,Other Services,21.02,Retail Trade
+21,Other Services,21.03,Food & Beverages Services
+21,Other Services,21.04,Health Services
+21,Other Services,21.05,Retail Sales Index
+21,Other Services,21.06,Food & Beverage Services Index
+21,Other Services,21.07,Domestic Wholesale Trade Index
+21,Other Services,21.08,Foreign Wholesale Trade Index
+21,Other Services,21.09,Business Receipts Index for Services Industries
+22,Public Finance,22.01,Government Overall Fiscal Position
+22,Public Finance,22.02,Government Operating Revenue and Receipts
+22,Public Finance,22.03,Government Expenditure and Outlays
+22,Public Finance,22.04,Headcount by Ministry
+22,Public Finance,22.05,Sources and Uses of Development Fund
+22,Public Finance,22.06,Government Debt
+22,Public Finance,22.07,Government Finance in IMF Special Data Dissemination Standard (SDDS) Format
+22,Public Finance,22.08,Customs and Excise Tax Data
+22,Public Finance,22.09,Tax Administrative Data
+23,Prices,23.01,Consumer Price Index at Group and Sub Group Level
+23,Prices,23.02,Consumer Price Index for Households in Different Income Groups
+23,Prices,23.03,Availability of Selected Consumer Durables/Service
+23,Prices,23.04,Distribution of Monthly Household Expenditure by Type of Goods and Services
+23,Prices,23.05,Price Indices of Selected Consumer Items
+23,Prices,23.06,Average Retail Price of Selected Items
+23,Prices,23.07,Domestic Supply Price Index
+23,Prices,23.08,Singapore Manufactured Products Price Index
+23,Prices,23.09,Import Price Index
+23,Prices,23.1,Export Price Index
+23,Prices,23.11,Construction Material Market Prices
+23,Prices,23.12,Private Property Price Index by Type of Property
+23,Prices,23.13,Rental Index
+23,Prices,23.14,Price Indices of Non Landed Private Residential Properties by Locality and Completion Status
+23,Prices,23.15,Housing & Development Board Prices
+23,Prices,23.16,Tender Price Index by Type of Building
+23,Prices,23.17,Construction Materials Contracted Prices (Delivered to Site)
+23,Prices,23.18,Construction Materials Spot Prices
+23,Prices,23.19,Units Rates - Excavation
+23,Prices,23.2,Consumer Price Index at Group and Sub Group Level (Seasonally Adjusted)
+23,Prices,23.21,Percentage Change in Consumer Price Index
+24,Labour Costs,24.01,Wages
+24,Labour Costs,24.02,Unit Labour Cost Index and Unit Business Cost Index
+25,"Science, Technology and Innovation",25.01,Surveyed Research and Development Organisations by Sector
+25,"Science, Technology and Innovation",25.02,Research and Development Expenditure by Sector
+25,"Science, Technology and Innovation",25.03,Research and Development Expenditure by Type of Costs
+25,"Science, Technology and Innovation",25.04,Research and Development Manpower by Sector
+25,"Science, Technology and Innovation",25.05,Research and Development Full Time Equivalence by Sector
+25,"Science, Technology and Innovation",25.06,Research and Development Outputs by Sector
+25,"Science, Technology and Innovation",25.07,Intellectual Property
+26,Environment,26.01,Meteorological Services
+26,Environment,26.02,Pollution Control
+26,Environment,26.03,Water Supply and Demand
+26,Environment,26.04,Solid Waste Management
+26,Environment,26.05,Resource Conservation
+26,Environment,26.06,Climate Change and Energy Efficiency
+26,Environment,26.07,Environmental Health
+26,Environment,26.08,Cleanliness and Food Hygiene
+26,Environment,26.09,Licensed Hawkers Under National Environment Agency
+26,Environment,26.1,Licensed Hawkers Under Other Agencies
+26,Environment,26.11,Licensed Food Establishments
+26,Environment,26.12,Other Environment Related Licenses and Approvals
+26,Environment,26.13,Floods
+26,Environment,26.14,Water Quality
+27,Information Society,27.01,Infocomm Services
+27,Information Society,27.02,Infocomm Industry Revenue
+27,Information Society,27.03,Infocomm Manpower
+27,Information Society,27.04,Telecommunications
+27,Information Society,27.05,Computer and Internet Access and Usage by Households and Individuals
+27,Information Society,27.06,Computer and Internet Usage by Enterprises
+27,Information Society,27.07,Consumer Broadband Report
+27,Information Society,27.08,Print Media
+28,Entrepreneurship and SMEs,28.01,Enterprise Development
+28,Entrepreneurship and SMEs,28.02,Quality and Excellence
+29,Millennium Development Goals,29.01,ASEAN MDG Statistical Indicators
+30,Miscellaneous,30.01,Personal Details
+30,Miscellaneous,30.02,Information on Missions
+30,Miscellaneous,30.03,LPG Sales
+30,Miscellaneous,30.04,Global Navigation Satellite Systems (GNSS) Data
+30,Miscellaneous,30.05,Control Point Information

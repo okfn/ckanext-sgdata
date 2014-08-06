@@ -1,5 +1,7 @@
 import datetime
 import logging
+import os.path
+import json
 
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
@@ -21,7 +23,8 @@ SIMPLE_MANDATORY_TEXT_FIELDS = (
     'data_provider_alternate_contact_designation',
     'data_provider_alternate_contact_department',
     'data_provider_alternate_contact_telephone_number',
-    'data_provider_alternate_contact_email_address'
+    'data_provider_alternate_contact_email_address',
+    'category',
     )
 
 
@@ -180,6 +183,27 @@ def publish_on_data_gov_sg():
     return _get_tags_from_vocabulary(
         'publish_on_data_gov_sg', ('No', 'Yes - publish both metadata and data',
         'Yes - publish metadata only'))
+
+
+def categories():
+
+    path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                        '../../categories.json')
+    categories = json.loads(open(path, 'r').read())
+    # FIXME: Sort the values.
+    return categories.values()
+
+
+def category(value):
+    category = None
+    for c in categories():
+        for sc in c['categories'].values():
+            if sc['value'] == value:
+                category = sc
+                break
+        if category:
+            break
+    return '{0} -> {1}'.format(category['parent_label'], category['label'])
 
 
 def last_update_by(pkg_dict):
@@ -358,6 +382,8 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                 'data_granularities': data_granularities,
                 'publish_on_data_gov_sg': publish_on_data_gov_sg,
                 'last_update_by': last_update_by,
+                'categories': categories,
+                'category': category,
                 }
 
 

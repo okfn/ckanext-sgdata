@@ -179,14 +179,20 @@
 
   {{ datepicker('available-from', 'Available From', value=(data.get('available-from') or h.today())) }}
 
-  {{ select('first_level_category', '1st Level Category',
-            [_('Business Statistics'),], is_required=True, disabled=True) }}
-  {{ select('second_level_category', '2nd Level Category',
-            [_('Business Expectations for the Services Sector - Forecast by Industry'),],
-            is_required=True, disabled=True)}}
-  {{ select('third_level_category', '3rd Level Category',
-            [_('General Business Expectations by Industry'),],
-            is_required=True, disabled=True)}}
+  <div class="control-group">
+    <label class="control-label" for="field-category">{{ required(True) }}{{ _('Category') }}</label>
+    <div class="controls">
+      <select id="field-category" name="category">
+        {% for category in h.categories() %}
+          <optgroup label="{{ category.label }}">
+            {% for subcategory in category.categories.values() %}
+              <option value="{{ subcategory.value }}" {% if subcategory.value == data.get('category') %}selected{% endif %}>{{ subcategory.label }}</option>
+            {% endfor %}
+          </optgroup>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
 
   {{ select('type_of_data_collection', 'Type of Data Collection',
             h.types_of_data_collection(), is_required=True,
