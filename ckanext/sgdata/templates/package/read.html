@@ -81,6 +81,8 @@
 
   <h2>Last Update By</h2>
   {% set last_updater = h.last_update_by(pkg) %}
-  <a href="{{ h.url_for(controller='user', action='read', id=last_updater.name) }}">{{ last_updater.display_name }}</a>
+  {% if last_updater %}
+    <a href="{{ h.url_for(controller='user', action='read', id=last_updater.name) }}">{{ last_updater.display_name }}</a>
+  {% endif %}
 
 {% endblock %}

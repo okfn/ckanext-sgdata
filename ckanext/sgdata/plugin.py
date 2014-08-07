@@ -209,6 +209,8 @@ def category(value):
 def last_update_by(pkg_dict):
     activities = toolkit.get_action('package_activity_list')(
             context={}, data_dict={'id': pkg_dict['id']})
+    if not activities:
+        return None
     user_id = activities[0]['user_id']
     user_dict = toolkit.get_action('user_show')(
             context={}, data_dict={'id': user_id})
