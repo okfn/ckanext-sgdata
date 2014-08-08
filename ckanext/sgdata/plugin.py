@@ -43,9 +43,14 @@ SIMPLE_OPTIONAL_TEXT_FIELDS = (
 def _change_error_dict(err):
     errors = err.error_dict.copy()
 
-    # Change "Tag string" to "Keywords" in the error summary shown to the user.
+    # Change "Tags" to "Keywords" in the error summary shown to the user.
+    if 'tags' in errors:
+        errors['keywords'] = errors['tags']
+        del errors['tags']
+
+    # The 'tags' errors seem to also be repeated as 'tag_string', which is also
+    # shown to the user! Stop it.
     if 'tag_string' in errors:
-        errors['keywords'] = errors['tag_string']
         del errors['tag_string']
 
     # Change "Name" to "URL" in the error summary shown to the user.
@@ -209,6 +214,8 @@ def category(value):
 def last_update_by(pkg_dict):
     activities = toolkit.get_action('package_activity_list')(
             context={}, data_dict={'id': pkg_dict['id']})
+    if not activities:
+        return None
     user_id = activities[0]['user_id']
     user_dict = toolkit.get_action('user_show')(
             context={}, data_dict={'id': user_id})
