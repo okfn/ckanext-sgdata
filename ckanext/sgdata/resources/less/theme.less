@@ -1,0 +1,89 @@
+//Variables
+@bg: #005500;
+
+@serif: Georgia,Times,'Times New Roman',serif;
+
+//Mixins
+.button-colour(@bg-colour, @text-colour: #fff) {
+  background-color: @bg-colour;
+  border-color: @bg-colour;
+  color: @text-colour;
+  &:hover,
+  &:focus {
+    color: @text-colour;
+    background-color:lighten(@bg-colour, 10%);
+    border-color:lighten(@bg-colour, 10%);
+  }
+}
+
+.gradient (@startColor: @bg, @endColor: @bg) {
+	background-color: @startColor;
+	background: -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
+	background: -webkit-linear-gradient(top, @startColor, @endColor);
+	background: -moz-linear-gradient(top, @startColor, @endColor);
+	background: -ms-linear-gradient(top, @startColor, @endColor);
+	background: -o-linear-gradient(top, @startColor, @endColor);
+}
+
+
+/* Utilities */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+
+/* Reset */
+body,
+.account-masthead,
+.masthead,
+[role="main"],
+.main,
+.site-footer {
+  background-image:none;
+  background-color:@bg;
+}
+
+body {
+  font-size:14px;
+}
+
+
+/* Buttons */
+.btn {
+  background-image: none;
+  box-shadow: none;
+  font-size: 13px;
+  line-height: 16px;
+  padding: 3px 8px;
+  text-shadow: none;
+  .button-colour(@bg);
+}
+.btn-primary,
+.btn-group.open .btn-primary.dropdown-toggle {
+  .button-colour(@bg);
+}
+.btn-success {
+  .button-colour(@bg);
+}
+.btn-warning {
+  .button-colour(@bg);
+}
+.btn-danger {
+  .button-colour(@bg);
+}
+
+
+
+/* Structure */
+
