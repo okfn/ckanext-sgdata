@@ -6,6 +6,7 @@ import json
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as helpers
+import ckan.model as model
 
 
 SIMPLE_MANDATORY_TEXT_FIELDS = (
@@ -369,6 +370,11 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
             controller='ckanext.sgdata.plugin:SGDataPackageController',
             action='new_metadata')
 
+        map_.connect(
+            '/dataset/contact/{dataset_id}',
+            controller='ckanext.sgdata.plugin:SGDataPackageController',
+            action='contact')
+
         return map_
 
     # IActions
@@ -411,3 +417,21 @@ class SGDataPackageController(toolkit.BaseController):
 
         base.redirect(helpers.url_for(controller='package', action='read',
                                       id=id))
+
+    def contact(self, dataset_id):
+
+        context = {'model': model, 'session': model.Session,
+                   'user': toolkit.c.user or toolkit.c.author,
+                   'for_view': True, 'auth_user_obj': toolkit.c.userobj}
+        data_dict = {'id': dataset_id}
+
+        try:
+            toolkit.c.pkg_dict = toolkit.get_action('package_show')(context,
+                                                                    data_dict)
+        except toolkit.ObjectNotFound:
+            toolkit.abort(404, _('Dataset not found'))
+        except toolkit.NotAuthorized:
+            toolkit.abort(401,
+                          ('Unauthorized to read dataset %s') % dataset_id)
+
+        return toolkit.render('package/contact.html')
