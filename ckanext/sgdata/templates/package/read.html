@@ -79,10 +79,16 @@
   <h2>Last Metadata Update Date</h2>
   {{ h.render_datetime(pkg.metadata_modified) }}
 
-  <h2>Last Update By</h2>
   {% set last_updater = h.last_update_by(pkg) %}
   {% if last_updater %}
+    <h2>Last Update By</h2>
     <a href="{{ h.url_for(controller='user', action='read', id=last_updater.name) }}">{{ last_updater.display_name }}</a>
+  {% endif %}
+
+  {% set identifier = h.sg_data_record_identifier(pkg) %}
+  {% if identifier %}
+    <h2>SG Data Record Identifier</h2>
+    {{ identifier }}
   {% endif %}
 
 {% endblock %}
