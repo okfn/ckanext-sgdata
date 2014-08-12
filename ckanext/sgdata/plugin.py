@@ -6,6 +6,9 @@ import json
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as helpers
+import ckan.model
+
+import ckanext.sgdata.model as model
 
 
 SIMPLE_MANDATORY_TEXT_FIELDS = (
@@ -98,6 +101,8 @@ def package_create(context, data_dict):
 
     if error_dict:
         raise toolkit.ValidationError(error_dict)
+
+    model.save_sg_data_record_identifier(result)
 
     return result
 
@@ -222,6 +227,10 @@ def last_update_by(pkg_dict):
     return user_dict
 
 
+def sg_data_record_identifier(pkg_dict):
+    return model.sg_data_record_identifier(pkg_dict['id'])
+
+
 class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IDatasetForm)
@@ -234,7 +243,7 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     def update_config(self, config):
         toolkit.add_template_directory(config, 'templates')
         toolkit.add_public_directory(config, 'public')
-        toolkit.add_resource('resources', 'theme')
+        model.setup()
 
     # IDatasetForm
 
@@ -370,6 +379,11 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
             controller='ckanext.sgdata.plugin:SGDataPackageController',
             action='new_metadata')
 
+        map_.connect(
+            '/dataset/contact/{dataset_id}',
+            controller='ckanext.sgdata.plugin:SGDataPackageController',
+            action='contact')
+
         return map_
 
     # IActions
@@ -392,17 +406,17 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                 'last_update_by': last_update_by,
                 'categories': categories,
                 'category': category,
+                'sg_data_record_identifier': sg_data_record_identifier,
                 }
 
 
 class SGDataPackageController(toolkit.BaseController):
 
     def new_metadata(self, id, data=None, errors=None, error_summary=None):
-        import ckan.model as model
         import ckan.lib.base as base
 
         # Change the package state from draft to active and save it.
-        context = {'model': model, 'session': model.Session,
+        context = {'model': ckan.model, 'session': ckan.model.Session,
                    'user': toolkit.c.user or toolkit.c.author,
                    'auth_user_obj': toolkit.c.userobj}
         data_dict = toolkit.get_action('package_show')(context, {'id': id})
@@ -412,3 +426,21 @@ class SGDataPackageController(toolkit.BaseController):
 
         base.redirect(helpers.url_for(controller='package', action='read',
                                       id=id))
+
+    def contact(self, dataset_id):
+
+        context = {'model': ckan.model, 'session': ckan.model.Session,
+                   'user': toolkit.c.user or toolkit.c.author,
+                   'for_view': True, 'auth_user_obj': toolkit.c.userobj}
+        data_dict = {'id': dataset_id}
+
+        try:
+            toolkit.c.pkg_dict = toolkit.get_action('package_show')(context,
+                                                                    data_dict)
+        except toolkit.ObjectNotFound:
+            toolkit.abort(404, _('Dataset not found'))
+        except toolkit.NotAuthorized:
+            toolkit.abort(401,
+                          ('Unauthorized to read dataset %s') % dataset_id)
+
+        return toolkit.render('package/contact.html')
