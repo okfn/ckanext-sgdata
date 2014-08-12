@@ -1,0 +1,93 @@
+{% extends "page.html" %}
+
+{% block subtitle %}{{ _("Welcome") }}{% endblock %}
+
+{% block maintag %}{% endblock %}
+{% block toolbar %}{% endblock %}
+
+
+{% block content %}
+  <div class="homepage">
+    <div class="container">
+      <form class="section site-search simple-input" action="{% url_for controller='package', action='search' %}" method="get">
+          <div class="search-input search-giant field">
+            <label for="field-sitewide-search">{{ _('Search Datasets') }}</label>
+            <input id="field-sitewide-search" type="text" name="q" placeholder="{{ _('Search datasets...') }}" />
+            <button class="btn-search" type="submit"><i class="icon-search"></i></button>
+          </div>
+        </form>
+    </div>
+
+    <section class="grey horizontal">
+      <div class="container">
+        {{ self.flash() }}
+    
+        {% block primary_content %}
+          <div role="main">
+            <div class="container">
+                
+              <ul class="box-list">
+                <li class="data">
+                  <a href="dataset">
+                    <h3>Browse Metadata Catalog</h3>
+                    <p>Browse, search and filter all datasets</p>
+                  </a>
+                </li>
+                
+                <li class="agencies">
+                  <a href="organization">
+                    <h3>Browse Agencies</h3>
+                    <p>Browse collections of datasets</p>
+                  </a>
+                </li>
+                
+                {% if c.userobj %}
+                <li class="profile">
+                  <a href="{{ h.url_for(controller='user', action='read', id=c.userobj.name) }}">
+                    <h3>User Profile</h3>
+                    <p>View and manage your profile</p>
+                  </a>
+                </li>
+                {% else %}
+                <li class="profile">
+                  <a href="user/login">
+                    <h3>Log In</h3>
+                    <p>Create and edit datasets</p>
+                  </a>
+                </li>
+                {% endif %}
+                
+                {% if c.userobj %}
+                <li class="add-data">
+                  <a href="dataset/new">
+                    <h3>Add Metadata</h3>
+                    <p>Create a new collection of data files</p>
+                  </a>
+                </li>
+                
+                <li class="add-agency">
+                  <a href="organization/new">
+                    <h3>Add an Agency</h3>
+                    <p>Create and manage collections of datasets</p>
+                  </a>
+                </li>
+                
+                <li class="dashboard">
+                  <a href="{{ h.url_for(controller='user', action='dashboard') }}">
+                    <h3>Dashboard</h3>
+                    <p>Newsfeed, your datasets and groups</p>
+                    {% set new_activities = h.new_activities() %}
+                    <span class="activities">{% if new_activities > 0 %}{{ new_activities }}{% else %}<i class="icon-check-sign"></i>{% endif %}</span>
+                  </a>
+                </li>
+                {% endif %}
+                
+              </ul>
+              
+            </div>
+          </div>
+        {% endblock %}
+      </div>
+    </section>
+  </div>
+{% endblock %}
