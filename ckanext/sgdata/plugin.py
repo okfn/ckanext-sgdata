@@ -102,7 +102,7 @@ def package_create(context, data_dict):
     if error_dict:
         raise toolkit.ValidationError(error_dict)
 
-    model.save_sg_data_record_identifier(result)
+    #model.save_sg_data_record_identifier(result)
 
     return result
 
@@ -244,7 +244,7 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         toolkit.add_template_directory(config, 'templates')
         toolkit.add_public_directory(config, 'public')
         toolkit.add_resource('resources', 'theme')
-        model.setup()
+        #model.setup()
 
     # IDatasetForm
 
@@ -407,7 +407,7 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                 'last_update_by': last_update_by,
                 'categories': categories,
                 'category': category,
-                'sg_data_record_identifier': sg_data_record_identifier,
+                #'sg_data_record_identifier': sg_data_record_identifier,
                 }
 
 

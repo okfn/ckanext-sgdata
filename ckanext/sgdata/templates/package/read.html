@@ -85,10 +85,10 @@
     <a href="{{ h.url_for(controller='user', action='read', id=last_updater.name) }}">{{ last_updater.display_name }}</a>
   {% endif %}
 
-  {% set identifier = h.sg_data_record_identifier(pkg) %}
+  {# {% set identifier = h.sg_data_record_identifier(pkg) %}
   {% if identifier %}
     <h2>SG Data Record Identifier</h2>
     {{ identifier }}
-  {% endif %}
+  {% endif %} #}
 
 {% endblock %}
