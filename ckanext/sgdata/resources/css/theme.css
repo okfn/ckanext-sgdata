@@ -460,16 +460,15 @@ section.grey.horizontal {
   margin-bottom: 15px;
   box-shadow: 2px 1px 1px 0px rgba(50, 50, 50, 0.17);
 }
+.masthead .content .nav:before,
+.masthead .content .nav:after {
+  display: none;
+}
 .masthead .content .nav li {
   display: table-cell;
   float: none;
-  width: 100%;
+  width: 2%;
   text-align: center;
-}
-.ie .masthead .content .nav li,
-.ie9 .masthead .content .nav li {
-  float: left;
-  width: auto;
 }
 .masthead .content .nav li a {
   border-radius: 0;

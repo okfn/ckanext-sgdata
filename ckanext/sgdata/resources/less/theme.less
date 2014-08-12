@@ -354,17 +354,16 @@ section.grey {
       margin-bottom:15px;
       box-shadow: 2px 1px 1px 0px rgba(50, 50, 50, 0.17);
       
+      &:before,
+      &:after {
+        display:none;
+      }
+      
       li {
         display: table-cell;
         float:none;
-        width: 100%;
+        width: 2%;
         text-align:center;
-         
-        .ie &,
-        .ie9 & {
-          float:left;
-          width:auto;
-        }
          
         a {
           border-radius:0;
