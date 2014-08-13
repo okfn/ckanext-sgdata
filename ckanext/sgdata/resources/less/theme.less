@@ -26,8 +26,8 @@
   &:hover,
   &:focus {
     color: @text-colour;
-    background-color:darken(@bg-colour, 5%);
-    border-color:darken(@bg-colour, 5%);
+    background-color:darken(saturate(@bg-colour, 15%), 7%);
+    border-color:darken(saturate(@bg-colour, 15%), 7%);
   }
 }
 
@@ -89,6 +89,12 @@ html,
 body {
   .body-font;
   background-color:#fff;
+}
+
+[role="main"],
+.main {
+  padding: 0;
+  min-height:0;
 }
 
 input, 
@@ -259,6 +265,13 @@ section.grey {
   .button-colour(@red);
 }
 
+.toolbar .btn,
+.btn-link {
+  background-color:transparent;
+  border-color:transparent;
+  color:@text;
+  text-decoration:none;
+}
 
 /* Structure */
 .account-masthead {
@@ -415,6 +428,199 @@ section.grey {
   }
 }
 
+
+#content {
+  & > .flash-messages,
+  & > .toolbar {
+    display:none;
+  }
+}
+
+.wrapper {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  margin-bottom: 0;
+  background-position:220px top;
+  background-size:15px auto;
+  z-index:1;
+  
+  &:before {
+    background-color:@lightgrey;
+    bottom: 0;
+    content: "";
+    margin-right: 250px;
+    position: absolute;
+    right: 50%;
+    top: 0;
+    width: 9999px;
+    display:block;
+    z-index:-1;
+  }
+  
+  &.no-nav {
+    &:before {
+      display:none;
+    }
+  }
+}
+
+
+.toolbar {
+  margin-top:20px;
+  
+  .breadcrumb {
+    font-size:13px;
+    
+    .home .icon-home {
+      font-size: 18px;
+      width: 18px;
+      vertical-align: -2px;
+    }
+    
+    a {
+      color:@text;
+    }
+    
+    .active a,
+    a.active {
+      font-weight: normal;
+    }
+  }
+  
+  .page_primary_action {
+    float:right;
+    margin:0 -8px 0 0;
+  }
+}
+
+
+[role="main"] .primary {
+  width: 667px;
+  
+  .module-content {
+    padding-left:0;
+    padding-right:0;
+    
+    &:first-child {
+      padding-top:0;
+    }
+    
+    .page_primary_action {
+      display:none;
+    }
+    
+    .search-form {
+      h2 {
+        color:@heading;
+      }
+      .filter-list {
+        color: @text;
+        line-height: inherit;
+      }
+    }
+    
+    .search-form,
+    .dataset-item {
+      border-bottom: 1px solid #ececec;
+    }
+    
+    .filter-list {
+      &:empty {
+        display:none;
+      }
+      
+      a.remove {
+        color:@text;
+        text-decoration:none;
+        
+        &:hover {
+          color:@red;
+        }
+        
+        i {
+          font-size:13px;
+        }
+      }
+    }
+    
+    .dataset-heading a {
+      color: inherit;
+    }
+    
+    .dataset-resources li {
+      margin-right:5px;
+      
+      a {
+        border-radius:0;
+        line-height:30px;
+        min-width:24px;
+        text-align:center;
+        text-shadow:none;
+      }
+    }
+    
+    .dataset-item:last-of-type {
+      padding-bottom: 20px;
+    }
+  }
+}
+
+
+[role="main"] .secondary {
+  width: 235px;
+  padding-top:30px;
+  padding-bottom:20px;
+  
+  .module-heading {
+    background-color: transparent;
+    border-bottom: 1px solid #e3e3e3;
+    border-top: none;
+    font-size: 15px;
+    padding: 7px 2px;
+  }
+  
+  .nav-simple > li,
+  .nav-aside > li {
+    border-bottom: 1px solid #e3e3e3;
+  }
+
+  .nav-item > a,
+  .nav-aside li a {
+    color: inherit;
+    
+    &:hover {
+      background-color:fade(#fff, 50%);
+    }
+  }
+  
+  .nav-item.active > a,
+  .nav-aside li.active a {
+    background-color: #fff;
+    color: inherit;
+    
+    &:before {
+      background-image: none;
+      background-color:@lightblue;
+      right: auto;
+      top: 0;
+      left:-10px;
+      width: 10px;
+      border-radius:3px 0 0 3px;
+    }
+  }
+  
+  .module-footer {
+    border-top: none;
+  }
+  
+  .module .read-more {
+    color: inherit;
+    font-size:12px;
+  }
+}
+
+
 .site-footer {
   color: @text;
   a {
@@ -447,6 +653,30 @@ section.grey {
 }
 
 
+.homepage .site-search .btn-search,
+.search-form .search-input.search-giant button {
+  background-color: @orange;
+  height: 52px;
+  margin-top: 0;
+  padding: 0;
+  right: 0;
+  top: 0;
+  width: 70px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  transition: background-color 0.2s ease-in 0s;
+  
+  &:hover {
+    color:#fff;
+    background-color:darken(saturate(@orange, 15%), 7%);
+  }
+  
+  i {
+    font-size:31px;
+    color: #fff;
+  }
+}
+
 /* Home */
 .homepage {
   .site-search {
@@ -460,22 +690,9 @@ section.grey {
     }
     
     .btn-search {
-      background-color: @orange;
-      color: #fff;
-      height: 62px;
-      margin-top: 0;
-      padding: 0;
-      right: -2px;
-      top: 0;
       width: 85px;
-      border-top-right-radius: 3px;
-      border-bottom-right-radius: 3px;
-      transition: background-color 0.2s ease-in 0s;
-      
-      &:hover {
-        color:#fff;
-        background-color:darken(@orange, 5%)
-      }
+      height: 62px;
+      right: -2px;
       
       i {
         font-size:36px;
