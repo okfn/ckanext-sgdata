@@ -271,6 +271,11 @@ section.grey {
   border-color:transparent;
   color:@text;
   text-decoration:none;
+  
+   [class^='icon-'],
+  [class*=" icon-"] {
+    margin-right:1px;
+  }
 }
 
 /* Structure */
@@ -495,6 +500,12 @@ section.grey {
 }
 
 
+[role="main"] .primary .toolbar + .module 
+.module-content:first-child {
+    padding-top: 0;
+}
+
+
 [role="main"] .primary {
   width: 667px;
   
@@ -503,7 +514,7 @@ section.grey {
     padding-right:0;
     
     &:first-child {
-      padding-top:0;
+      padding-top:30px;
     }
     
     .page_primary_action {
@@ -620,6 +631,85 @@ section.grey {
   }
 }
 
+.stages {
+  position:absolute;
+  top:30px;
+  left:-10px;
+  margin:0;
+  
+  li,
+  li.complete {
+    float:none;
+    width:245px;
+    font-size:16px;
+    padding:0;
+    background-color:@text;
+    padding-left:10px;
+    border-radius:3px 0 0 3px;
+    box-shadow: 2px 1px 1px 0px rgba(50, 50, 50, 0.17);
+    margin-bottom:1px;
+    
+    &:before {
+      display:none;
+    }
+    
+    &:after {
+      display:none;
+    }
+    
+    .highlight {
+      background-color:#fff;
+      position:relative;
+      height:57px;
+      line-height:57px;
+      padding:0 0 0 70px;
+      width:100%;
+      color:@text;
+      background-image:url(../img/add-icons.png);
+      background-size:51px auto;
+      background-repeat:no-repeat;
+      background-position:5px -141px; //second
+      
+      &:before {
+        content: counter(stage, decimal) '. ';
+      }
+    }
+    
+    &.first {
+      .highlight {
+        background-image:url(../img/add-icons.png);
+        background-size:51px auto;
+        background-repeat:no-repeat;
+        background-position:5px -41px; //first
+      }
+      
+      &.active,
+      &.complete {
+        .highlight {
+          background-position:5px 9px; //first active
+        }
+      }
+    }
+    
+    &.active,
+    &.complete {
+      background-color:@lightgreen;
+      .highlight {
+        background-color:#fff;
+        color: @lightgreen;
+        background-image:url(../img/add-icons.png);
+        background-size:51px auto;
+        background-repeat:no-repeat;
+        background-position:5px -91px; //second active
+      }
+    }
+    
+    &.uncomplete,
+    &.complete {
+      opacity:0.5;
+    }
+  }
+}
 
 .site-footer {
   color: @text;
