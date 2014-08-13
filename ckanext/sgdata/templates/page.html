@@ -1,0 +1,40 @@
+{% ckan_extends %}
+
+        {% block primary_content %}
+           
+          {% block flash %}
+            {% set flash_messages = h.flash.pop_messages() | list %}
+            <div class="flash-messages">
+              {% for message in flash_messages %}
+                <div class="alert fade in {{ message.category }}">
+                  {{ h.literal(message) }}
+                </div>
+              {% endfor %}
+            </div>
+          {% endblock %} 
+          
+          {% block toolbar %}
+            <div class="toolbar">
+              {% if self.page_primary_action() | trim %}
+                <div class="page_primary_action">
+                  {% block page_primary_action %}{% endblock %}
+                </div>
+              {% endif %}
+              
+              {% block breadcrumb %}
+                {% if self.breadcrumb_content() | trim %}
+                  <ol class="breadcrumb">
+                    {% snippet 'snippets/home_breadcrumb_item.html' %}
+                    {% block breadcrumb_content %}{% endblock %}
+                  </ol>
+                {% endif %}
+              {% endblock %}
+            </div>
+          {% endblock %}
+          
+          {{ super() }}
+          
+        {% endblock %}
+
+
+           

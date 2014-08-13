@@ -1,0 +1,30 @@
+{% ckan_extends %}
+
+        {% block primary_content %}
+  
+          {% block toolbar %}
+            <div class="toolbar">
+            
+              {% block page_primary_action %}
+                {% if h.check_access('package_create') %}
+                  <div class="page_primary_action">
+                    {% link_for _('Add Dataset'), controller='package', action='new', class_='btn btn-link', icon='plus-sign-alt' %}
+                  </div>
+                {% endif %}
+              {% endblock %}
+            
+              {% block breadcrumb %}
+                {% block breadcrumb_content %}
+    
+                  <ol class="breadcrumb">
+                    {% snippet 'snippets/home_breadcrumb_item.html' %}
+                    <li class="active">{{ h.nav_link(_('Datasets'), controller='package', action='search', highlight_actions = 'new index') }}</li>
+                  </ol>
+                {% endblock %}
+              {% endblock %}
+            </div>
+          {% endblock %}
+          
+          {{ super() }}
+  
+        {% endblock %}
