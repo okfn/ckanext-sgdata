@@ -8,8 +8,6 @@ import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as helpers
 import ckan.model
 
-import ckanext.sgdata.model as model
-
 
 SIMPLE_MANDATORY_TEXT_FIELDS = (
     'zzz_administrative_source',
@@ -103,8 +101,6 @@ def package_create(context, data_dict):
 
     if error_dict:
         raise toolkit.ValidationError(error_dict)
-
-    #model.save_sg_data_record_identifier(result)
 
     return result
 
@@ -239,10 +235,6 @@ def last_update_by(pkg_dict):
     return user_dict
 
 
-def sg_data_record_identifier(pkg_dict):
-    return model.sg_data_record_identifier(pkg_dict['id'])
-
-
 class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IDatasetForm)
@@ -256,8 +248,6 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         toolkit.add_template_directory(config, 'templates')
         toolkit.add_public_directory(config, 'public')
         toolkit.add_resource('resources', 'theme')
-
-        #model.setup()
 
     # IDatasetForm
 
@@ -432,7 +422,6 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                 'last_update_by': last_update_by,
                 'categories': categories,
                 'category': category,
-                #'sg_data_record_identifier': sg_data_record_identifier,
                 }
 
 
