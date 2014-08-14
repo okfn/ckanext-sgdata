@@ -89,6 +89,7 @@ html,
 body {
   .body-font;
   background-color:#fff;
+  overflow-x: hidden;
 }
 
 [role="main"],
@@ -799,11 +800,12 @@ a.tip {
   margin-right:0;
 }
 
-
+@tab-border: #cccccc;
+@tab-fill: #fafafa;
 .page-header {
   .gradient;
   position: relative;
-  border-bottom-color:#cccccc;
+  border-bottom-color:@tab-border;
   
   &:before {
     content: "";
@@ -815,12 +817,63 @@ a.tip {
     width: 9999px;
     display:block;
     z-index:-1;
-    border-bottom:solid 1px #cccccc;
+    border-bottom:solid 1px @tab-border;
     
     .no-nav & {
       left:-5000px;
     }
   } 
+}
+
+.nav-tabs {
+  border-bottom-color:@tab-border;
+  
+  & > li {
+    & > a {
+      position:relative;
+      background-color: @tab-fill;
+      border:solid 1px lighten(@tab-border, 10%);
+      border-bottom-color:@tab-border;
+      color:@text;
+      
+      &:after {
+        content:'';
+        display:block;
+        position:absolute;
+        background-color:@tab-fill;
+        top:0;
+        bottom:0px;
+        right:-5px;
+        width:10px;
+        -webkit-transform: skew(15deg, 0deg);
+        -moz-transform: skew(15deg, 0deg);
+        -ms-transform: skew(15deg, 0deg);
+        -o-transform: skew(15deg, 0deg);
+        transform: skew(15deg, 0deg);
+        border-right:solid 1px lighten(@tab-border, 10%);
+        z-index:1;
+      }
+      
+      i {
+        display:none;
+      }
+    }
+    
+    &.active {
+      & > a {
+        bottom:-1px;
+        z-index:2;
+        border-top-color:@tab-border;
+        border-right-color:@tab-border;
+        border-left-color:@tab-border;
+        
+        &:after {
+          background-color:#fff;
+          border-right:solid 1px @tab-border;
+        }
+      }
+    }
+  }
 }
 
 
