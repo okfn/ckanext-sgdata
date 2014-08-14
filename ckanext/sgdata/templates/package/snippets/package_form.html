@@ -154,7 +154,7 @@
     </div>
   </div>
 
-              
+
   <div class="small control-group">
     <label for="field-organizations" class="control-label">{{ required(True) }}{{ _('Metadata Creation Agency') }}</label>
     <a href="#" data-toggle="tooltip" title="{{ _('The agency of the data manager who published the data.') }}" class="tip"><i class="icon-question-sign"></i></a>
@@ -167,6 +167,21 @@
           {# get out first org from users list only if there is not an existing org #}
           {% set selected_org = (existing_org and existing_org == organization.id) or (not existing_org and not data.id and organization.id == organizations_available[0].id) %}
           <option value="{{ organization.id }}" {% if selected_org %}selected="selected"{% endif %}>{{ organization.title }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div class="small control-group">
+    <label class="control-label" for="field-department">{{ required(True) }}{{ _('Department') }}</label>
+    <div class="controls">
+      <select id="field-department" name="department">
+        {% for agency in h.departments().values() %}
+          <optgroup label="{{ agency.label }}">
+            {% for department in agency.departments.values() %}
+              <option value="{{ department.value }}" {% if department.value == data.get('department') %}selected{% endif %}>{{ department.label }}</option>
+            {% endfor %}
+          </optgroup>
         {% endfor %}
       </select>
     </div>
@@ -204,6 +219,8 @@
             h.frequencies(), is_required=True,
             value=data.get('frequency')[0],
             help=_('The time interval at which observations occur.')) }}
+
+  <div style="clear:both;"></div>
 
   {{ textarea('zzz_administrative_source', 'Survey / Administrative Source',
               _('The source of the data - the name of the survey or '
