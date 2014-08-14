@@ -320,6 +320,11 @@ section.grey.horizontal {
 .box-list li.dashboard a:hover .activities {
   color: #f13700;
 }
+.tip,
+a.tip {
+  display: inline-block;
+  text-decoration: none;
+}
 /* Buttons */
 .btn {
   background-image: none;
@@ -402,6 +407,9 @@ section.grey.horizontal {
 .toolbar .btn [class*=" icon-"],
 .btn-link [class*=" icon-"] {
   margin-right: 1px;
+}
+.control-required {
+  color: #f35222;
 }
 /* Structure */
 .account-masthead {
@@ -691,6 +699,7 @@ section.grey.horizontal {
   color: inherit;
   font-size: 12px;
 }
+/* dataset form */
 .stages {
   position: absolute;
   top: 30px;
@@ -770,6 +779,68 @@ section.grey.horizontal {
 .stages li.complete,
 .stages li.complete.complete {
   opacity: 0.5;
+}
+.dataset-form {
+  margin-right: -40px;
+}
+.dataset-form .control-required-message {
+  float: right;
+  margin-right: 40px;
+}
+.dataset-form label {
+  display: inline-block;
+}
+.dataset-form .control-group.control-large input {
+  height: 41px;
+}
+.dataset-form .control-group {
+  margin-bottom: 20px;
+}
+.dataset-form .control-group input,
+.dataset-form .control-group select,
+.dataset-form .control-group textarea,
+.dataset-form .control-group .select2-choices {
+  width: 666px;
+  box-sizing: border-box;
+}
+.dataset-form .control-group input {
+  height: 30px;
+}
+.dataset-form .control-group.small {
+  width: 235px;
+}
+.dataset-form .control-group.medium {
+  width: 469px;
+}
+.dataset-form .control-group.small,
+.dataset-form .control-group.medium {
+  float: left;
+}
+.dataset-form .control-group.small input,
+.dataset-form .control-group.medium input {
+  width: 196px;
+}
+.dataset-form .control-group.small select,
+.dataset-form .control-group.medium select {
+  width: 195px;
+}
+.dataset-form .control-group .to {
+  float: left;
+  width: 35px;
+  text-align: center;
+  line-height: 27px;
+}
+.dataset-form .control-group .to:after {
+  display: none;
+}
+.dataset-form .form-actions {
+  margin-right: 40px;
+}
+.form-actions {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
 }
 .site-footer {
   color: #878787;
