@@ -280,9 +280,19 @@ a.tip {
   color:@text;
   text-decoration:none;
   
-   [class^='icon-'],
+  [class^='icon-'],
   [class*=" icon-"] {
     margin-right:1px;
+  }
+  
+  &.btn-success {
+    color:@lightgreen;
+  }
+  
+  &:hover {
+    background-color:transparent;
+    border-color:transparent;
+    text-decoration:none;
   }
 }
 
@@ -872,6 +882,29 @@ a.tip {
           border-right:solid 1px @tab-border;
         }
       }
+    }
+  }
+}
+
+/* Dataset */
+.read {
+  //primary
+  .status {
+    float:right;
+  }
+  .notes.purpose {
+    font-size:18px;
+  }
+  
+  //secondary
+  .org {
+    .module-heading {
+      display:none;
+    }
+  }
+  .follow {
+    h1 {
+      display:none;
     }
   }
 }

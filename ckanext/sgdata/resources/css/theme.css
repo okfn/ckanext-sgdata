@@ -409,6 +409,16 @@ a.tip {
 .btn-link [class*=" icon-"] {
   margin-right: 1px;
 }
+.toolbar .btn.btn-success,
+.btn-link.btn-success {
+  color: #51d8a0;
+}
+.toolbar .btn:hover,
+.btn-link:hover {
+  background-color: transparent;
+  border-color: transparent;
+  text-decoration: none;
+}
 .control-required {
   color: #f35222;
 }
@@ -913,6 +923,19 @@ a.tip {
 .nav-tabs > li.active > a:after {
   background-color: #fff;
   border-right: solid 1px #cccccc;
+}
+/* Dataset */
+.read .status {
+  float: right;
+}
+.read .notes.purpose {
+  font-size: 18px;
+}
+.read .org .module-heading {
+  display: none;
+}
+.read .follow h1 {
+  display: none;
 }
 .site-footer {
   color: #878787;
