@@ -28,6 +28,7 @@
     </h1>
 
   {% block package_notes %}
+  
     {% if pkg.get('reference-period-start') and pkg.get('reference-period-end') %}
       <p>From {{ pkg['reference-period-start'] }} to {{ pkg['reference-period-end'] }}</p>
     {% elif pkg.get('reference-period-start') %}
@@ -45,32 +46,25 @@
         {{ c.pkg_notes_formatted }}
       </div>
     {% endif %}
+    
+    {% block package_resources %}
+    {% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
+  {% endblock %}
+
+  {% block package_tags %}
+    {% snippet "package/snippets/tags.html", tags=pkg.tags %}
+  {% endblock %}
   
     <div class="notes embedded-content">
       <h2>Survey / Administrative Source</h2>
       {{ pkg.zzz_administrative_source }}
     </div>
   
-    
-  
-    {% for name, title in (('type_of_data_collection', 'Type of Data Collection'),
-                           ('frequency', 'Frequency'),
-                           ('security_classification', 'Security Classification'),
-                           ('data_granularity', 'Data Granularity'),
-                           ('publish_on_data_gov_sg', 'Publish on Data.gov.sg'),
-                           ) %}
-      {% if pkg.get(name) %}
-        <h2>{{ title }}</h2>
-          {{ pkg[name][0] }}
-      {% endif %}
-    {% endfor %}
   
     {% for name, title in (('coverage', 'Coverage'),
                            ('conditions_of_use', 'Conditions of Use'),
                            ('comments', 'Comments'),
-                           ('unit_of_measure', 'Unit of Measure'),
                            ('available-from', 'Available From'),
-                           ('agency_record_identifier', 'Agency Record Identifier'),
                            ('data_provider', 'Data Provider / Distributor'),
                            ('data_provider_contact_name', 'Contact Name'),
                            ('data_provider_contact_designation', 'Contact Designation'),
@@ -112,24 +106,13 @@
       <h2>Last Update By</h2>
       <a href="{{ h.url_for(controller='user', action='read', id=last_updater.name) }}">{{ last_updater.display_name }}</a>
     {% endif %}
-  
-    {# {% set identifier = h.sg_data_record_identifier(pkg) %}
-    {% if identifier %}
-      <h2>SG Data Record Identifier</h2>
-      {{ identifier }}
-    {% endif %} #}
+ 
   
   {% endblock %}
 
 {% endblock %}
 
-  {% block package_resources %}
-    {% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
-  {% endblock %}
-
-  {% block package_tags %}
-    {% snippet "package/snippets/tags.html", tags=pkg.tags %}
-  {% endblock %}
+  
 
   {% block package_additional_info %}
     {% snippet "package/snippets/additional_info.html", pkg_dict=pkg %}
@@ -148,8 +131,31 @@
       {% endif %}
     {% endblock %}
     
-    
   </div>
+  
+  {# {% set identifier = h.sg_data_record_identifier(pkg) %}
+    {% if identifier %}
+      <h2>SG Data Record Identifier</h2>
+      {{ identifier }}
+    {% endif %} #}
+  
+   {% for name, title in ( ('agency_record_identifier', 'Agency Record Identifier'),
+                           ('type_of_data_collection', 'Type of Data Collection'),
+                           ('frequency', 'Frequency'),
+                           ('security_classification', 'Security Classification'),
+                           ('data_granularity', 'Data Granularity'),
+                           ('publish_on_data_gov_sg', 'Publish on Data.gov.sg'),
+                           ('unit_of_measure', 'Unit of Measure'),
+                           ) %}
+      {% if pkg.get(name) %}
+        <div class="module module-narrow module-shallow context-info">
+          <h2 class="module-heading">{{ title }}</h2>
+          <section class="module-content">
+            {{ pkg[name][0] }}
+          </section>
+        </div>
+      {% endif %}
+    {% endfor %}
   
   <div class="follow">
     {% block package_info %}

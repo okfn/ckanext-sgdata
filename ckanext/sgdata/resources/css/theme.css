@@ -925,16 +925,23 @@ a.tip {
   border-right: solid 1px #cccccc;
 }
 /* Dataset */
-.read .status {
+.read .primary h1 {
+  margin-bottom: 1px;
+}
+.read .primary .status {
   float: right;
 }
-.read .notes.purpose {
+.read .primary .notes.purpose {
   font-size: 18px;
 }
-.read .org .module-heading {
+.read .secondary .module-content {
+  padding-left: 0;
+  padding-right: 20px;
+}
+.read .secondary .org .module-heading {
   display: none;
 }
-.read .follow h1 {
+.read .secondary .follow h1 {
   display: none;
 }
 .site-footer {
