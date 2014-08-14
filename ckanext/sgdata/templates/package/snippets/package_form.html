@@ -8,37 +8,35 @@
 {% macro textarea(name, label, help='', rows=5, cols=20, is_required=False, disabled=False) -%}
   <div class="control-group control-full">
     <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
-    <div class="controls editor">
+    {% if help %}<a href="#" data-toggle="tooltip" title="{{ help }}" class="tip"><i class="icon-question-sign"></i></a>{% endif %}
+    <div class="controls">
       <textarea id="field-{{ name }}" rows="{{ rows }}" cols="{{ cols }}"
                 name="{{ name }}" style="margin-bottom:0;"
                 {% if disabled %}disabled{% endif %}>{{ data[name] }}</textarea>
       {% if errors[name] and errors[name] is iterable %}
         <span class="error-block">{{ errors[name]|join(', ') }}</span>
       {% endif %}
-      {% if help %}
-        <span class="editor-info-block">
-          {{ help }}
-        </span>
-      {% endif %}
     </div>
   </div>
 {% endmacro %}
 
 {% macro datepicker(name, label, disabled=False, value='') -%}
-  <div class="control-group">
+  <div class="small control-group">
     <label class="control-label" for="field-{{ name }}">{{ label }}</label>
+    <a href="#" data-toggle="tooltip" title="The date on which the metadata will be made available." class="tip"><i class="icon-question-sign"></i></a>
     <div class="controls">
       <input type="date" id="field-{{ name }}" name="{{ name }}"
              class="datepicker" value="{{ value or data[name] }}"
              {% if disabled %}disabled{% endif %}>
-      <span class="help-block">The date on which the metadata will be made available.</span>
+      
     </div>
   </div>
 {% endmacro %}
 
 {% macro select(name, label, options, is_required=False, disabled=False, value='', help='') -%}
-  <div class="control-group">
+  <div class="small control-group">
     <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
+    {% if help %}<a href="#" data-toggle="tooltip" title="{{ help }}" class="tip"><i class="icon-question-sign"></i></a>{% endif %}
     <div class="controls">
       <select id="field-{{ name }}" name="{{ name }}"
               {% if disabled %}disabled{% endif %}>
@@ -48,7 +46,6 @@
           </option>
         {% endfor %}
       </select>
-      {% if help %}<span class="help-block">{{ help }}</span>{% endif %}
     </div>
   </div>
 {% endmacro %}
@@ -57,6 +54,8 @@
   {% set error = errors[name] %}
   <div class="control-group{% if error %} error{% endif %}{% if classes %} {{ classes }}{% endif %}">
     <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
+    {% if help %}<a href="#" data-toggle="tooltip" title="{{ help }}" class="tip"><i class="icon-question-sign"></i></a>{% endif %}
+    <div class="controls">
     <div class="controls">
       <input type="{{ type }}" id="field-{{ name }}" name="{{ name }}"
              style="margin-bottom:0;"
@@ -65,9 +64,6 @@
              {% if disabled %}disabled{% endif %}
              {% if attrs %}{{ attrs }}{% endif %}>
       {% if error and error is iterable %}<span class="error-block" style="width:204px;">{{ error|join(', ') }}</span>{% endif %}
-      {% if help %}
-        <span class="help-block">{{ help }}</span>
-      {% endif %}
     </div>
   </div>
 {% endmacro %}
@@ -107,43 +103,13 @@
   {% set show_visibility_selector = dataset_has_organization or (organizations_available and (user_is_sysadmin or dataset_is_draft)) %}
   {% set can_create_unowned_datasets = h.check_config_permission('create_unowned_dataset') %}
   {% set existing_org = data.owner_org or data.group_id %}
-  <div class="control-group">
-    <label for="field-organizations" class="control-label">{{ required(True) }}{{ _('Metadata Creation Agency') }}</label>
-    <div class="controls">
-      <select id="field-organizations" name="owner_org" data-module="autocomplete">
-        {% if can_create_unowned_datasets %}
-            <option value="" {% if not selected_org and data.id %}selected="selected"{% endif %}>{{ _('No agency') }}</option>
-        {% endif %}
-        {% for organization in organizations_available %}
-          {# get out first org from users list only if there is not an existing org #}
-          {% set selected_org = (existing_org and existing_org == organization.id) or (not existing_org and not data.id and organization.id == organizations_available[0].id) %}
-          <option value="{{ organization.id }}" {% if selected_org %}selected="selected"{% endif %}>{{ organization.title }}</option>
-        {% endfor %}
-      </select>
-      <span class="help-block">{{ _('The agency of the data manager who published the data.') }}</span>
-    </div>
-  </div>
-
-  {% if show_visibility_selector %}
-    {% block package_metadata_fields_visibility %}
-      <div class="control-group">
-        <label for="field-private" class="control-label">{{ _('Visibility') }}</label>
-        <div class="controls">
-          <select id="field-private" name="private">
-            {% for option in [('True', _('Private')), ('False', _('Public'))] %}
-            <option value="{{ option[0] }}" {% if option[0] == data.private|trim %}selected="selected"{% endif %}>{{ option[1] }}</option>
-            {% endfor %}
-          </select>
-        </div>
-      </div>
-    {% endblock %}
-  {% endif %}
-
+  
   {{ textarea('notes', _('Purpose'),
               help=_('Circumstance, context, and perspective under which data is defined or used. E.g., Data on Electricity Generation as well as Licensed Electrical Workers are collected for regulatory purposes.'))}}
-
-  <div class="control-group">
+              
+  <div class="medium control-group">
     <label class="control-label" for="field-reference-period-start">Reference Period</label>
+    <a href="#" data-toggle="tooltip" title="{{ _('The period of time or point in time to which the data is intended to refer.') }}" class="tip"><i class="icon-question-sign"></i></a>
     <div class="controls">
       <div style="float:left;">
         <input style="margin-bottom:0;" type="date"
@@ -156,7 +122,7 @@
           </span>
         {% endif %}
       </div>
-      <div style="float:left; margin-left:10px; margin-right:10px;">to</div>
+      <label class="to" for="field-reference-period-end">to</label>
       <div style="float:left;">
         <input style="margin-bottom:0;" type="date" name="reference-period-end"
                id="field-reference-period-end" class="datepicker"
@@ -168,16 +134,12 @@
         {% endif %}
       </div>
       <div style="clear:both;"></div>
-      <span class="help-block">
-        The period of time or point in time to which the data is intended to
-        refer.
-      </span>
     </div>
   </div>
 
   {{ datepicker('available-from', 'Available From', value=(data.get('available-from') or h.today())) }}
 
-  <div class="control-group">
+  <div class="small control-group">
     <label class="control-label" for="field-category">{{ required(True) }}{{ _('Category') }}</label>
     <div class="controls">
       <select id="field-category" name="category">
@@ -192,6 +154,42 @@
     </div>
   </div>
 
+              
+  <div class="small control-group">
+    <label for="field-organizations" class="control-label">{{ required(True) }}{{ _('Metadata Creation Agency') }}</label>
+    <a href="#" data-toggle="tooltip" title="{{ _('The agency of the data manager who published the data.') }}" class="tip"><i class="icon-question-sign"></i></a>
+    <div class="controls">
+      <select id="field-organizations" name="owner_org" data-module="autocomplete">
+        {% if can_create_unowned_datasets %}
+            <option value="" {% if not selected_org and data.id %}selected="selected"{% endif %}>{{ _('No agency') }}</option>
+        {% endif %}
+        {% for organization in organizations_available %}
+          {# get out first org from users list only if there is not an existing org #}
+          {% set selected_org = (existing_org and existing_org == organization.id) or (not existing_org and not data.id and organization.id == organizations_available[0].id) %}
+          <option value="{{ organization.id }}" {% if selected_org %}selected="selected"{% endif %}>{{ organization.title }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  {% if show_visibility_selector %}
+    {% block package_metadata_fields_visibility %}
+      <div class="small control-group">
+        <label for="field-private" class="control-label">{{ _('Visibility') }}</label>
+        <div class="controls">
+          <select id="field-private" name="private">
+            {% for option in [('True', _('Private')), ('False', _('Public'))] %}
+            <option value="{{ option[0] }}" {% if option[0] == data.private|trim %}selected="selected"{% endif %}>{{ option[1] }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    {% endblock %}
+  {% endif %}
+
+
+
+  
   {{ select('type_of_data_collection', 'Type of Data Collection',
             h.types_of_data_collection(), is_required=True,
             value=data.get('type_of_data_collection')[0],
@@ -222,6 +220,7 @@
 
   <div class="control-group control-full{% if errors.keywords %} error{% endif %}">
     <label class="control-label" for="field-tags">{{ required(True) }}Keywords</label>
+    <a href="#" data-toggle="tooltip" title="{{ _('One or more words that capture the essence of the data or its metadata profile for easy retrieval.') }}" class="tip"><i class="icon-question-sign"></i></a>
     <div class="controls">
       <input id="field-tags" type="text" name="tag_string"
              value="{{ data.tag_string }}"
@@ -231,7 +230,6 @@
       {% if errors.keywords and errors.keywords is iterable %}
         <span class="error-block" style="width:504px;">{{ errors.keywords|join(', ') }}</span>
       {% endif %}
-      <span class="help-block">One or more words that capture the essence of the data or its metadata profile for easy retrieval.</span>
     </div>
   </div>
 

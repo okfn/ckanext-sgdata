@@ -1,0 +1,13 @@
+{% ckan_extends %}
+
+{% block primary_content %}
+  <div class="toolbar">
+    <ol class="breadcrumb">
+      {% snippet 'snippets/home_breadcrumb_item.html' %}
+      <li>{% link_for _('Datasets'), controller='package', action='search', highlight_actions = 'new index' %}</li>
+      <li class="active">{% link_for _('Add'), controller='package', action='new' %}</li>
+    </ol>
+  </div>
+{{ super() }}
+
+{% endblock %}
