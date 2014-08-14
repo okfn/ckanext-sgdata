@@ -8,8 +8,6 @@ import ckan.plugins.toolkit as toolkit
 import ckan.lib.helpers as helpers
 import ckan.model
 
-import ckanext.sgdata.model as model
-
 
 SIMPLE_MANDATORY_TEXT_FIELDS = (
     'zzz_administrative_source',
@@ -40,6 +38,7 @@ SIMPLE_OPTIONAL_TEXT_FIELDS = (
     'data_provider_contact_department',
     'data_provider_contact_telephone_number',
     'data_provider_contact_email_address',
+    'department',
     )
 
 
@@ -103,8 +102,6 @@ def package_create(context, data_dict):
 
     if error_dict:
         raise toolkit.ValidationError(error_dict)
-
-    #model.save_sg_data_record_identifier(result)
 
     return result
 
@@ -216,16 +213,38 @@ def categories():
 
 
 def category(value):
-    category = None
     for c in categories():
         for sc in c['categories'].values():
             if sc['value'] == value:
-                category = sc
-                break
-        if category:
-            break
-    assert category is not None
-    return '{0} -> {1}'.format(category['parent_label'], category['label'])
+                return '{0} -> {1}'.format(sc['parent_label'], sc['label'])
+    assert False, "Should never get here, unknown category: '{0}'".format(
+        value)
+
+
+def departments():
+    return {
+        'DOS': {
+            'value': 'DOS',
+            'label': 'Ministry of Trade and Industry - Department of Statistics',
+            'departments': {
+                'BSD': { 'value': 'BSD', 'label': 'Business Statistics Division'},
+                'CPI': { 'value': 'CPI', 'label': 'Consumer Price Indices'},
+                'EAD': { 'value': 'EAD', 'label': 'Economic Accounts Division'},
+                'IEPD': { 'value': 'IEPD', 'label': 'Income, Expenditure & Population Statistics Division'},
+                'IOTS': { 'value': 'IOTS', 'label': 'Input-output Tables'},
+                'PPD': { 'value': 'PPD', 'label': 'Policy Planning Division'},
+                'PPI': { 'value': 'PPI', 'label': 'Producer Price Indices'},
+                }
+        }
+    }
+
+
+def department(value):
+    for agency in departments().values():
+        for department in agency['departments'].values():
+            if department['value'] == value:
+                return department['label']
+    assert False, "We should never get here: Unknown department requested."
 
 
 def last_update_by(pkg_dict):
@@ -237,10 +256,6 @@ def last_update_by(pkg_dict):
     user_dict = toolkit.get_action('user_show')(
             context={}, data_dict={'id': user_id})
     return user_dict
-
-
-def sg_data_record_identifier(pkg_dict):
-    return model.sg_data_record_identifier(pkg_dict['id'])
 
 
 class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
@@ -256,8 +271,6 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         toolkit.add_template_directory(config, 'templates')
         toolkit.add_public_directory(config, 'public')
         toolkit.add_resource('resources', 'theme')
-
-        #model.setup()
 
     # IDatasetForm
 
@@ -432,7 +445,8 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                 'last_update_by': last_update_by,
                 'categories': categories,
                 'category': category,
-                #'sg_data_record_identifier': sg_data_record_identifier,
+                'departments': departments,
+                'department': department,
                 }
 
 

@@ -96,6 +96,10 @@
   
     {% endfor %}
   
+    {% if pkg.department %}
+     <h2>Department</h2>
+     {{ h.department(pkg.department) }}
+    {% endif %}
   
     <h2>Metadata Creation Date</h2>
     {{ h.render_datetime(pkg.metadata_created) }}
