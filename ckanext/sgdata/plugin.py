@@ -12,7 +12,7 @@ import ckanext.sgdata.model as model
 
 
 SIMPLE_MANDATORY_TEXT_FIELDS = (
-    'administrative_source',
+    'zzz_administrative_source',
     'coverage',
     'conditions_of_use',
     'unit_of_measure',

@@ -34,7 +34,7 @@ def import_datasets(ckan, owner_org):
         '1ST LEVEL CATEGORY NUMBER (2-DIGITS)*': 'first_level_category',
         '2ND LEVEL CATEGORY NUMBER (2-DIGITS)*': 'second_level_category',
         '3RD LEVEL CATEGORY NUMBER (2-DIGITS)*': 'third_level_category',
-        "SURVEY/ADMINISTRATIVE SOURCE (COMPULSORY IF TYPE OF DATA COLLECTION IS NOT 'OT')": 'administrative_source',
+        "SURVEY/ADMINISTRATIVE SOURCE (COMPULSORY IF TYPE OF DATA COLLECTION IS NOT 'OT')": 'zzz_administrative_source',
         'DATA PROVIDER/DISTRIBUTOR*': 'data_provider',
         'ALTERNATE PROVIDER NAME*': 'data_provider_alternate_contact_name',
         'ALTERNATE PROVIDER DESIGNATION*': 'data_provider_alternate_contact_designation',
@@ -83,7 +83,7 @@ def import_datasets(ckan, owner_org):
                 if not data[key]:
                     del data[key]
 
-            if 'administrative_source' not in data:
+            if 'zzz_administrative_source' not in data:
                 print 'Skipping because no administrative source'
                 datasets_skipped_because_no_administrative_source += 1
                 continue
