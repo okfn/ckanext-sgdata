@@ -17,11 +17,6 @@ SIMPLE_MANDATORY_TEXT_FIELDS = (
     'conditions_of_use',
     'unit_of_measure',
     'data_provider',
-    'data_provider_contact_name',
-    'data_provider_contact_designation',
-    'data_provider_contact_department',
-    'data_provider_contact_telephone_number',
-    'data_provider_contact_email_address',
     'data_provider_alternate_contact_name',
     'data_provider_alternate_contact_designation',
     'data_provider_alternate_contact_department',
@@ -40,6 +35,11 @@ SIMPLE_OPTIONAL_TEXT_FIELDS = (
     'data_compiler_contact_department',
     'data_compiler_contact_telephone_number',
     'data_compiler_contact_email_address',
+    'data_provider_contact_name',
+    'data_provider_contact_designation',
+    'data_provider_contact_department',
+    'data_provider_contact_telephone_number',
+    'data_provider_contact_email_address',
     )
 
 
@@ -91,6 +91,8 @@ def _custom_validation(data_dict):
 
 def package_create(context, data_dict):
     import ckan.logic.action.create
+
+    create_vocabs()
 
     error_dict = _custom_validation(data_dict)
 
@@ -195,6 +197,15 @@ def publish_on_data_gov_sg():
         'Yes - publish metadata only'))
 
 
+def create_vocabs():
+    types_of_data_collection()
+    statuses()
+    frequencies()
+    security_classifications()
+    data_granularities()
+    publish_on_data_gov_sg()
+
+
 def categories():
 
     path = os.path.join(os.path.dirname(os.path.realpath(__file__)),
@@ -213,6 +224,7 @@ def category(value):
                 break
         if category:
             break
+    assert category is not None
     return '{0} -> {1}'.format(category['parent_label'], category['label'])
 
 
@@ -244,12 +256,13 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
         toolkit.add_template_directory(config, 'templates')
         toolkit.add_public_directory(config, 'public')
         toolkit.add_resource('resources', 'theme')
+
         #model.setup()
 
     # IDatasetForm
 
     def is_fallback(self):
-        return False
+        return True
 
     def package_types(self):
         return ('dataset',)
@@ -273,12 +286,18 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                 ]
 
         schema['reference-period-start'] = [
+            toolkit.get_validator('ignore_missing'),
+            toolkit.get_validator('ignore_empty'),
             toolkit.get_converter('convert_to_extras')]
 
         schema['reference-period-end'] = [
+            toolkit.get_validator('ignore_missing'),
+            toolkit.get_validator('ignore_empty'),
             toolkit.get_converter('convert_to_extras')]
 
         schema['available-from'] = [
+            toolkit.get_validator('ignore_missing'),
+            toolkit.get_validator('ignore_empty'),
             toolkit.get_converter('convert_to_extras')]
 
         schema['type_of_data_collection'] = [
@@ -334,12 +353,18 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                 toolkit.get_validator('ignore_missing')]
 
         schema['reference-period-start'] = [
+            toolkit.get_validator('ignore_missing'),
+            toolkit.get_validator('ignore_empty'),
             toolkit.get_converter('convert_from_extras')]
 
         schema['reference-period-end'] = [
+            toolkit.get_validator('ignore_missing'),
+            toolkit.get_validator('ignore_empty'),
             toolkit.get_converter('convert_from_extras')]
 
         schema['available-from'] = [
+            toolkit.get_validator('ignore_missing'),
+            toolkit.get_validator('ignore_empty'),
             toolkit.get_converter('convert_from_extras')]
 
         schema['type_of_data_collection'] = [
