@@ -903,32 +903,50 @@ a.tip {
 
 /* Dataset */
 .read {
-  .primary {
-    h1 {
-      margin-bottom:1px;
-    }
-    .status {
-      float:right;
-    }
-    .notes.purpose {
-      font-size:18px;
-    }
-  }
-  
-  .secondary {
-    .module-content {
-      padding-left:0;
-      padding-right:20px;
-    }
-    
-    .org {
-      .module-heading {
-        display:none;
+  [role="main"] {
+    .primary {
+      h1 {
+        margin-bottom:1px;
+      }
+      .status {
+        float:right;
+      }
+      .notes.purpose {
+        font-size:18px;
       }
     }
-    .follow {
-      h1 {
-        display:none;
+    .secondary {
+      .module-heading {
+        border-top: 1px solid #e3e3e3;
+        border-bottom: none;
+        padding-top:20px;
+      }
+      .module-content {
+        padding:0 20px 0 0;
+      }
+      
+      .org {
+        .module {
+          margin-bottom:0;
+        }
+        .module-content {
+          padding-bottom:0;
+        }
+        .module-heading {
+          display:none;
+        }
+        p {
+          display:none;
+        }
+        .agency_record_identifier {
+          display:block;
+          text-transform:uppercase;
+        }
+      }
+      .follow {
+        h1 {
+          display:none;
+        }
       }
     }
   }

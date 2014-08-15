@@ -939,23 +939,40 @@ a.tip {
   border-right: solid 1px #cccccc;
 }
 /* Dataset */
-.read .primary h1 {
+.read [role="main"] .primary h1 {
   margin-bottom: 1px;
 }
-.read .primary .status {
+.read [role="main"] .primary .status {
   float: right;
 }
-.read .primary .notes.purpose {
+.read [role="main"] .primary .notes.purpose {
   font-size: 18px;
 }
-.read .secondary .module-content {
-  padding-left: 0;
-  padding-right: 20px;
+.read [role="main"] .secondary .module-heading {
+  border-top: 1px solid #e3e3e3;
+  border-bottom: none;
+  padding-top: 20px;
 }
-.read .secondary .org .module-heading {
+.read [role="main"] .secondary .module-content {
+  padding: 0 20px 0 0;
+}
+.read [role="main"] .secondary .org .module {
+  margin-bottom: 0;
+}
+.read [role="main"] .secondary .org .module-content {
+  padding-bottom: 0;
+}
+.read [role="main"] .secondary .org .module-heading {
   display: none;
 }
-.read .secondary .follow h1 {
+.read [role="main"] .secondary .org p {
+  display: none;
+}
+.read [role="main"] .secondary .org .agency_record_identifier {
+  display: block;
+  text-transform: uppercase;
+}
+.read [role="main"] .secondary .follow h1 {
   display: none;
 }
 .site-footer {
