@@ -806,7 +806,7 @@ a.tag {
   }
 }
 
-.dataset-form {
+.package-form .dataset-form {
   margin-right:-40px;
   
   .control-required-message {
@@ -815,6 +815,10 @@ a.tag {
   }
   label {
     display: inline-block;
+  }
+  
+  legend {
+    width:666px;
   }
   
   .control-group.control-large input {
@@ -828,7 +832,8 @@ a.tag {
     select,
     textarea,
     .select2-choices,
-    .error-block {
+    .error-block,
+    .editor-info-block {
       width:666px;
       box-sizing:border-box;
     }
@@ -870,6 +875,13 @@ a.tag {
   }
   
   .form-actions {
+    margin-right:40px;
+    
+    .control-required-message {
+      margin-right:0;
+    }
+  }
+  .error-explanation {
     margin-right:40px;
   }
 }
