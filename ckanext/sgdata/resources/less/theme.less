@@ -7,6 +7,7 @@
 @lightblue: #51a0d8;
 @nav: #488cca;
 @lightgrey: #f5f5f5;
+@grey: #c3c3c2;
 @orange: #f39823;
 @red: #f35222;
 @lightgreen: #51d8a0;
@@ -922,15 +923,85 @@ a.tip {
           cursor:auto;
         }
       }
-      h1 {
-        margin-bottom:1px;
+      .categories {
+        margin-bottom:20px;
       }
       .notes.purpose {
         font-size:18px;
+        margin-bottom:20px;
       }
       .tab-content {
         display:block;
         overflow:hidden;
+      }
+      
+      .resource-item {
+        .format-label{
+          background-image:none;
+          text-indent:0;
+          text-align:center;
+          line-height:33px;
+          color:#fff;
+          font-size:13px;
+          text-transform:uppercase;
+          font-weight:normal;
+          width:35px;
+          background-color:@grey;
+          
+          &[data-format="xls"] {
+            background-color:@darkgreen;
+          }
+          &[data-format="html"] {
+            background-color:@darkblue;
+          }
+          &[data-format="json"] {
+            background-color:@orange;
+          }
+          &[data-format="csv"] {
+            background-color:@lightgreen;
+          }
+          &[data-format="txt"] {
+            background-color:@lightblue;
+          }
+          &[data-format="pdf"] {
+            background-color:@red;
+          }
+        }
+        .heading {
+          color: @heading;
+        }
+        
+        .explore {
+          position:absolute;
+          right:10px;
+          top:14px;
+          
+          li {
+            display:inline-block;
+            margin-left:10px;
+            
+            a {
+              text-decoration:none;            
+              color:@text;
+              
+              &:hover {
+                color:@darkblue;
+              }
+              i {
+                font-size:32px;
+              }
+            }
+          }
+        }
+        &:hover {
+          background-color:transparent;
+        }
+      }
+      
+      footer {
+        border-top:solid 1px @footer;
+        margin-top:20px;
+        padding-top:20px;
       }
     }
     .secondary {

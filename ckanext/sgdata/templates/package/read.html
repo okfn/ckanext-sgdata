@@ -50,7 +50,9 @@
           {% endif %}
         
           {% if pkg.category %}
-            {{ h.category(pkg.category) }}
+            <div class="categories">
+              {{ h.category(pkg.category) }}
+            </div>
           {% endif %}
         
           {% if c.pkg_notes_formatted %}
@@ -85,18 +87,16 @@
         
           {% endfor %}
       
+          <footer>
+            Last metadata update date: {{ h.render_datetime(pkg.metadata_modified) }} | 
+            
+            {% set last_updater = h.last_update_by(pkg) %}
+            {% if last_updater %}
+              Last update by: <a href="{{ h.url_for(controller='user', action='read', id=last_updater.name) }}">{{ last_updater.display_name }}</a>
+            {% endif %}
+          </footer>
         
-          <h2>Metadata Creation Date</h2>
-          {{ h.render_datetime(pkg.metadata_created) }}
-        
-          <h2>Last Metadata Update Date</h2>
-          {{ h.render_datetime(pkg.metadata_modified) }}
-        
-          {% set last_updater = h.last_update_by(pkg) %}
-          {% if last_updater %}
-            <h2>Last Update By</h2>
-            <a href="{{ h.url_for(controller='user', action='read', id=last_updater.name) }}">{{ last_updater.display_name }}</a>
-          {% endif %}
+          
        
         
         {% endblock %}
@@ -177,6 +177,14 @@
         </div>
       {% endif %}
     {% endfor %}
+    
+    <div class="module module-narrow module-shallow context-info">
+      <h2 class="module-heading">Metadata Creation Date</h2>
+      <section class="module-content">
+        {{ h.render_datetime(pkg.metadata_created) }}
+      </section>
+    </div>
+
   
   <div class="follow">
     {% block package_info %}

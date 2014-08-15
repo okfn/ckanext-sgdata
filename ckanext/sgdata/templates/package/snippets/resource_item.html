@@ -1,0 +1,42 @@
+{% ckan_extends %}
+
+{% block resource_item_explore %}
+  {% if not url_is_edit %}
+ 
+    <ul class="explore">
+      {% block resource_item_explore_links %}
+      <li>
+        <a href="{{ url }}">
+          {% if res.can_be_previewed %}
+            <i class="icon-bar-chart"></i>
+            <span class="sr-only">{{ _('Preview') }}</span>
+          {% else %}
+            <i class="icon-info-sign"></i>
+            <span class="sr-only">{{ _('More information') }}</span>
+          {% endif %}
+        </a>
+      </li>
+      <li>
+        <a href="{{ res.url }}" class="resource-url-analytics" target="_blank">
+          {% if res.can_be_previewed %}
+            <i class="icon-download"></i>
+            <span class="sr-only">{{ _('Download') }}</span>
+          {% else %}
+            <i class="icon-external-link"></i>
+            <span class="sr-only">{{ _('Go to resource') }}</span>
+          {% endif %}
+        </a>
+      </li>
+      {% if can_edit %}
+      <li>
+        <a href="{{ h.url_for(controller='package', action='resource_edit', id=pkg.name, resource_id=res.id) }}">
+          <i class="icon-wrench"></i>
+          <span class="sr-only">{{ _('Edit') }}</span>
+        </a>
+      </li>
+      {% endif %}
+      {% endblock %}
+    </ul>
+
+  {% endif %}
+{% endblock %}
