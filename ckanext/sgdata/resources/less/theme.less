@@ -851,6 +851,15 @@ a.tip {
       border:solid 1px lighten(@tab-border, 10%);
       border-bottom-color:@tab-border;
       color:@text;
+      padding-left:15px;
+      
+      &:hover,
+      &:focus {
+        background-color:lighten(@tab-fill, 50%);
+        &:after {
+          background-color:lighten(@tab-fill, 50%);
+        }
+      }
       
       &:after {
         content:'';

@@ -897,6 +897,15 @@ a.tip {
   border: solid 1px #e6e6e6;
   border-bottom-color: #cccccc;
   color: #878787;
+  padding-left: 15px;
+}
+.nav-tabs > li > a:hover,
+.nav-tabs > li > a:focus {
+  background-color: #ffffff;
+}
+.nav-tabs > li > a:hover:after,
+.nav-tabs > li > a:focus:after {
+  background-color: #ffffff;
 }
 .nav-tabs > li > a:after {
   content: '';
