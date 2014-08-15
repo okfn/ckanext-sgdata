@@ -689,6 +689,9 @@ a.tag:hover {
 [role="main"] .primary .module-content .search-form h2 {
   color: #777777;
 }
+[role="main"] .primary .module-content .search-form .search-input input {
+  height: 52px;
+}
 [role="main"] .primary .module-content .search-form .filter-list {
   color: #878787;
   line-height: inherit;
