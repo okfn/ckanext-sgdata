@@ -285,14 +285,21 @@ a.tip {
     margin-right:1px;
   }
   
-  &.btn-success {
-    color:@lightgreen;
-  }
-  
   &:hover {
     background-color:transparent;
     border-color:transparent;
     text-decoration:none;
+    color:@text;
+  }
+  
+  &.btn-success {
+    color:@lightgreen;
+  }
+  &.btn-danger {
+    color:@red;
+  }
+  &.btn-warning {
+    color:@orange;
   }
 }
 
@@ -763,7 +770,8 @@ a.tip {
     input,
     select,
     textarea,
-    .select2-choices {
+    .select2-choices,
+    .error-block {
       width:666px;
       box-sizing:border-box;
     }
@@ -905,11 +913,17 @@ a.tip {
 .read {
   [role="main"] {
     .primary {
+      .page-header .content_action {
+        position: absolute;
+        right: 0;
+        top: -40px;
+        
+        .status {
+          cursor:auto;
+        }
+      }
       h1 {
         margin-bottom:1px;
-      }
-      .status {
-        float:right;
       }
       .notes.purpose {
         font-size:18px;
