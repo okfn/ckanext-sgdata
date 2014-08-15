@@ -102,6 +102,9 @@
         {% endblock %}
       </div>
       <div class="tab-pane" id="contact">
+        <table class="table table-striped">
+
+
          {% for name, title in ( ('data_provider', 'Data Provider / Distributor'),
                                  ('data_provider_contact_name', 'Contact Name'),
                                  ('data_provider_contact_designation', 'Contact Designation'),
@@ -121,11 +124,13 @@
                                  ('data_compiler_contact_email_address', 'Contact Email Address'),
                                  ) %}
             {% if pkg.get(name) %}
-              <h2>{{ title }}</h2>
-                {{ pkg[name] }}
+          <tr>
+            <th>{{ title }}</th>
+            <td>{{ pkg[name] }}</td>
             {% endif %}
-        
+          </tr>
           {% endfor %}
+        </table>
       </div>
     </div>
 

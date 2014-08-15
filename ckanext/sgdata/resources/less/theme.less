@@ -115,6 +115,8 @@ h4,
 h5,
 h6 {
   .header-font;
+  margin-top:15px;
+  margin-bottom:5px;
 }
 
 section.grey {
@@ -247,6 +249,16 @@ section.grey {
 a.tip {
   display:inline-block;
   text-decoration:none;
+}
+
+.tag {
+  background-color: @grey;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  color: #fff;
+  padding: 4px 12px;
+  font-size:13px;
 }
 
 
@@ -935,67 +947,78 @@ a.tip {
         overflow:hidden;
       }
       
-      .resource-item {
-        .format-label{
-          background-image:none;
-          text-indent:0;
-          text-align:center;
-          line-height:33px;
-          color:#fff;
-          font-size:13px;
-          text-transform:uppercase;
-          font-weight:normal;
-          width:35px;
-          background-color:@grey;
-          
-          &[data-format="xls"] {
-            background-color:@darkgreen;
-          }
-          &[data-format="html"] {
-            background-color:@darkblue;
-          }
-          &[data-format="json"] {
-            background-color:@orange;
-          }
-          &[data-format="csv"] {
-            background-color:@lightgreen;
-          }
-          &[data-format="txt"] {
-            background-color:@lightblue;
-          }
-          &[data-format="pdf"] {
-            background-color:@red;
-          }
-        }
-        .heading {
-          color: @heading;
-        }
+      .resource-list {
+        margin-top:0;
         
-        .explore {
-          position:absolute;
-          right:10px;
-          top:14px;
-          
-          li {
-            display:inline-block;
-            margin-left:10px;
+        .resource-item {
+          .format-label{
+            background-image:none;
+            text-indent:0;
+            text-align:center;
+            line-height:33px;
+            color:#fff;
+            font-size:13px;
+            text-transform:uppercase;
+            font-weight:normal;
+            width:35px;
+            background-color:@grey;
             
-            a {
-              text-decoration:none;            
-              color:@text;
+            &[data-format="xls"] {
+              background-color:@darkgreen;
+            }
+            &[data-format="html"] {
+              background-color:@darkblue;
+            }
+            &[data-format="json"] {
+              background-color:@orange;
+            }
+            &[data-format="csv"] {
+              background-color:@lightgreen;
+            }
+            &[data-format="txt"] {
+              background-color:@lightblue;
+            }
+            &[data-format="pdf"] {
+              background-color:@red;
+            }
+          }
+          .heading {
+            color: @heading;
+          }
+          
+          .explore {
+            position:absolute;
+            right:10px;
+            top:14px;
+            
+            li {
+              display:inline-block;
+              margin-left:10px;
               
-              &:hover {
-                color:@darkblue;
-              }
-              i {
-                font-size:32px;
+              a {
+                text-decoration:none;            
+                color:@text;
+                
+                &:hover {
+                  color:@darkblue;
+                }
+                i {
+                  font-size:32px;
+                }
               }
             }
           }
+          &:hover {
+            background-color:transparent;
+          }
         }
-        &:hover {
-          background-color:transparent;
-        }
+      }
+      
+      .tag-list {
+        background-color:#fff;
+        padding:0;
+        border:none;
+        box-shadow:none;
       }
       
       footer {
