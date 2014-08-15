@@ -446,6 +446,36 @@ a.tip {
   background-image: none;
   background-color: #fff;
   border: none;
+  margin-left: -15px;
+}
+.media-grid .media-item {
+  width: 182px;
+  padding-bottom: 0;
+}
+.media-grid .media-item .media-heading,
+.media-grid .media-item p,
+.media-grid .media-item .count {
+  background-color: #f5f5f5;
+  margin: 0 -15px;
+  display: block;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 3px;
+}
+.media-grid .media-item .media-heading {
+  padding-top: 15px;
+  margin-top: 10px;
+}
+.media-grid .media-item .count {
+  padding-bottom: 15px;
+}
+.media-grid .media-item .media-view {
+  border-color: #f5f5f5;
+  box-shadow: 1px 1px 1px 0px rgba(50, 50, 50, 0.17);
+}
+.media-grid .media-item .media-view:hover,
+.media-grid .media-item .media-view.hovered {
+  box-shadow: 2px 1px 1px 0px rgba(50, 50, 50, 0.17);
 }
 /* Structure */
 .account-masthead {

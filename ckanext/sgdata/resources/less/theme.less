@@ -324,6 +324,39 @@ a.tip {
   background-image:none;
   background-color:#fff;
   border:none;
+  margin-left:-15px;
+  
+  .media-item {
+    width:182px;
+    padding-bottom:0;
+    
+    .media-heading,
+    p,
+    .count {
+      background-color:@lightgrey;
+      margin: 0 -15px;
+      display:block;
+      padding-left:15px;
+      padding-right:15px;
+      padding-bottom:3px;
+    }
+    .media-heading {
+      padding-top:15px;
+      margin-top:10px;
+    }
+    .count {
+      padding-bottom:15px;
+    }
+    .media-view {
+      border-color:@lightgrey;
+      box-shadow: 1px 1px 1px 0px rgba(50, 50, 50, 0.17);
+      
+      &:hover,
+      &.hovered {
+        box-shadow: 2px 1px 1px 0px rgba(50, 50, 50, 0.17);
+      }
+    }
+  }
 }
 
 
