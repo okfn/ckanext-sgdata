@@ -948,6 +948,10 @@ a.tip {
 .read [role="main"] .primary .notes.purpose {
   font-size: 18px;
 }
+.read [role="main"] .primary .tab-content {
+  display: block;
+  overflow: hidden;
+}
 .read [role="main"] .secondary .module-heading {
   border-top: 1px solid #e3e3e3;
   border-bottom: none;
