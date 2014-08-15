@@ -328,7 +328,8 @@ a.tip {
   display: inline-block;
   text-decoration: none;
 }
-.tag {
+.tag,
+a.tag {
   background-color: #c3c3c2;
   border: none;
   border-radius: 0;
@@ -336,6 +337,12 @@ a.tip {
   color: #fff;
   padding: 4px 12px;
   font-size: 13px;
+}
+.tag:hover,
+a.tag:hover {
+  background-color: #aaaaa8;
+  border: none;
+  box-shadow: none;
 }
 /* Buttons */
 .btn {
@@ -1078,6 +1085,9 @@ a.tip {
   margin-top: 20px;
   padding-top: 20px;
 }
+.read [role="main"] .secondary .image a {
+  border-radius: 0;
+}
 .read [role="main"] .secondary .module-heading {
   border-top: 1px solid #e3e3e3;
   border-bottom: none;
@@ -1104,6 +1114,11 @@ a.tip {
 }
 .read [role="main"] .secondary .follow h1 {
   display: none;
+}
+/* Resource */
+.resource-read .actions {
+  top: -70px;
+  right: -25px;
 }
 .site-footer {
   color: #878787;

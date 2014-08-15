@@ -251,7 +251,8 @@ a.tip {
   text-decoration:none;
 }
 
-.tag {
+.tag,
+a.tag {
   background-color: @grey;
   border: none;
   border-radius: 0;
@@ -259,6 +260,12 @@ a.tip {
   color: #fff;
   padding: 4px 12px;
   font-size:13px;
+  
+  &:hover {
+    background-color: darken(@grey, 10%);
+    border: none;
+    box-shadow: none;
+  }
 }
 
 
@@ -1061,6 +1068,9 @@ a.tip {
       }
     }
     .secondary {
+      .image a {
+        border-radius:0;
+      }
       .module-heading {
         border-top: 1px solid #e3e3e3;
         border-bottom: none;
@@ -1097,6 +1107,13 @@ a.tip {
   }
 }
 
+/* Resource */
+.resource-read {
+  .actions {
+    top:-70px;
+    right: -25px;
+  }
+}
 
 .site-footer {
   color: @text;
