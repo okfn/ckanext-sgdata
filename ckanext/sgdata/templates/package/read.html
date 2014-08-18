@@ -162,15 +162,18 @@
     {% if pkg.department %}
      {{ h.department(pkg.department) }}
     {% endif %}
-    <span class="agency_record_identifier">{{ pkg.agency_record_identifier[0] }}</span>
+
+    {% if 'agency_record_identifier' in pkg %}
+      <span class="agency_record_identifier">{{ pkg.agency_record_identifier[0] }}</span>
+    {% endif %}
   </div>
-  
+
   {# {% set identifier = h.sg_data_record_identifier(pkg) %}
     {% if identifier %}
       <h2>SG Data Record Identifier</h2>
       {{ identifier }}
     {% endif %} #}
-  
+
    {% for name, title in ( ('type_of_data_collection', 'Type of Data Collection'),
                            ('frequency', 'Frequency'),
                            ('security_classification', 'Security Classification'),
