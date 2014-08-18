@@ -212,11 +212,20 @@ def categories():
     return categories.values()
 
 
-def category(value):
+def first_level_category(value):
     for c in categories():
         for sc in c['categories'].values():
             if sc['value'] == value:
-                return '{0} -> {1}'.format(sc['parent_label'], sc['label'])
+                return sc['parent_label']
+    assert False, "Should never get here, unknown category: '{0}'".format(
+        value)
+
+
+def second_level_category(value):
+    for c in categories():
+        for sc in c['categories'].values():
+            if sc['value'] == value:
+                return sc['label']
     assert False, "Should never get here, unknown category: '{0}'".format(
         value)
 
@@ -444,7 +453,8 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                 'publish_on_data_gov_sg': publish_on_data_gov_sg,
                 'last_update_by': last_update_by,
                 'categories': categories,
-                'category': category,
+                'first_level_category': first_level_category,
+                'second_level_category': second_level_category,
                 'departments': departments,
                 'department': department,
                 }
