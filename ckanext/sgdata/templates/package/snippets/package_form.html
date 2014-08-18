@@ -56,7 +56,6 @@
       <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
       {% if help %}<a href="#" data-toggle="tooltip" title="{{ help }}" class="tip"><i class="icon-question-sign"></i></a>{% endif %}
       <div class="controls">
-      <div class="controls">
         <input type="{{ type }}" id="field-{{ name }}" name="{{ name }}"
                style="margin-bottom:0;"
                {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
