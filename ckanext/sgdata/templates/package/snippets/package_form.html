@@ -106,7 +106,7 @@
     {{ textarea('notes', _('Purpose'),
                 help=_('Circumstance, context, and perspective under which data is defined or used. E.g., Data on Electricity Generation as well as Licensed Electrical Workers are collected for regulatory purposes.'))}}
                 
-    <div class="medium control-group">
+    <div class="large control-group">
       <label class="control-label" for="field-reference-period-start">Reference Period</label>
       <a href="#" data-toggle="tooltip" title="{{ _('The period of time or point in time to which the data is intended to refer.') }}" class="tip"><i class="icon-question-sign"></i></a>
       <div class="controls">
@@ -281,40 +281,56 @@
   
     {{ input('data_provider', 'Data Provider / Distributor',
              is_required=True,
-             help=_('The agency which produces the data or metadata. E.g. labour productivity is computed and disseminated by DOS but it is based on data from MOM which is the compiling agency.')) }}
+             help=_('The agency which produces the data or metadata. E.g. labour productivity is computed and disseminated by DOS but it is based on data from MOM which is the compiling agency.'))
+           }}
   
-    {{ input('data_provider_contact_name', 'Contact Name', is_required=True) }}
+    {{ input('data_provider_contact_name', 'Contact Name', is_required=True,
+             classes='medium') }}
     {{ input('data_provider_contact_designation', 'Contact Designation',
-             is_required=True) }}
+             is_required=True,
+             classes='medium') }}
     {{ input('data_provider_contact_department', 'Contact Department',
-             is_required=True) }}
+             is_required=True,
+             classes='medium') }}
     {{ input('data_provider_contact_telephone_number',
-             'Contact Telephone Number', is_required=True, type='tel') }}
+             'Contact Telephone Number', is_required=True, type='tel',
+             classes='medium') }}
     {{ input('data_provider_contact_email_address', 'Contact Email Address',
-             is_required=True, type='email') }}
+             is_required=True, type='email',
+             classes='medium') }}
   
     {{ input('data_provider_alternate_contact_name', 'Alternate Contact Name',
-             is_required=True) }}
+             is_required=True,
+             classes='medium') }}
     {{ input('data_provider_alternate_contact_designation',
-             'Alternate Contact Designation', is_required=True) }}
+             'Alternate Contact Designation', is_required=True,
+             classes='medium') }}
     {{ input('data_provider_alternate_contact_department',
-             'Alternate Contact Department', is_required=True) }}
+             'Alternate Contact Department', is_required=True,
+             classes='medium') }}
     {{ input('data_provider_alternate_contact_telephone_number',
              'Alternate Contact Telephone Number', is_required=True,
-             type='tel') }}
+             type='tel',
+             classes='medium') }}
     {{ input('data_provider_alternate_contact_email_address',
              'Alternate Contact Email Address', is_required=True,
-             type='email') }}
+             type='email',
+             classes='medium') }}
   
     {{ input('data_compiler', 'Data Compiler / Source (if different from Data Provider / Distributor)',
              help=_('The agency compiling the data being reported.')) }}
-    {{ input('data_compiler_contact_name', 'Contact Name') }}
-    {{ input('data_compiler_contact_designation', 'Contact Designation') }}
-    {{ input('data_compiler_contact_department', 'Contact Department') }}
+    {{ input('data_compiler_contact_name', 'Contact Name',
+             classes='medium') }}
+    {{ input('data_compiler_contact_designation', 'Contact Designation',
+             classes='medium') }}
+    {{ input('data_compiler_contact_department', 'Contact Department',
+             classes='medium') }}
     {{ input('data_compiler_contact_telephone_number', 'Contact Telephone Number',
-             type='tel') }}
+             type='tel',
+             classes='medium') }}
     {{ input('data_compiler_contact_email_address', 'Contact Email Address',
-             type='email') }}
+             type='email',
+             classes='medium') }}
   
     <div class="form-actions">
       <p class="action-info small">

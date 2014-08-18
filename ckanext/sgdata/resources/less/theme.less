@@ -842,16 +842,9 @@ a.tag {
       height:30px;
     }
     
-    &.small {
-      width:235px;
-    }
-
-    &.medium {
-      width:469px;
-    }
-  
     &.small,
-    &.medium {
+    &.medium,
+    &.large {
       float:left;
     
       input {
@@ -860,6 +853,20 @@ a.tag {
       select {
         width:195px;
       }
+    }
+    
+    &.small {
+      width:235px;
+    }
+    &.medium {
+      width:353px;
+      
+      input {
+        width:313px;
+      }
+    }
+    &.large {
+      width:469px;
     }
     
     .to {
@@ -876,6 +883,7 @@ a.tag {
   
   .form-actions {
     margin-right:40px;
+    clear:both;
     
     .control-required-message {
       margin-right:0;

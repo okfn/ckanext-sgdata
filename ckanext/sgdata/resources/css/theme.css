@@ -887,23 +887,32 @@ a.tag:hover {
 .package-form .dataset-form .control-group input {
   height: 30px;
 }
+.package-form .dataset-form .control-group.small,
+.package-form .dataset-form .control-group.medium,
+.package-form .dataset-form .control-group.large {
+  float: left;
+}
+.package-form .dataset-form .control-group.small input,
+.package-form .dataset-form .control-group.medium input,
+.package-form .dataset-form .control-group.large input {
+  width: 196px;
+}
+.package-form .dataset-form .control-group.small select,
+.package-form .dataset-form .control-group.medium select,
+.package-form .dataset-form .control-group.large select {
+  width: 195px;
+}
 .package-form .dataset-form .control-group.small {
   width: 235px;
 }
 .package-form .dataset-form .control-group.medium {
-  width: 469px;
+  width: 353px;
 }
-.package-form .dataset-form .control-group.small,
-.package-form .dataset-form .control-group.medium {
-  float: left;
-}
-.package-form .dataset-form .control-group.small input,
 .package-form .dataset-form .control-group.medium input {
-  width: 196px;
+  width: 313px;
 }
-.package-form .dataset-form .control-group.small select,
-.package-form .dataset-form .control-group.medium select {
-  width: 195px;
+.package-form .dataset-form .control-group.large {
+  width: 469px;
 }
 .package-form .dataset-form .control-group .to {
   float: left;
@@ -916,6 +925,7 @@ a.tag:hover {
 }
 .package-form .dataset-form .form-actions {
   margin-right: 40px;
+  clear: both;
 }
 .package-form .dataset-form .form-actions .control-required-message {
   margin-right: 0;
