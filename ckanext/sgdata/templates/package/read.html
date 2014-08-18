@@ -50,14 +50,14 @@
           {% endif %}
         
           {% if pkg.category %}
-            <div class="categories">
+
+            <ul class="categories">
+              <li>{{ h.first_level_category(pkg.category) }}</li>
               <ul>
-                <li>{{ h.first_level_category(pkg.category) }}</li>
-                <ul>
-                  <li>{{ h.second_level_category(pkg.category) }}</li>
-                </ul>
+                <li>{{ h.second_level_category(pkg.category) }}</li>
               </ul>
-            </div>
+            </ul>
+              
           {% endif %}
         
           {% if c.pkg_notes_formatted %}
