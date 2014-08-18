@@ -63,7 +63,7 @@
                value="{{ data[name] }}"
                {% if disabled %}disabled{% endif %}
                {% if attrs %}{{ attrs }}{% endif %}>
-        {% if error and error is iterable %}<span class="error-block" style="width:204px;">{{ error|join(', ') }}</span>{% endif %}
+        {% if error and error is iterable %}<span class="error-block">{{ error|join(', ') }}</span>{% endif %}
       </div>
     </div>
   {% endmacro %}
@@ -117,7 +117,7 @@
                  id="field-reference-period-start" class="datepicker"
                  value="{{ data['reference-period-start'] }}">
           {% if errors['reference-period-start'] %}
-            <span class="error-block" style="width:204px;">
+            <span class="error-block">
               {{ errors['reference-period-start']|join(', ') }}
             </span>
           {% endif %}
@@ -128,7 +128,7 @@
                  id="field-reference-period-end" class="datepicker"
                  value="{{ data['reference-period-end'] }}">
           {% if errors['reference-period-end'] %}
-            <span class="error-block" style="width:204px;">
+            <span class="error-block">
               {{ errors['reference-period-end']|join(', ') }}
             </span>
           {% endif %}
@@ -245,7 +245,7 @@
                data-module="autocomplete" data-module-tags
                data-module-source="/api/2/util/tag/autocomplete?incomplete=?">
         {% if errors.keywords and errors.keywords is iterable %}
-          <span class="error-block" style="width:504px;">{{ errors.keywords|join(', ') }}</span>
+          <span class="error-block">{{ errors.keywords|join(', ') }}</span>
         {% endif %}
       </div>
     </div>
