@@ -210,6 +210,9 @@ section.grey.horizontal {
 .box-list li a:hover h3 {
   color: #2193e4;
 }
+.ie8 .box-list li a {
+  background-image: url(../img/box-icons-small.png);
+}
 .box-list li a h3,
 .box-list li a p {
   margin: 0;
@@ -604,6 +607,10 @@ a.tag:hover {
 .masthead .content .nav li a:focus {
   background-color: rgba(81, 160, 216, 0.5);
 }
+.ie8 .masthead .content .nav li a:hover,
+.ie8 .masthead .content .nav li a:focus {
+  background-color: #51a0d8;
+}
 .masthead .content .nav li.active a:hover,
 .masthead .content .nav li.active a:focus {
   background-color: #51a0d8;
@@ -632,6 +639,12 @@ a.tag:hover {
   background-position: 220px top;
   background-size: 15px auto;
   z-index: 1;
+}
+.ie8 .wrapper {
+  background-image: url(../img/nav-small.png);
+}
+.ie8 .wrapper.no-nav {
+  background-image: none;
 }
 .wrapper:before {
   background-color: #f5f5f5;
@@ -824,6 +837,10 @@ a.tag:hover {
   background-repeat: no-repeat;
   background-position: 5px -141px;
 }
+.ie8 .stages li .highlight,
+.ie8 .stages li.complete .highlight {
+  background-image: url(../img/add-icons-small.png);
+}
 .stages li .highlight:before,
 .stages li.complete .highlight:before {
   content: counter(stage, decimal) '. ';
@@ -834,6 +851,10 @@ a.tag:hover {
   background-size: 51px auto;
   background-repeat: no-repeat;
   background-position: 5px -41px;
+}
+.ie8 .stages li.first .highlight,
+.ie8 .stages li.complete.first .highlight {
+  background-image: url(../img/add-icons-small.png);
 }
 .stages li.first.active .highlight,
 .stages li.complete.first.active .highlight,
@@ -857,6 +878,12 @@ a.tag:hover {
   background-size: 51px auto;
   background-repeat: no-repeat;
   background-position: 5px -91px;
+}
+.ie8 .stages li.active .highlight,
+.ie8 .stages li.complete.active .highlight,
+.ie8 .stages li.complete .highlight,
+.ie8 .stages li.complete.complete .highlight {
+  background-image: url(../img/add-icons-small.png);
 }
 .stages li.uncomplete,
 .stages li.complete.uncomplete,
@@ -1177,6 +1204,9 @@ a.tag:hover {
   width: 82px;
   background-size: contain;
   background-position: right center;
+}
+.ie8 .site-footer .attribution .ckan-footer-logo {
+  background-image: url(../img/ckan-logo-footer-small.png);
 }
 .homepage .site-search .btn-search,
 .search-form .search-input.search-giant button {

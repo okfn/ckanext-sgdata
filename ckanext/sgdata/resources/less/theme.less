@@ -183,6 +183,10 @@ section.grey {
       position:relative;
       box-shadow: 2px 1px 1px 0px rgba(50, 50, 50, 0.17);
       
+      .ie8 & {
+        background-image:url(../img/box-icons-small.png);
+      }
+      
       h3,
       p {
         margin:0;
@@ -494,6 +498,10 @@ a.tag {
           &:hover,
           &:focus {
             background-color: fade(@lightblue, 50%);
+            
+            .ie8 & {
+              background-color:@lightblue;
+            }
           }
         }
         
@@ -538,6 +546,13 @@ a.tag {
   background-position:220px top;
   background-size:15px auto;
   z-index:1;
+  
+  .ie8 & {
+    background-image:url(../img/nav-small.png);
+    &.no-nav {
+      background-image:none;
+    }
+  }
   
   &:before {
     background-color:@lightgrey;
@@ -774,6 +789,10 @@ a.tag {
       background-repeat:no-repeat;
       background-position:5px -141px; //second
       
+      .ie8 & {
+        background-image:url(../img/add-icons-small.png);
+      }
+      
       &:before {
         content: counter(stage, decimal) '. ';
       }
@@ -785,6 +804,10 @@ a.tag {
         background-size:51px auto;
         background-repeat:no-repeat;
         background-position:5px -41px; //first
+        
+        .ie8 & {
+          background-image:url(../img/add-icons-small.png);
+        }
       }
       
       &.active,
@@ -805,6 +828,10 @@ a.tag {
         background-size:51px auto;
         background-repeat:no-repeat;
         background-position:5px -91px; //second active
+        
+        .ie8 & {
+          background-image:url(../img/add-icons-small.png);
+        }
       }
     }
     
@@ -1175,6 +1202,10 @@ a.tag {
       width: 82px;
       background-size:contain;
       background-position:right center;
+      
+      .ie8 & {
+        background-image:url(../img/ckan-logo-footer-small.png);
+      }
     }
   }
 }
