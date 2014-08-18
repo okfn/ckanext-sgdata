@@ -1065,6 +1065,23 @@ a.tag:hover {
 }
 .read [role="main"] .primary .categories {
   margin-bottom: 20px;
+  margin-left: 0;
+}
+.read [role="main"] .primary .categories ul {
+  display: inline-block;
+  margin: 0;
+}
+.read [role="main"] .primary .categories ul:before {
+  content: '\2192';
+  color: #c3c3c2;
+}
+.read [role="main"] .primary .categories li {
+  display: inline-block;
+  background-color: #f39823;
+  line-height: 33px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #fff;
 }
 .read [role="main"] .primary .notes.purpose {
   font-size: 18px;

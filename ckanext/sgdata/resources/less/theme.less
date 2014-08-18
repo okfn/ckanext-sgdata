@@ -1037,6 +1037,25 @@ a.tag {
       }
       .categories {
         margin-bottom:20px;
+        margin-left:0;
+        
+        ul {
+          display:inline-block;
+          margin:0;
+          
+          &:before {
+            content:'\2192';
+            color:@grey;
+          }
+        }
+        li {
+          display:inline-block;
+          background-color:@orange;
+          line-height:33px;
+          padding-left:10px;
+          padding-right:10px;
+          color:#fff;
+        }
       }
       .notes.purpose {
         font-size:18px;
