@@ -1,157 +1,71 @@
 {% ckan_extends %}
 
-{% block bodytag %}
-{{ super() }}
- class="read"
-{% endblock %}
+{% block bodytag %}{{ super() }} class="read"{% endblock %}
 
 {% block content_action %}
-  {% if h.check_access('package_update', {'id':pkg.id }) %}
-    {% link_for _('Manage'), controller='package', action='edit', id=pkg.name, class_='btn btn-link', icon='wrench' %}
-  {% endif %}
-  <span class="status btn btn-link {% if pkg.status[0] == 'Active' %}btn-success{% elif pkg.status[0] == 'Discontinued' %}btn-danger{% elif pkg.status[0] == 'Replaced' %}btn-warning{% endif %}"><i class="icon-check"></i> {{ pkg.status[0] }}</span>
+  {{ super() }}
+  {% set status = "Active" %}{#pkg.status[0] %}#}
+  <span class="status btn btn-link {% if status == 'Active' %}btn-success{% elif status == 'Discontinued' %}btn-danger{% elif status == 'Replaced' %}btn-warning{% endif %}">
+    <i class="icon-check"></i> {{ status }}
+  </span>
 {% endblock %}
 
 {% block content_primary_nav %}
   {{ super() }}
-  <li><a href="{{ h.url_for('dataset_read', id=pkg.name) }}#contact" data-toggle="tab">{{ _('Contact Information') }}</a></li>
+  {{ h.build_nav_icon('dataset_contact', _('Contact Information'), id=pkg.name) }}
 {% endblock %}
 
-{% block primary_content_inner %}
+{% block package_notes %}
 
-  {% block package_description %}
-    {% if pkg.private %}
-      <span class="dataset-private label label-inverse pull-right">
-        <i class="icon-lock"></i>
-        {{ _('Private') }}
-      </span>
+  {% if pkg.get('reference-period-start') and pkg.get('reference-period-end') %}
+    <p>From {{ pkg['reference-period-start'] }} to {{ pkg['reference-period-end'] }}</p>
+  {% elif pkg.get('reference-period-start') %}
+    <p>{{ pkg['reference-period-start'] }}</p>
+  {% elif pkg.get('reference-period-end') %}
+    <p>{{ pkg['reference-period-end'] }}</p>
+  {% endif %}
+
+  {% if pkg.category %}
+    <ul class="categories">
+      <li>{{ h.first_level_category(pkg.category) }}</li>
+      <ul>
+        <li>{{ h.second_level_category(pkg.category) }}</li>
+      </ul>
+    </ul>
+  {% endif %}
+
+  {{ super() }}
+
+{% endblock %}
+
+{% block package_additional_info %}
+
+  <div class="notes embedded-content">
+    <h2>Survey / Administrative Source</h2>
+    {{ pkg.zzz_administrative_source }}
+  </div>
+
+  {% for name, title in (('coverage', 'Coverage'),
+                         ('conditions_of_use', 'Conditions of Use'),
+                         ('comments', 'Comments'),
+                         ('available-from', 'Available From'),
+                        ) %}
+    {% if pkg.get(name) %}
+      <h2>{{ title }}</h2>
+      {{ pkg[name] }}
     {% endif %}
-    
-    <h1>
-      {% block page_heading %}
-        {{ pkg.title or pkg.name }}
-        {% if pkg.state.startswith('draft') %}
-          [{{ _('Draft') }}]
-        {% endif %}
-      {% endblock %}
-    </h1>
-    
-    <div class="tab-content">
-      <div class="tab-pane active" id="main">
+  {% endfor %}
 
-        {% block package_notes %}
-        
-          {% if pkg.get('reference-period-start') and pkg.get('reference-period-end') %}
-            <p>From {{ pkg['reference-period-start'] }} to {{ pkg['reference-period-end'] }}</p>
-          {% elif pkg.get('reference-period-start') %}
-            <p>{{ pkg['reference-period-start'] }}</p>
-          {% elif pkg.get('reference-period-end') %}
-            <p>{{ pkg['reference-period-end'] }}</p>
-          {% endif %}
-        
-          {% if pkg.category %}
-
-            <ul class="categories">
-              <li>{{ h.first_level_category(pkg.category) }}</li>
-              <ul>
-                <li>{{ h.second_level_category(pkg.category) }}</li>
-              </ul>
-            </ul>
-              
-          {% endif %}
-        
-          {% if c.pkg_notes_formatted %}
-            <div class="notes embedded-content purpose">
-              {{ c.pkg_notes_formatted }}
-            </div>
-          {% endif %}
-          
-          {% block package_resources %}
-          {% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
-        {% endblock %}
-      
-        {% block package_tags %}
-          {% snippet "package/snippets/tags.html", tags=pkg.tags %}
-        {% endblock %}
-        
-          <div class="notes embedded-content">
-            <h2>Survey / Administrative Source</h2>
-            {{ pkg.zzz_administrative_source }}
-          </div>
-        
-        
-          {% for name, title in (('coverage', 'Coverage'),
-                                 ('conditions_of_use', 'Conditions of Use'),
-                                 ('comments', 'Comments'),
-                                 ('available-from', 'Available From'),
-                                 ) %}
-            {% if pkg.get(name) %}
-              <h2>{{ title }}</h2>
-                {{ pkg[name] }}
-            {% endif %}
-        
-          {% endfor %}
-      
-          <footer>
-            Last metadata update date: {{ h.render_datetime(pkg.metadata_modified) }} | 
-            
-            {% set last_updater = h.last_update_by(pkg) %}
-            {% if last_updater %}
-              Last update by: <a href="{{ h.url_for(controller='user', action='read', id=last_updater.name) }}">{{ last_updater.display_name }}</a>
-            {% endif %}
-          </footer>
-        
-          
-       
-        
-        {% endblock %}
-      </div>
-      <div class="tab-pane" id="contact">
-        <table class="table table-striped">
-
-
-         {% for name, title in ( ('data_provider', 'Data Provider / Distributor'),
-                                 ('data_provider_contact_name', 'Contact Name'),
-                                 ('data_provider_contact_designation', 'Contact Designation'),
-                                 ('data_provider_contact_department', 'Contact Department'),
-                                 ('data_provider_contact_telephone_number', 'Contact Telephone Number'),
-                                 ('data_provider_contact_email_address', 'Contact Email Address'),
-                                 ('data_provider_alternate_contact_name', 'Alternate Contact Name'),
-                                 ('data_provider_alternate_contact_designation', 'Alternate Contact Designation'),
-                                 ('data_provider_alternate_contact_department', 'Alternate Contact Department'),
-                                 ('data_provider_alternate_contact_telephone_number', 'Alternate Contact Telephone Number'),
-                                 ('data_provider_alternate_contact_email_address', 'Alternate Contact Email Address'),
-                                 ('data_compiler', 'Data Compiler / Source'),
-                                 ('data_compiler_contact_name', 'Contact Name'),
-                                 ('data_compiler_contact_designation', 'Contact Designation'),
-                                 ('data_compiler_contact_department', 'Contact Department'),
-                                 ('data_compiler_contact_telephone_number', 'Contact Telephone Number'),
-                                 ('data_compiler_contact_email_address', 'Contact Email Address'),
-                                 ) %}
-            {% if pkg.get(name) %}
-          <tr>
-            <th>{{ title }}</th>
-            <td>{{ pkg[name] }}</td>
-            {% endif %}
-          </tr>
-          {% endfor %}
-        </table>
-      </div>
-    </div>
-
-{% endblock %}
-
-  
-
-  {% block package_additional_info %}
-    {# snippet "package/snippets/additional_info.html", pkg_dict=pkg #}
-  {% endblock %}
-
+  <footer>
+    Last metadata update date: {{ h.render_datetime(pkg.metadata_modified) }} | 
+    {% set last_updater = h.last_update_by(pkg) %}
+    {% if last_updater %}
+      Last update by: <a href="{{ h.url_for(controller='user', action='read', id=last_updater.name) }}">{{ last_updater.display_name }}</a>
+    {% endif %}
+  </footer>
 {% endblock %}
 
 {% block secondary_content %}
-
-  {% block secondary_help_content %}{% endblock %}
   
   <div class="org">
     {% block package_organization %}
@@ -204,10 +118,6 @@
       {% snippet 'package/snippets/info.html', pkg=pkg %}
     {% endblock %}
   </div>
-  
-  {% block package_social %}
-    {# snippet "snippets/social.html" #}
-  {% endblock %}
 
   {% block package_license %}
     {% snippet "snippets/license.html", pkg_dict=pkg %}
