@@ -1,0 +1,77 @@
+{% ckan_extends %}
+
+{% block bodytag %}{{ super() }} class="read"{% endblock %}
+
+{% block content_action %}
+  {{ super() }}
+  {% set status = "Active" %}{#pkg.status[0] %}#}
+  <span class="status btn btn-link {% if status == 'Active' %}btn-success{% elif status == 'Discontinued' %}btn-danger{% elif status == 'Replaced' %}btn-warning{% endif %}">
+    <i class="icon-check"></i> {{ status }}
+  </span>
+{% endblock %}
+
+{% block content_primary_nav %}
+  {{ super() }}
+  {{ h.build_nav_icon('dataset_contact', _('Contact Information'), id=pkg.name) }}
+{% endblock %}
+
+{% block secondary_content %}
+
+  <div class="org">
+    {% block package_organization %}
+      {% if pkg.organization %}
+        {% snippet "snippets/organization.html", organization=pkg.organization, has_context_title=true %}
+      {% endif %}
+    {% endblock %}
+    {% if pkg.department %}
+     {{ h.department(pkg.department) }}
+    {% endif %}
+
+    {% if 'agency_record_identifier' in pkg %}
+      <span class="agency_record_identifier">{{ pkg.agency_record_identifier[0] }}</span>
+    {% endif %}
+  </div>
+
+  {# {% set identifier = h.sg_data_record_identifier(pkg) %}
+    {% if identifier %}
+      <h2>SG Data Record Identifier</h2>
+      {{ identifier }}
+    {% endif %} #}
+
+   {% for name, title in ( ('type_of_data_collection', 'Type of Data Collection'),
+                           ('frequency', 'Frequency'),
+                           ('security_classification', 'Security Classification'),
+                           ('data_granularity', 'Data Granularity'),
+                           ('publish_on_data_gov_sg', 'Publish on Data.gov.sg'),
+                           ('unit_of_measure', 'Unit of Measure'),
+                           ) %}
+      {% if pkg.get(name) %}
+        <div class="module module-narrow module-shallow context-info">
+          <h2 class="module-heading">{{ title }}</h2>
+          <section class="module-content">
+            {{ pkg[name][0] }}
+          </section>
+        </div>
+      {% endif %}
+    {% endfor %}
+    
+    <div class="module module-narrow module-shallow context-info">
+      <h2 class="module-heading">Metadata Creation Date</h2>
+      <section class="module-content">
+        {{ h.render_datetime(pkg.metadata_created) }}
+      </section>
+    </div>
+
+  
+  <div class="follow">
+    {% block package_info %}
+      {% snippet 'package/snippets/info.html', pkg=pkg %}
+    {% endblock %}
+  </div>
+
+  {% block package_license %}
+    {% snippet "snippets/license.html", pkg_dict=pkg %}
+  {% endblock %}
+
+{% endblock %}
+
