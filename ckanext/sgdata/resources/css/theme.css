@@ -1105,23 +1105,38 @@ a.tag:hover {
   width: 35px;
   background-color: #c3c3c2;
 }
-.read [role="main"] .primary .resource-list .resource-item .format-label[data-format="xls"] {
-  background-color: #3dbaa7;
-}
 .read [role="main"] .primary .resource-list .resource-item .format-label[data-format="html"] {
-  background-color: #3d75ba;
+  background-color: #55a1ce;
 }
 .read [role="main"] .primary .resource-list .resource-item .format-label[data-format="json"] {
-  background-color: #f39823;
+  background-color: #ef7100;
+}
+.read [role="main"] .primary .resource-list .resource-item .format-label[data-format="xml"] {
+  background-color: #ef7100;
+}
+.read [role="main"] .primary .resource-list .resource-item .format-label[data-format="text"] {
+  background-color: #74cbec;
 }
 .read [role="main"] .primary .resource-list .resource-item .format-label[data-format="csv"] {
-  background-color: #51d8a0;
+  background-color: #dfb100;
 }
-.read [role="main"] .primary .resource-list .resource-item .format-label[data-format="txt"] {
-  background-color: #51a0d8;
+.read [role="main"] .primary .resource-list .resource-item .format-label[data-format="xls"] {
+  background-color: #2db55d;
+}
+.read [role="main"] .primary .resource-list .resource-item .format-label[data-format="zip"] {
+  background-color: #686868;
+}
+.read [role="main"] .primary .resource-list .resource-item .format-label[data-format="api"] {
+  background-color: #ec96be;
 }
 .read [role="main"] .primary .resource-list .resource-item .format-label[data-format="pdf"] {
-  background-color: #f35222;
+  background-color: #e0051e;
+}
+.read [role="main"] .primary .resource-list .resource-item .format-label[data-format="rdf"],
+.read [role="main"] .primary .resource-list .resource-item .format-label[data-format*="nquad"],
+.read [role="main"] .primary .resource-list .resource-item .format-label[data-format*="ntriples"],
+.read [role="main"] .primary .resource-list .resource-item .format-labellabel[data-format*="turtle"] {
+  background-color: #0b4498;
 }
 .read [role="main"] .primary .resource-list .resource-item .heading {
   color: #777777;
