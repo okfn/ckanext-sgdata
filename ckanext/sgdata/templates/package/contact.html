@@ -4,23 +4,23 @@
   <table class="table table-striped">
     <tbody>
       {% for name, title in ( ('data_provider', 'Data Provider / Distributor'),
-                           ('data_provider_contact_name', 'Contact Name'),
-                           ('data_provider_contact_designation', 'Contact Designation'),
-                           ('data_provider_contact_department', 'Contact Department'),
-                           ('data_provider_contact_telephone_number', 'Contact Telephone Number'),
-                           ('data_provider_contact_email_address', 'Contact Email Address'),
-                           ('data_provider_alternate_contact_name', 'Alternate Contact Name'),
-                           ('data_provider_alternate_contact_designation', 'Alternate Contact Designation'),
-                           ('data_provider_alternate_contact_department', 'Alternate Contact Department'),
-                           ('data_provider_alternate_contact_telephone_number', 'Alternate Contact Telephone Number'),
-                           ('data_provider_alternate_contact_email_address', 'Alternate Contact Email Address'),
-                           ('data_compiler', 'Data Compiler / Source'),
-                           ('data_compiler_contact_name', 'Contact Name'),
-                           ('data_compiler_contact_designation', 'Contact Designation'),
-                           ('data_compiler_contact_department', 'Contact Department'),
-                           ('data_compiler_contact_telephone_number', 'Contact Telephone Number'),
-                           ('data_compiler_contact_email_address', 'Contact Email Address'),
-                           ) %}
+                              ('data_provider_contact_name', 'Contact Name'),
+                              ('data_provider_contact_designation', 'Contact Designation'),
+                              ('data_provider_contact_department', 'Contact Department'),
+                              ('data_provider_contact_telephone_number', 'Contact Telephone Number'),
+                              ('data_provider_contact_email_address', 'Contact Email Address'),
+                              ('data_provider_alternate_contact_name', 'Alternate Contact Name'),
+                              ('data_provider_alternate_contact_designation', 'Alternate Contact Designation'),
+                              ('data_provider_alternate_contact_department', 'Alternate Contact Department'),
+                              ('data_provider_alternate_contact_telephone_number', 'Alternate Contact Telephone Number'),
+                              ('data_provider_alternate_contact_email_address', 'Alternate Contact Email Address'),
+                              ('data_compiler', 'Data Compiler / Source'),
+                              ('data_compiler_contact_name', 'Contact Name'),
+                              ('data_compiler_contact_designation', 'Contact Designation'),
+                              ('data_compiler_contact_department', 'Contact Department'),
+                              ('data_compiler_contact_telephone_number', 'Contact Telephone Number'),
+                              ('data_compiler_contact_email_address', 'Contact Email Address'),
+                            ) %}
         {% if pkg.get(name) %}
           <tr>
             <th scope="row">{{ title }}</th>
