@@ -103,7 +103,7 @@
     {% set can_create_unowned_datasets = h.check_config_permission('create_unowned_dataset') %}
     {% set existing_org = data.owner_org or data.group_id %}
     
-    {{ textarea('notes', _('Purpose'),
+    {{ textarea('purpose', _('Purpose'),
                 help=_('Context under which data is defined or used.  E.g., Survey, Regulatory purposes.'))}}
                 
     <div class="large control-group">
