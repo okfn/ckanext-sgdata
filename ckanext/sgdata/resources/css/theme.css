@@ -469,6 +469,21 @@ a.tag:hover {
   width: 182px;
   padding-bottom: 0;
 }
+.media-grid .media-item .media-image {
+  height: 130px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.media-grid .media-item .media-image img {
+  display: none;
+}
+.ie8 .media-grid .media-item .media-image {
+  background-image: none !important;
+}
+.ie8 .media-grid .media-item .media-image img {
+  display: block;
+}
 .media-grid .media-item .media-heading,
 .media-grid .media-item p,
 .media-grid .media-item .count {
