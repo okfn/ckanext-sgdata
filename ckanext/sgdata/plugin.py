@@ -278,6 +278,7 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.ITemplateHelpers)
+    plugins.implements(plugins.IFacets, inherit=True)
 
     # IConfigurer
 
@@ -464,6 +465,20 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                 'departments': departments,
                 'department': department,
                 }
+
+    # IFacets
+
+    def dataset_facets(self, facets_dict, package_type):
+        facets_dict['tags'] = toolkit._('Keywords')
+        return facets_dict
+
+    def group_facets(self, facets_dict, group_type, package_type):
+        facets_dict['tags'] = toolkit._('Keywords')
+        return facets_dict
+
+    def organization_facets(self, facets_dict, organization_type, package_type):
+        facets_dict['tags'] = toolkit._('Keywords')
+        return facets_dict
 
 
 class SGDataPackageController(toolkit.BaseController):
