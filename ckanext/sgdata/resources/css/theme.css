@@ -17,6 +17,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.icon-question-sign,
+.icon-external-link,
 .icon-search,
 .icon-check-sign,
 .icon-home,
@@ -41,6 +43,12 @@
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.icon-question-sign:before {
+  content: "\f059";
+}
+.icon-external-link:before {
+  content: "\f08e";
 }
 .icon-search:before {
   content: "\f002";
