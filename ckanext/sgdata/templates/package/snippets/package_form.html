@@ -41,10 +41,10 @@
         <select id="field-{{ name }}" name="{{ name }}"
                 {% if disabled %}disabled{% endif %}>
           {% for option in options %}
-            <option {% if option == value %}selected{% endif %}>
+            <option value="{{ option }}" {% if option == value %}selected{% endif %}>
               {{ option }}
             </option>
-          {% endfor %}
+            {% endfor %}
         </select>
       </div>
     </div>
