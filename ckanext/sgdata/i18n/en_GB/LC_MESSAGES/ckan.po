@@ -354,7 +354,7 @@ msgstr "Unauthorized to delete group %s"
 
 #: ckan/controllers/group.py:597
 msgid "Organization has been deleted."
-msgstr "Organisation has been deleted."
+msgstr "Agency has been deleted."
 
 #: ckan/controllers/group.py:599
 msgid "Group has been deleted."
@@ -846,7 +846,7 @@ msgstr "{actor} updated the group {group}"
 
 #: ckan/lib/activity_streams.py:70
 msgid "{actor} updated the organization {organization}"
-msgstr "{actor} updated the organisation {organization}"
+msgstr "{actor} updated the agency {organization}"
 
 #: ckan/lib/activity_streams.py:73
 msgid "{actor} updated the dataset {dataset}"
@@ -879,7 +879,7 @@ msgstr "{actor} deleted the group {group}"
 
 #: ckan/lib/activity_streams.py:95
 msgid "{actor} deleted the organization {organization}"
-msgstr "{actor} deleted the organisation {organization}"
+msgstr "{actor} deleted the agency {organization}"
 
 #: ckan/lib/activity_streams.py:98
 msgid "{actor} deleted the dataset {dataset}"
@@ -899,7 +899,7 @@ msgstr "{actor} created the group {group}"
 
 #: ckan/lib/activity_streams.py:111
 msgid "{actor} created the organization {organization}"
-msgstr "{actor} created the organisation {organization}"
+msgstr "{actor} created the agency {organization}"
 
 #: ckan/lib/activity_streams.py:114
 msgid "{actor} created the dataset {dataset}"
@@ -1294,19 +1294,19 @@ msgstr ""
 
 #: ckan/logic/validators.py:28
 msgid "A organization must be supplied"
-msgstr "A organisation must be supplied"
+msgstr "A agency must be supplied"
 
 #: ckan/logic/validators.py:38
 msgid "You cannot remove a dataset from an existing organization"
-msgstr ""
+msgstr "You cannot remove a dataset from an existing agency"
 
 #: ckan/logic/validators.py:43
 msgid "Organization does not exist"
-msgstr "Organisation does not exist"
+msgstr "Agency does not exist"
 
 #: ckan/logic/validators.py:48
 msgid "You cannot add a dataset to this organization"
-msgstr "You cannot add a dataset to this organisation"
+msgstr "You cannot add a dataset to this agency"
 
 #: ckan/logic/validators.py:68
 msgid "Invalid integer"
@@ -1482,7 +1482,7 @@ msgstr "role does not exist."
 
 #: ckan/logic/validators.py:695
 msgid "Datasets with no organization can't be private."
-msgstr ""
+msgstr "Datasets with no agency can't be private."
 
 #: ckan/logic/validators.py:701
 msgid "Not a list"
@@ -1513,7 +1513,7 @@ msgstr "REST API: Create member object %s"
 
 #: ckan/logic/action/create.py:667
 msgid "Trying to create an organization as a group"
-msgstr "Trying to create an organisation as a group"
+msgstr "Trying to create an agency as a group"
 
 #: ckan/logic/action/create.py:751
 msgid "You must supply a package id or name (parameter \"package\")."
@@ -1640,7 +1640,7 @@ msgstr "TaskStatus was not found."
 
 #: ckan/logic/action/update.py:1093
 msgid "Organization was not found."
-msgstr "Organisation was not found."
+msgstr "Agency was not found."
 
 #: ckan/logic/auth/create.py:19 ckan/logic/auth/create.py:37
 #, python-format
@@ -1655,7 +1655,7 @@ msgstr "User %s not authorized to edit these groups"
 #: ckan/logic/auth/create.py:30
 #, python-format
 msgid "User %s not authorized to add dataset to this organization"
-msgstr ""
+msgstr "User %s not authorized to add dataset to this agency"
 
 #: ckan/logic/auth/create.py:52
 msgid "You must be a sysadmin to create a featured related item"
@@ -1678,7 +1678,7 @@ msgstr "User %s not authorized to create groups"
 #: ckan/logic/auth/create.py:101
 #, python-format
 msgid "User %s not authorized to create organizations"
-msgstr "User %s not authorized to create organisations"
+msgstr "User %s not authorized to create agencies"
 
 #: ckan/logic/auth/create.py:117
 msgid "User {user} not authorized to create users via the API"
@@ -1747,12 +1747,12 @@ msgstr "User %s not authorized to delete group %s"
 #: ckan/logic/auth/delete.py:106
 #, python-format
 msgid "User %s not authorized to delete organizations"
-msgstr "User %s not authorized to delete organisations"
+msgstr "User %s not authorized to delete agencies"
 
 #: ckan/logic/auth/delete.py:110
 #, python-format
 msgid "User %s not authorized to delete organization %s"
-msgstr "User %s not authorized to delete organisation %s"
+msgstr "User %s not authorized to delete agency %s"
 
 #: ckan/logic/auth/delete.py:123
 #, python-format
@@ -1762,7 +1762,7 @@ msgstr "User %s not authorized to delete task_status"
 #: ckan/logic/auth/delete.py:139
 #, python-format
 msgid "User %s not authorized to delete organization %s members"
-msgstr "User %s not authorized to delete organisation %s members"
+msgstr "User %s not authorized to delete agency %s members"
 
 #: ckan/logic/auth/get.py:93
 #, python-format
@@ -1801,7 +1801,7 @@ msgstr "User %s not authorized to change state of package %s"
 #: ckan/logic/auth/update.py:120
 #, python-format
 msgid "User %s not authorized to edit organization %s"
-msgstr "User %s not authorized to edit organisation %s"
+msgstr "User %s not authorized to edit agency %s"
 
 #: ckan/logic/auth/update.py:131 ckan/logic/auth/update.py:137
 msgid "Only the owner can update a related item"
@@ -2752,6 +2752,9 @@ msgid ""
 "organization members.</p> <p><strong>Member:</strong> Can add/remove "
 "datasets from groups</p> "
 msgstr ""
+" <p><strong>Admin:</strong> Can edit group information, as well as manage "
+"agency members.</p> <p><strong>Member:</strong> Can add/remove "
+"datasets from groups</p> "
 
 #: ckan/templates/group/new.html:3 ckan/templates/group/new.html:5
 #: ckan/templates/group/new.html:7
@@ -2936,7 +2939,7 @@ msgid ""
 "href=\"http://ckan.org/tour/\">http://ckan.org/tour/</a><br /> Features "
 "overview: <a "
 "href=\"http://ckan.org/features/\">http://ckan.org/features/</a></p> "
-msgstr " <p>CKAN is the world’s leading open-source data portal platform.</p> <p>CKAN is a complete out-of-the-box software solution that makes data accessible and usable – by providing tools to streamline publishing, sharing, finding and using data (including storage of data and provision of robust data APIs). CKAN is aimed at data publishers (national and regional governments, companies and organisations) wanting to make their data open and available.</p> <p>CKAN is used by governments and user groups worldwide and powers a variety of official and community data portals including portals for local, national and international government, such as the UK’s <a href=\"http://data.gov.uk\">data.gov.uk</a> and the European Union’s <a href=\"http://publicdata.eu/\">publicdata.eu</a>, the Brazilian <a href=\"http://dados.gov.br/\">dados.gov.br</a>, Dutch and Netherland government portals, as well as city and municipal sites in the US, UK, Argentina, Finland and elsewhere.</p> <p>CKAN: <a href=\"http://ckan.org/\">http://ckan.org/</a><br /> CKAN Tour: <a href=\"http://ckan.org/tour/\">http://ckan.org/tour/</a><br /> Features overview: <a href=\"http://ckan.org/features/\">http://ckan.org/features/</a></p> "
+msgstr " <p>CKAN is the world’s leading open-source data portal platform.</p> <p>CKAN is a complete out-of-the-box software solution that makes data accessible and usable – by providing tools to streamline publishing, sharing, finding and using data (including storage of data and provision of robust data APIs). CKAN is aimed at data publishers (national and regional governments, companies and agencies) wanting to make their data open and available.</p> <p>CKAN is used by governments and user groups worldwide and powers a variety of official and community data portals including portals for local, national and international government, such as the UK’s <a href=\"http://data.gov.uk\">data.gov.uk</a> and the European Union’s <a href=\"http://publicdata.eu/\">publicdata.eu</a>, the Brazilian <a href=\"http://dados.gov.br/\">dados.gov.br</a>, Dutch and Netherland government portals, as well as city and municipal sites in the US, UK, Argentina, Finland and elsewhere.</p> <p>CKAN: <a href=\"http://ckan.org/\">http://ckan.org/</a><br /> CKAN Tour: <a href=\"http://ckan.org/tour/\">http://ckan.org/tour/</a><br /> Features overview: <a href=\"http://ckan.org/features/\">http://ckan.org/features/</a></p> "
 
 #: ckan/templates/home/snippets/promoted.html:8
 msgid "Welcome to CKAN"
@@ -2992,11 +2995,11 @@ msgstr "datasets"
 
 #: ckan/templates/home/snippets/stats.html:16
 msgid "organization"
-msgstr ""
+msgstr "agency"
 
 #: ckan/templates/home/snippets/stats.html:16
 msgid "organizations"
-msgstr ""
+msgstr "agencies"
 
 #: ckan/templates/home/snippets/stats.html:22
 msgid "group"
@@ -3060,11 +3063,11 @@ msgstr ""
 #: ckan/templates/snippets/organization.html:37
 #: ckan/templates/snippets/organization_item.html:16
 msgid "There is no description for this organization"
-msgstr "There is no description for this organisation"
+msgstr "There is no description for this agency"
 
 #: ckan/templates/organization/base_form_page.html:5
 msgid "Organization Form"
-msgstr "Organisation Form"
+msgstr "Agency Form"
 
 #: ckan/templates/organization/bulk_process.html:3
 #: ckan/templates/organization/bulk_process.html:11
@@ -3119,7 +3122,7 @@ msgstr "This dataset has no description"
 
 #: ckan/templates/organization/bulk_process.html:90
 msgid "This organization has no datasets associated to it"
-msgstr ""
+msgstr "This agency has no datasets associated to it"
 
 #: ckan/templates/organization/bulk_process.html:99
 #: ckan/templates/package/search.html:30
@@ -3147,26 +3150,26 @@ msgstr "Last Modified"
 
 #: ckan/templates/organization/confirm_delete.html:11
 msgid "Are you sure you want to delete organization - {name}?"
-msgstr "Are you sure you want to delete organisation - {name}?"
+msgstr "Are you sure you want to delete agency - {name}?"
 
 #: ckan/templates/organization/edit.html:6
 #: ckan/templates/organization/snippets/info.html:13
 #: ckan/templates/organization/snippets/info.html:16
 msgid "Edit Organization"
-msgstr "Edit Organisation"
+msgstr "Edit Agency"
 
 #: ckan/templates/organization/index.html:13
 #: ckan/templates/user/dashboard_organizations.html:7
 msgid "Add Organization"
-msgstr "Add Organisation"
+msgstr "Add Agency"
 
 #: ckan/templates/organization/index.html:20
 msgid "Search organizations..."
-msgstr ""
+msgstr "Search agencies..."
 
 #: ckan/templates/organization/index.html:29
 msgid "There are currently no organizations for this site"
-msgstr "There are currently no organisations for this site"
+msgstr "There are currently no agencies for this site"
 
 #: ckan/templates/organization/member_new.html:58
 msgid "Update Member"
@@ -3179,22 +3182,22 @@ msgid ""
 "edit datasets, but not manage organization members.</p> "
 "<p><strong>Member:</strong> Can view the organization's private datasets, "
 "but not add new datasets.</p> "
-msgstr " <p><strong>Admin:</strong> Can add/edit and delete datasets, as well as manage organisation members.</p> <p><strong>Editor:</strong> Can add and edit datasets, but not manage organisation members.</p> <p><strong>Member:</strong> Can view the organisation's private datasets, but not add new datasets.</p> "
+msgstr " <p><strong>Admin:</strong> Can add/edit and delete datasets, as well as manage agency members.</p> <p><strong>Editor:</strong> Can add and edit datasets, but not manage agency members.</p> <p><strong>Member:</strong> Can view the agencies private datasets, but not add new datasets.</p> "
 
 #: ckan/templates/organization/new.html:3
 #: ckan/templates/organization/new.html:5
 #: ckan/templates/organization/new.html:7
 #: ckan/templates/organization/new.html:12
 msgid "Create an Organization"
-msgstr "Create an Organisation"
+msgstr "Create an Agency"
 
 #: ckan/templates/organization/new_organization_form.html:17
 msgid "Update Organization"
-msgstr "Update Organisation"
+msgstr "Update Agency"
 
 #: ckan/templates/organization/new_organization_form.html:19
 msgid "Create Organization"
-msgstr "Create Organisation"
+msgstr "Create Agency"
 
 #: ckan/templates/organization/read.html:5
 #: ckan/templates/package/search.html:16
@@ -3207,7 +3210,7 @@ msgstr "Add Dataset"
 #: ckan/templates/organization/snippets/help.html:4
 #: ckan/templates/organization/snippets/helper.html:4
 msgid "What are Organizations?"
-msgstr "What are Organisations?"
+msgstr "What are Agencies?"
 
 #: ckan/templates/organization/snippets/help.html:7
 msgid ""
@@ -3217,7 +3220,7 @@ msgid ""
 "organizations, admins can assign roles and authorisation its members, giving"
 " individual users the right to publish datasets from that particular "
 "organisation (e.g. Office of National Statistics).</p> "
-msgstr " <p>Organisations act like publishing departments for datasets (for example, the Department of Health). This means that datasets can be published by and belong to a department instead of an individual user.</p> <p>Within organisations, admins can assign roles and authorisation its members, giving individual users the right to publish datasets from that particular organisation (e.g. Office of National Statistics).</p> "
+msgstr " <p>Agencies act like publishing departments for datasets (for example, the Department of Health). This means that datasets can be published by and belong to a department instead of an individual user.</p> <p>Within agencies, admins can assign roles and authorisation its members, giving individual users the right to publish datasets from that particular agency (e.g. Office of National Statistics).</p> "
 
 #: ckan/templates/organization/snippets/helper.html:8
 msgid ""
@@ -3225,32 +3228,37 @@ msgid ""
 "datasets. Users can have different roles within an Organization, depending "
 "on their level of authorisation to create, edit and publish. "
 msgstr ""
+" CKAN Agencies are used to create, manage and publish collections of "
+"datasets. Users can have different roles within an agencies, depending "
+"on their level of authorisation to create, edit and publish. "
 
 #: ckan/templates/organization/snippets/organization_form.html:10
 msgid "My Organization"
-msgstr "My Organisation"
+msgstr "My Agency"
 
 #: ckan/templates/organization/snippets/organization_form.html:18
 msgid "my-organization"
-msgstr "my-organisation"
+msgstr "my-agency"
 
 #: ckan/templates/organization/snippets/organization_form.html:20
 msgid "A little information about my organization..."
-msgstr "A little information about my organisation..."
+msgstr "A little information about my agency..."
 
 #: ckan/templates/organization/snippets/organization_form.html:81
 msgid ""
 "Are you sure you want to delete this Organization? This will delete all the "
 "public and private datasets belonging to this organization."
 msgstr ""
+"Are you sure you want to delete this Agency? This will delete all the "
+"public and private datasets belonging to this agency."
 
 #: ckan/templates/organization/snippets/organization_form.html:85
 msgid "Save Organization"
-msgstr "Save Organisation"
+msgstr "Save Agency"
 
 #: ckan/templates/organization/snippets/organization_item.html:26
 msgid "This organization has no description"
-msgstr "This organisation has no description"
+msgstr "This agency has no description"
 
 #: ckan/templates/organization/snippets/organization_item.html:36
 #: ckan/templates/organization/snippets/organization_item.html:37
@@ -3612,11 +3620,11 @@ msgstr " License definitions and additional information can be found at <a href=
 #: ckan/templates/package/snippets/package_basic_fields.html:69
 #: ckan/templates/snippets/organization.html:20
 msgid "Organization"
-msgstr "Organisation"
+msgstr "Agency"
 
 #: ckan/templates/package/snippets/package_basic_fields.html:72
 msgid "No organization"
-msgstr ""
+msgstr "No agency"
 
 #: ckan/templates/package/snippets/package_basic_fields.html:86
 msgid "Visibility"
@@ -4151,22 +4159,22 @@ msgstr ""
 #: ckan/templates/snippets/search_result_text.html:27
 msgid "{number} organization found for \"{query}\""
 msgid_plural "{number} organizations found for \"{query}\""
-msgstr[0] "{number} organization found for \"{query}\""
-msgstr[1] "{number} organisations found for \"{query}\""
+msgstr[0] "{number} agency found for \"{query}\""
+msgstr[1] "{number} agencies found for \"{query}\""
 
 #: ckan/templates/snippets/search_result_text.html:28
 msgid "No organizations found for \"{query}\""
-msgstr ""
+msgstr "No agencies found for \"{query}\""
 
 #: ckan/templates/snippets/search_result_text.html:29
 msgid "{number} organization found"
 msgid_plural "{number} organizations found"
-msgstr[0] "{number} organization found"
-msgstr[1] "{number} organisations found"
+msgstr[0] "{number} agency found"
+msgstr[1] "{number} agencies found"
 
 #: ckan/templates/snippets/search_result_text.html:30
 msgid "No organizations found"
-msgstr ""
+msgstr "No agencies found"
 
 #: ckan/templates/snippets/social.html:3
 msgid "Social"
@@ -4215,7 +4223,7 @@ msgstr "My Datasets"
 #: ckan/templates/user/dashboard.html:21
 #: ckan/templates/user/dashboard_organizations.html:12
 msgid "My Organizations"
-msgstr ""
+msgstr "My Agencies"
 
 #: ckan/templates/user/dashboard.html:22
 #: ckan/templates/user/dashboard_groups.html:12
@@ -4244,7 +4252,7 @@ msgstr ""
 
 #: ckan/templates/user/dashboard_organizations.html:20
 msgid "You are not a member of any organizations."
-msgstr ""
+msgstr "You are not a memener of any agencies."
 
 #: ckan/templates/user/edit.html:6 ckan/templates/user/edit_base.html:3
 #: ckan/templates/user/list.html:6 ckan/templates/user/list.html:13
