@@ -1,8 +1,8 @@
 !function ($) {
 
   $(function () {
-    $(".dataset-form a.tip").tooltip();
-    $(".datepicker").datepicker();
+    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="datepicker"]').datepicker();
   });
 
 }(window.jQuery);
