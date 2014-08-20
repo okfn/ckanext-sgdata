@@ -12,6 +12,8 @@ try:
         (top_level_value, top_level_label, second_level_value,
             second_level_label) = row
 
+        assert len(second_level_value.split('.')[1]) == 2, second_level_value
+
         if top_level_value not in categories:
             categories[top_level_value] = {'value': top_level_value,
                                            'label': top_level_label,
