@@ -25,7 +25,7 @@
       <label class="control-label" for="field-{{ name }}">{{ label }}</label>
       <a href="#" data-toggle="tooltip" title="The date on which the metadata will be made available." class="tip"><i class="icon-question-sign"></i></a>
       <div class="controls">
-        <input type="date" id="field-{{ name }}" name="{{ name }}"
+        <input type="text" id="field-{{ name }}" name="{{ name }}"
                class="datepicker" value="{{ value or data[name] }}"
                {% if disabled %}disabled{% endif %}>
         
@@ -111,7 +111,7 @@
       <a href="#" data-toggle="tooltip" title="{{ _('Period of time or point in time to which the data is intended to refer.') }}" class="tip"><i class="icon-question-sign"></i></a>
       <div class="controls">
         <div style="float:left;">
-          <input style="margin-bottom:0;" type="date"
+          <input style="margin-bottom:0;" type="text"
                  name="reference-period-start"
                  id="field-reference-period-start" class="datepicker"
                  value="{{ data['reference-period-start'] }}">
@@ -123,7 +123,7 @@
         </div>
         <label class="to" for="field-reference-period-end">to</label>
         <div style="float:left;">
-          <input style="margin-bottom:0;" type="date" name="reference-period-end"
+          <input style="margin-bottom:0;" type="text" name="reference-period-end"
                  id="field-reference-period-end" class="datepicker"
                  value="{{ data['reference-period-end'] }}">
           {% if errors['reference-period-end'] %}
