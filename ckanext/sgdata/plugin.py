@@ -39,6 +39,7 @@ SIMPLE_OPTIONAL_TEXT_FIELDS = (
     'data_provider_contact_telephone_number',
     'data_provider_contact_email_address',
     'department',
+    'purpose',
     )
 
 
