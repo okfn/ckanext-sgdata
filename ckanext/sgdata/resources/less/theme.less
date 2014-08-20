@@ -1,5 +1,4 @@
 //Fonts
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600);
 @import url(icons.less);
 
 //Variables
@@ -571,6 +570,17 @@ a.tag {
     &:before {
       display:none;
     }
+    
+    .page-header {
+      border-radius:0;
+      padding-left:0;
+      padding-right:0;
+    }
+    
+    .module-content {
+      padding-left:0;
+      padding-right:0;
+    }
   }
 }
 
@@ -959,7 +969,12 @@ a.tag {
     .no-nav & {
       left:-5000px;
     }
-  } 
+  }
+  
+  .content_action {
+    margin-right: 0;
+    margin-top: -3px;
+  }
 }
 
 .nav-tabs {
@@ -1082,24 +1097,40 @@ a.tag {
             width:35px;
             background-color:@grey;
             
-            &[data-format="xls"] {
-              background-color:@darkgreen;
-            }
             &[data-format="html"] {
-              background-color:@darkblue;
+              background-color: #55a1ce;
             }
             &[data-format="json"] {
-              background-color:@orange;
+              background-color: #ef7100;
+            }
+            &[data-format="xml"] {
+              background-color: #ef7100;
+            }
+            &[data-format="text"] {
+              background-color: #74cbec;
             }
             &[data-format="csv"] {
-              background-color:@lightgreen;
+              background-color: #dfb100;
             }
-            &[data-format="txt"] {
-              background-color:@lightblue;
+            &[data-format="xls"] {
+              background-color: #2db55d;
+            }
+            &[data-format="zip"] {
+              background-color: #686868;
+            }
+            &[data-format="api"] {
+              background-color: #ec96be;
             }
             &[data-format="pdf"] {
-              background-color:@red;
+              background-color: #e0051e;
             }
+            &[data-format="rdf"], 
+            &[data-format*="nquad"], 
+            &[data-format*="ntriples"], 
+            &label[data-format*="turtle"] {
+              background-color: #0b4498;
+            }
+            
           }
           .heading {
             color: @heading;
