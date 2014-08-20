@@ -314,17 +314,14 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
 
         schema['reference-period-start'] = [
             toolkit.get_validator('ignore_missing'),
-            toolkit.get_validator('ignore_empty'),
             toolkit.get_converter('convert_to_extras')]
 
         schema['reference-period-end'] = [
             toolkit.get_validator('ignore_missing'),
-            toolkit.get_validator('ignore_empty'),
             toolkit.get_converter('convert_to_extras')]
 
         schema['available-from'] = [
             toolkit.get_validator('ignore_missing'),
-            toolkit.get_validator('ignore_empty'),
             toolkit.get_converter('convert_to_extras')]
 
         schema['type_of_data_collection'] = [
@@ -380,19 +377,16 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                 toolkit.get_validator('ignore_missing')]
 
         schema['reference-period-start'] = [
-            toolkit.get_validator('ignore_missing'),
-            toolkit.get_validator('ignore_empty'),
-            toolkit.get_converter('convert_from_extras')]
+            toolkit.get_converter('convert_from_extras'),
+            toolkit.get_validator('ignore_missing')]
 
         schema['reference-period-end'] = [
-            toolkit.get_validator('ignore_missing'),
-            toolkit.get_validator('ignore_empty'),
-            toolkit.get_converter('convert_from_extras')]
+            toolkit.get_converter('convert_from_extras'),
+            toolkit.get_validator('ignore_missing')]
 
         schema['available-from'] = [
-            toolkit.get_validator('ignore_missing'),
-            toolkit.get_validator('ignore_empty'),
-            toolkit.get_converter('convert_from_extras')]
+            toolkit.get_converter('convert_from_extras'),
+            toolkit.get_validator('ignore_missing')]
 
         schema['type_of_data_collection'] = [
             toolkit.get_converter('convert_from_tags')('type_of_data_collection'),
