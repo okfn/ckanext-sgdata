@@ -433,7 +433,8 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
             action='new_metadata')
 
         map_.connect(
-            '/dataset/contact/{dataset_id}',
+            'dataset_contact',
+            '/dataset/contact/{id}',
             controller='ckanext.sgdata.plugin:SGDataPackageController',
             action='contact')
 
@@ -482,12 +483,12 @@ class SGDataPackageController(toolkit.BaseController):
         base.redirect(helpers.url_for(controller='package', action='read',
                                       id=id))
 
-    def contact(self, dataset_id):
+    def contact(self, id):
 
         context = {'model': ckan.model, 'session': ckan.model.Session,
                    'user': toolkit.c.user or toolkit.c.author,
                    'for_view': True, 'auth_user_obj': toolkit.c.userobj}
-        data_dict = {'id': dataset_id}
+        data_dict = {'id': id}
 
         try:
             toolkit.c.pkg_dict = toolkit.get_action('package_show')(context,
@@ -496,6 +497,6 @@ class SGDataPackageController(toolkit.BaseController):
             toolkit.abort(404, _('Dataset not found'))
         except toolkit.NotAuthorized:
             toolkit.abort(401,
-                          ('Unauthorized to read dataset %s') % dataset_id)
+                          ('Unauthorized to read dataset %s') % id)
 
         return toolkit.render('package/contact.html')
