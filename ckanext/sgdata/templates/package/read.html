@@ -9,7 +9,7 @@
   {% if h.check_access('package_update', {'id':pkg.id }) %}
     {% link_for _('Manage'), controller='package', action='edit', id=pkg.name, class_='btn btn-link', icon='wrench' %}
   {% endif %}
-  <span class="status btn btn-link {% if pkg.status[0] == 'Active' %}btn-success{% elif pkg.status[0] == 'Discontinued' %}btn-danger{% elif pkg.status[0] == 'Replaced' %}btn-warning{% endif %}"><i class="icon-check"></i> {{ pkg.status[0] }}</span>
+  <span class="status btn btn-link {% if pkg.status == 'Active' %}btn-success{% elif pkg.status == 'Discontinued' %}btn-danger{% elif pkg.status == 'Replaced' %}btn-warning{% endif %}"><i class="icon-check"></i> {{ pkg.status }}</span>
 {% endblock %}
 
 {% block content_primary_nav %}
@@ -60,9 +60,9 @@
               
           {% endif %}
         
-          {% if c.pkg_notes_formatted %}
+          {% if pkg.purpose %}
             <div class="notes embedded-content purpose">
-              {{ c.pkg_notes_formatted }}
+              {{ pkg.purpose }}
             </div>
           {% endif %}
           
@@ -164,7 +164,7 @@
     {% endif %}
 
     {% if 'agency_record_identifier' in pkg %}
-      <span class="agency_record_identifier">{{ pkg.agency_record_identifier[0] }}</span>
+      <span class="agency_record_identifier">{{ pkg.agency_record_identifier }}</span>
     {% endif %}
   </div>
 
@@ -185,7 +185,7 @@
         <div class="module module-narrow module-shallow context-info">
           <h2 class="module-heading">{{ title }}</h2>
           <section class="module-content">
-            {{ pkg[name][0] }}
+            {{ pkg[name] }}
           </section>
         </div>
       {% endif %}
