@@ -1,0 +1,15 @@
+{% ckan_extends %}
+
+{% block bodytag %}{{ super() }} class="read"{% endblock %}
+
+{% block content_action %}
+  {% if h.check_access('package_update', {'id':pkg.id }) %}
+    {% link_for _('Manage'), controller='package', action='edit', id=pkg.name, class_='btn btn-link', icon='wrench' %}
+  {% endif %}
+  <span class="status btn btn-link {% if pkg.status == 'Active' %}btn-success{% elif pkg.status == 'Discontinued' %}btn-danger{% elif pkg.status == 'Replaced' %}btn-warning{% endif %}"><i class="icon-check"></i> {{ pkg.status }}</span>
+{% endblock %}
+
+{% block content_primary_nav %}
+  {{ super() }}
+  {{ h.build_nav_icon('dataset_contact', _('Contact Information'), id=pkg.name) }}
+{% endblock %}

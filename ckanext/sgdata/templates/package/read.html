@@ -1,22 +1,5 @@
 {% ckan_extends %}
 
-{% block bodytag %}
-{{ super() }}
- class="read"
-{% endblock %}
-
-{% block content_action %}
-  {% if h.check_access('package_update', {'id':pkg.id }) %}
-    {% link_for _('Manage'), controller='package', action='edit', id=pkg.name, class_='btn btn-link', icon='wrench' %}
-  {% endif %}
-  <span class="status btn btn-link {% if pkg.status == 'Active' %}btn-success{% elif pkg.status == 'Discontinued' %}btn-danger{% elif pkg.status == 'Replaced' %}btn-warning{% endif %}"><i class="icon-check"></i> {{ pkg.status }}</span>
-{% endblock %}
-
-{% block content_primary_nav %}
-  {{ super() }}
-  <li><a href="{{ h.url_for('dataset_read', id=pkg.name) }}#contact" data-toggle="tab">{{ _('Contact Information') }}</a></li>
-{% endblock %}
-
 {% block primary_content_inner %}
 
   {% block package_description %}
@@ -35,9 +18,6 @@
         {% endif %}
       {% endblock %}
     </h1>
-    
-    <div class="tab-content">
-      <div class="tab-pane active" id="main">
 
         {% block package_notes %}
         
@@ -67,7 +47,7 @@
           {% endif %}
           
           {% block package_resources %}
-          {% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}
+          {#{% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}#}
         {% endblock %}
       
         {% block package_tags %}
@@ -105,39 +85,6 @@
        
         
         {% endblock %}
-      </div>
-      <div class="tab-pane" id="contact">
-        <table class="table table-striped">
-
-
-         {% for name, title in ( ('data_provider', 'Data Provider / Distributor'),
-                                 ('data_provider_contact_name', 'Contact Name'),
-                                 ('data_provider_contact_designation', 'Contact Designation'),
-                                 ('data_provider_contact_department', 'Contact Department'),
-                                 ('data_provider_contact_telephone_number', 'Contact Telephone Number'),
-                                 ('data_provider_contact_email_address', 'Contact Email Address'),
-                                 ('data_provider_alternate_contact_name', 'Alternate Contact Name'),
-                                 ('data_provider_alternate_contact_designation', 'Alternate Contact Designation'),
-                                 ('data_provider_alternate_contact_department', 'Alternate Contact Department'),
-                                 ('data_provider_alternate_contact_telephone_number', 'Alternate Contact Telephone Number'),
-                                 ('data_provider_alternate_contact_email_address', 'Alternate Contact Email Address'),
-                                 ('data_compiler', 'Data Compiler / Source'),
-                                 ('data_compiler_contact_name', 'Contact Name'),
-                                 ('data_compiler_contact_designation', 'Contact Designation'),
-                                 ('data_compiler_contact_department', 'Contact Department'),
-                                 ('data_compiler_contact_telephone_number', 'Contact Telephone Number'),
-                                 ('data_compiler_contact_email_address', 'Contact Email Address'),
-                                 ) %}
-            {% if pkg.get(name) %}
-          <tr>
-            <th>{{ title }}</th>
-            <td>{{ pkg[name] }}</td>
-            {% endif %}
-          </tr>
-          {% endfor %}
-        </table>
-      </div>
-    </div>
 
 {% endblock %}
 
