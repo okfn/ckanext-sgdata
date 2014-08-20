@@ -19,7 +19,11 @@
     </ul>
   {% endif %}
 
-  {{ super() }}
+  {% if pkg.purpose %}
+    <div class="notes embedded-content purpose">
+      {{ pkg.purpose }}
+    </div>
+  {% endif %}
 
 {% endblock %}
 

@@ -39,6 +39,7 @@ SIMPLE_OPTIONAL_TEXT_FIELDS = (
     'data_provider_contact_telephone_number',
     'data_provider_contact_email_address',
     'department',
+    'purpose',
     )
 
 
@@ -267,6 +268,10 @@ def last_update_by(pkg_dict):
     return user_dict
 
 
+def first_item_only(value, context):
+    return value[0]
+
+
 class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IDatasetForm)
@@ -309,17 +314,14 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
 
         schema['reference-period-start'] = [
             toolkit.get_validator('ignore_missing'),
-            toolkit.get_validator('ignore_empty'),
             toolkit.get_converter('convert_to_extras')]
 
         schema['reference-period-end'] = [
             toolkit.get_validator('ignore_missing'),
-            toolkit.get_validator('ignore_empty'),
             toolkit.get_converter('convert_to_extras')]
 
         schema['available-from'] = [
             toolkit.get_validator('ignore_missing'),
-            toolkit.get_validator('ignore_empty'),
             toolkit.get_converter('convert_to_extras')]
 
         schema['type_of_data_collection'] = [
@@ -375,43 +377,46 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                 toolkit.get_validator('ignore_missing')]
 
         schema['reference-period-start'] = [
-            toolkit.get_validator('ignore_missing'),
-            toolkit.get_validator('ignore_empty'),
-            toolkit.get_converter('convert_from_extras')]
+            toolkit.get_converter('convert_from_extras'),
+            toolkit.get_validator('ignore_missing')]
 
         schema['reference-period-end'] = [
-            toolkit.get_validator('ignore_missing'),
-            toolkit.get_validator('ignore_empty'),
-            toolkit.get_converter('convert_from_extras')]
+            toolkit.get_converter('convert_from_extras'),
+            toolkit.get_validator('ignore_missing')]
 
         schema['available-from'] = [
-            toolkit.get_validator('ignore_missing'),
-            toolkit.get_validator('ignore_empty'),
-            toolkit.get_converter('convert_from_extras')]
+            toolkit.get_converter('convert_from_extras'),
+            toolkit.get_validator('ignore_missing')]
 
         schema['type_of_data_collection'] = [
             toolkit.get_converter('convert_from_tags')('type_of_data_collection'),
-            toolkit.get_validator('ignore_missing')]
+            toolkit.get_validator('ignore_missing'),
+            first_item_only]
 
         schema['status'] = [
             toolkit.get_converter('convert_from_tags')('status'),
-            toolkit.get_validator('ignore_missing')]
+            toolkit.get_validator('ignore_missing'),
+            first_item_only]
 
         schema['frequency'] = [
             toolkit.get_converter('convert_from_tags')('frequency'),
-            toolkit.get_validator('ignore_missing')]
+            toolkit.get_validator('ignore_missing'),
+            first_item_only]
 
         schema['security_classification'] = [
             toolkit.get_converter('convert_from_tags')('security_classification'),
-            toolkit.get_validator('ignore_missing')]
+            toolkit.get_validator('ignore_missing'),
+            first_item_only]
 
         schema['data_granularity'] = [
             toolkit.get_converter('convert_from_tags')('data_granularity'),
-            toolkit.get_validator('ignore_missing')]
+            toolkit.get_validator('ignore_missing'),
+            first_item_only]
 
         schema['publish_on_data_gov_sg'] = [
             toolkit.get_converter('convert_from_tags')('publish_on_data_gov_sg'),
-            toolkit.get_validator('ignore_missing')]
+            toolkit.get_validator('ignore_missing'),
+            first_item_only]
 
         return schema
 

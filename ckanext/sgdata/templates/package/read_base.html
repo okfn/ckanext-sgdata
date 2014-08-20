@@ -4,7 +4,7 @@
 
 {% block content_action %}
   {{ super() }}
-  {% set status = pkg.status[0] %}
+  {% set status = pkg.status %}
   <span class="status btn btn-link {% if status == 'Active' %}btn-success{% elif status == 'Discontinued' %}btn-danger{% elif status == 'Replaced' %}btn-warning{% endif %}">
     <i class="icon-check"></i> {{ status }}
   </span>
