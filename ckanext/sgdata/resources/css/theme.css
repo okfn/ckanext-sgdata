@@ -480,9 +480,11 @@ a.tag:hover {
 }
 .ie8 .media-grid .media-item .media-image {
   background-image: none !important;
+  text-align: center;
 }
 .ie8 .media-grid .media-item .media-image img {
   display: block;
+  max-height: 100%;
 }
 .media-grid .media-item .media-heading,
 .media-grid .media-item p,
