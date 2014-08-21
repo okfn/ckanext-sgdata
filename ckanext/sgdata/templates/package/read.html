@@ -1,164 +1,55 @@
 {% ckan_extends %}
 
-{% block primary_content_inner %}
+{% block package_notes %}
 
-  {% block package_description %}
-    {% if pkg.private %}
-      <span class="dataset-private label label-inverse pull-right">
-        <i class="icon-lock"></i>
-        {{ _('Private') }}
-      </span>
-    {% endif %}
-    
-    <h1>
-      {% block page_heading %}
-        {{ pkg.title or pkg.name }}
-        {% if pkg.state.startswith('draft') %}
-          [{{ _('Draft') }}]
-        {% endif %}
-      {% endblock %}
-    </h1>
+  {% if pkg.get('reference-period-start') and pkg.get('reference-period-end') %}
+    <p>From {{ pkg['reference-period-start'] }} to {{ pkg['reference-period-end'] }}</p>
+  {% elif pkg.get('reference-period-start') %}
+    <p>{{ pkg['reference-period-start'] }}</p>
+  {% elif pkg.get('reference-period-end') %}
+    <p>{{ pkg['reference-period-end'] }}</p>
+  {% endif %}
 
-        {% block package_notes %}
-        
-          {% if pkg.get('reference-period-start') and pkg.get('reference-period-end') %}
-            <p>From {{ pkg['reference-period-start'] }} to {{ pkg['reference-period-end'] }}</p>
-          {% elif pkg.get('reference-period-start') %}
-            <p>{{ pkg['reference-period-start'] }}</p>
-          {% elif pkg.get('reference-period-end') %}
-            <p>{{ pkg['reference-period-end'] }}</p>
-          {% endif %}
-        
-          {% if pkg.category %}
+  {% if pkg.category %}
+    <ul class="categories">
+      <li>{{ h.first_level_category(pkg.category) }}</li>
+      <ul>
+        <li>{{ h.second_level_category(pkg.category) }}</li>
+      </ul>
+    </ul>
+  {% endif %}
 
-            <ul class="categories">
-              <li>{{ h.first_level_category(pkg.category) }}</li>
-              <ul>
-                <li>{{ h.second_level_category(pkg.category) }}</li>
-              </ul>
-            </ul>
-              
-          {% endif %}
-        
-          {% if pkg.purpose %}
-            <div class="notes embedded-content purpose">
-              {{ pkg.purpose }}
-            </div>
-          {% endif %}
-          
-          {% block package_resources %}
-          {#{% snippet "package/snippets/resources_list.html", pkg=pkg, resources=pkg.resources %}#}
-        {% endblock %}
-      
-        {% block package_tags %}
-          {% snippet "package/snippets/tags.html", tags=pkg.tags %}
-        {% endblock %}
-        
-          <div class="notes embedded-content">
-            <h2>Survey / Administrative Source</h2>
-            {{ pkg.zzz_administrative_source }}
-          </div>
-        
-        
-          {% for name, title in (('coverage', 'Coverage'),
-                                 ('conditions_of_use', 'Conditions of Use'),
-                                 ('comments', 'Comments'),
-                                 ('available-from', 'Available From'),
-                                 ) %}
-            {% if pkg.get(name) %}
-              <h2>{{ title }}</h2>
-                {{ pkg[name] }}
-            {% endif %}
-        
-          {% endfor %}
-      
-          <footer>
-            Last metadata update date: {{ h.render_datetime(pkg.metadata_modified) }} | 
-            
-            {% set last_updater = h.last_update_by(pkg) %}
-            {% if last_updater %}
-              Last update by: <a href="{{ h.url_for(controller='user', action='read', id=last_updater.name) }}">{{ last_updater.display_name }}</a>
-            {% endif %}
-          </footer>
-        
-          
-       
-        
-        {% endblock %}
-
-{% endblock %}
-
-  
-
-  {% block package_additional_info %}
-    {# snippet "package/snippets/additional_info.html", pkg_dict=pkg #}
-  {% endblock %}
-
-{% endblock %}
-
-{% block secondary_content %}
-
-  {% block secondary_help_content %}{% endblock %}
-  
-  <div class="org">
-    {% block package_organization %}
-      {% if pkg.organization %}
-        {% snippet "snippets/organization.html", organization=pkg.organization, has_context_title=true %}
-      {% endif %}
-    {% endblock %}
-    {% if pkg.department and pkg.department != 'none' %}
-     {{ h.department(pkg.department) }}
-    {% endif %}
-
-    {% if 'agency_record_identifier' in pkg %}
-      <span class="agency_record_identifier">{{ pkg.agency_record_identifier }}</span>
-    {% endif %}
-  </div>
-
-  <div class="module module-narrow module-shallow context-info">
-    <h2 class="module-heading">SG Data Record Identifier</h2>
-    <section class="module-content">
-      {{ pkg.id }}
-    </section>
-  </div>
-
-   {% for name, title in ( ('type_of_data_collection', 'Type of Data Collection'),
-                           ('frequency', 'Frequency'),
-                           ('security_classification', 'Security Classification'),
-                           ('data_granularity', 'Data Granularity'),
-                           ('publish_on_data_gov_sg', 'Publish on Data.gov.sg'),
-                           ('unit_of_measure', 'Unit of Measure'),
-                           ) %}
-      {% if pkg.get(name) %}
-        <div class="module module-narrow module-shallow context-info">
-          <h2 class="module-heading">{{ title }}</h2>
-          <section class="module-content">
-            {{ pkg[name] }}
-          </section>
-        </div>
-      {% endif %}
-    {% endfor %}
-    
-    <div class="module module-narrow module-shallow context-info">
-      <h2 class="module-heading">Metadata Creation Date</h2>
-      <section class="module-content">
-        {{ h.render_datetime(pkg.metadata_created) }}
-      </section>
+  {% if pkg.purpose %}
+    <div class="notes embedded-content purpose">
+      {{ pkg.purpose }}
     </div>
+  {% endif %}
 
-  
-  <div class="follow">
-    {% block package_info %}
-      {% snippet 'package/snippets/info.html', pkg=pkg %}
-    {% endblock %}
+{% endblock %}
+
+{% block package_additional_info %}
+
+  <div class="notes embedded-content">
+    <h2>Survey / Administrative Source</h2>
+    {{ pkg.zzz_administrative_source }}
   </div>
-  
-  {% block package_social %}
-    {# snippet "snippets/social.html" #}
-  {% endblock %}
 
-  {% block package_license %}
-    {% snippet "snippets/license.html", pkg_dict=pkg %}
-  {% endblock %}
+  {% for name, title in (('coverage', 'Coverage'),
+                         ('conditions_of_use', 'Conditions of Use'),
+                         ('comments', 'Comments'),
+                         ('available-from', 'Available From'),
+                        ) %}
+    {% if pkg.get(name) %}
+      <h2>{{ title }}</h2>
+      {{ pkg[name] }}
+    {% endif %}
+  {% endfor %}
 
+  <footer>
+    Last metadata update date: {{ h.render_datetime(pkg.metadata_modified) }} | 
+    {% set last_updater = h.last_update_by(pkg) %}
+    {% if last_updater %}
+      Last update by: <a href="{{ h.url_for(controller='user', action='read', id=last_updater.name) }}">{{ last_updater.display_name }}</a>
+    {% endif %}
+  </footer>
 {% endblock %}

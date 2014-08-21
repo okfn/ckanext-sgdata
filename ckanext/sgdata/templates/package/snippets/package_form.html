@@ -1,87 +1,91 @@
 {% import 'macros/form.html' as form %}
+
+{% macro required(is_required) %}
+  {% if is_required %}<span title="{{ _("This field is required") }}" class="control-required">*</span> {% endif %}
+{% endmacro %}
+
+{% macro textarea(name, label, help='', rows=5, cols=20, is_required=False, is_disabled=False) -%}
+  <div class="control-group control-full">
+    <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
+    {% if help %}<a href="#" data-toggle="tooltip" title="{{ help }}" class="tip"><i class="icon-question-sign"></i></a>{% endif %}
+    <div class="controls">
+      <textarea id="field-{{ name }}" rows="{{ rows }}" cols="{{ cols }}"
+                name="{{ name }}" style="margin-bottom:0;"
+                {% if is_disabled %}disabled{% endif %}>{{ data[name] }}</textarea>
+      {% if errors[name] and errors[name] is iterable %}
+        <span class="error-block">{{ errors[name]|join(', ') }}</span>
+      {% endif %}
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro datepicker(name, label, is_disabled=False, value='') -%}
+  <div class="small control-group">
+    <label class="control-label" for="field-{{ name }}">{{ label }}</label>
+    <a href="#" data-toggle="tooltip" title="The date on which the metadata will be made available." class="tip"><i class="icon-question-sign"></i></a>
+    <div class="controls">
+      <input type="text" id="field-{{ name }}" name="{{ name }}"
+             class="datepicker" value="{{ value or data[name] }}"
+             data-toggle="datepicker"
+             {% if is_disabled %}disabled{% endif %}>
+      
+    </div>
+  </div>
+{% endmacro %}
+  
+{% macro select(name, label, options, is_required=False, disabled=False, value='', help='') -%}
+  <div class="small control-group">
+    <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
+    {% if help %}<a href="#" data-toggle="tooltip" title="{{ help }}" class="tip"><i class="icon-question-sign"></i></a>{% endif %}
+    <div class="controls">
+      <select id="field-{{ name }}" name="{{ name }}"
+              {% if disabled %}disabled{% endif %}>
+        {% for option in options %}
+          <option value="{{ option }}" {% if option == value %}selected{% endif %}>
+            {{ option }}
+          </option>
+          {% endfor %}
+      </select>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro input(name, label, type='text', placeholder='', help='', is_required=False, is_disabled=False, classes='', attrs='') -%}
+  {% set error = errors[name] %}
+  <div class="control-group{% if error %} error{% endif %}{% if classes %} {{ classes }}{% endif %}">
+    <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
+    {% if help %}<a href="#" data-toggle="tooltip" title="{{ help }}" class="tip"><i class="icon-question-sign"></i></a>{% endif %}
+    <div class="controls">
+      <input type="{{ type }}" id="field-{{ name }}" name="{{ name }}"
+             style="margin-bottom:0;"
+             {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
+             value="{{ data[name] }}"
+             {% if is_disabled %}disabled{% endif %}
+             {% if attrs %}{{ attrs }}{% endif %}>
+      {% if error and error is iterable %}<span class="error-block">{{ error|join(', ') }}</span>{% endif %}
+    </div>
+  </div>
+{% endmacro %}
+
 {% set action = c.form_action or '' %}
+
 <div class="package-form">
-  {% macro required(is_required) %}
-    {% if is_required %}<span title="{{ _("This field is required") }}" class="control-required">*</span> {% endif %}
-  {% endmacro %}
-  
-  {% macro textarea(name, label, help='', rows=5, cols=20, is_required=False, disabled=False) -%}
-    <div class="control-group control-full">
-      <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
-      {% if help %}<a href="#" data-toggle="tooltip" title="{{ help }}" class="tip"><i class="icon-question-sign"></i></a>{% endif %}
-      <div class="controls">
-        <textarea id="field-{{ name }}" rows="{{ rows }}" cols="{{ cols }}"
-                  name="{{ name }}" style="margin-bottom:0;"
-                  {% if disabled %}disabled{% endif %}>{{ data[name] }}</textarea>
-        {% if errors[name] and errors[name] is iterable %}
-          <span class="error-block">{{ errors[name]|join(', ') }}</span>
-        {% endif %}
-      </div>
-    </div>
-  {% endmacro %}
-  
-  {% macro datepicker(name, label, disabled=False, value='') -%}
-    <div class="small control-group">
-      <label class="control-label" for="field-{{ name }}">{{ label }}</label>
-      <a href="#" data-toggle="tooltip" title="The date on which the metadata will be made available." class="tip"><i class="icon-question-sign"></i></a>
-      <div class="controls">
-        <input type="text" id="field-{{ name }}" name="{{ name }}"
-               class="datepicker" value="{{ value or data[name] }}"
-               {% if disabled %}disabled{% endif %}>
-        
-      </div>
-    </div>
-  {% endmacro %}
-  
-  {% macro select(name, label, options, is_required=False, disabled=False, value='', help='') -%}
-    <div class="small control-group">
-      <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
-      {% if help %}<a href="#" data-toggle="tooltip" title="{{ help }}" class="tip"><i class="icon-question-sign"></i></a>{% endif %}
-      <div class="controls">
-        <select id="field-{{ name }}" name="{{ name }}"
-                {% if disabled %}disabled{% endif %}>
-          {% for option in options %}
-            <option value="{{ option }}" {% if option == value %}selected{% endif %}>
-              {{ option }}
-            </option>
-            {% endfor %}
-        </select>
-      </div>
-    </div>
-  {% endmacro %}
-  
-  {% macro input(name, label, type='text', placeholder='', help='', is_required=False, disabled=False, classes='', attrs='') -%}
-    {% set error = errors[name] %}
-    <div class="control-group{% if error %} error{% endif %}{% if classes %} {{ classes }}{% endif %}">
-      <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
-      {% if help %}<a href="#" data-toggle="tooltip" title="{{ help }}" class="tip"><i class="icon-question-sign"></i></a>{% endif %}
-      <div class="controls">
-        <input type="{{ type }}" id="field-{{ name }}" name="{{ name }}"
-               style="margin-bottom:0;"
-               {% if placeholder %}placeholder="{{ placeholder }}"{% endif %}
-               value="{{ data[name] }}"
-               {% if disabled %}disabled{% endif %}
-               {% if attrs %}{{ attrs }}{% endif %}>
-        {% if error and error is iterable %}<span class="error-block">{{ error|join(', ') }}</span>{% endif %}
-      </div>
-    </div>
-  {% endmacro %}
-  
+
   <form class="dataset-form" method="post" action="{{ action }}" data-module="basic-form">
     {% block stages %}
       {{ h.snippet('package/snippets/stages.html', stages=stage) }}
     {% endblock %}
-  
+
     <input type="hidden" name="_ckan_phase" value="dataset_new_1" />
     {# pkg_name used in 3 stage edit #}
     <input type="hidden" name="pkg_name" value="{{ data.id }}" />
-  
+
     {{ form.errors(error_summary) }}
-  
+
     <p class="control-required-message">
       <span class="control-required">*</span> {{ _("Denotes required fields.") }}
     </p>
-  
+
     {{ form.input('title', id='field-title', label=_('Title'),
                   placeholder=_('eg. Business Expectations for the Services Sector (Forecast for Next Six Months)'),
                   value=data.title, error=errors.title,
@@ -93,7 +97,7 @@
     {% set domain = domain|replace("http://", "")|replace("https://", "") %}
     {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<dataset>'} %}
     {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-dataset'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
-  
+
     {% set dataset_is_draft = data.get('state', 'draft').startswith('draft') or data.get('state', 'none') ==  'none' %}
     {% set dataset_has_organization = data.owner_org or data.group_id %}
     {% set organizations_available = h.organizations_available('create_dataset') %}
@@ -102,10 +106,10 @@
     {% set show_visibility_selector = dataset_has_organization or (organizations_available and (user_is_sysadmin or dataset_is_draft)) %}
     {% set can_create_unowned_datasets = h.check_config_permission('create_unowned_dataset') %}
     {% set existing_org = data.owner_org or data.group_id %}
-    
-    {{ textarea('purpose', _('Purpose'),
+    {{ textarea('purpose',
+                _('Purpose'),
                 help=_('Context under which data is defined or used.  E.g., Survey, Regulatory purposes.'))}}
-                
+
     <div class="large control-group">
       <label class="control-label" for="field-reference-period-start">Reference Period</label>
       <a href="#" data-toggle="tooltip" title="{{ _('Period of time or point in time to which the data is intended to refer.') }}" class="tip"><i class="icon-question-sign"></i></a>
@@ -114,6 +118,7 @@
           <input style="margin-bottom:0;" type="text"
                  name="reference-period-start"
                  id="field-reference-period-start" class="datepicker"
+                 data-toggle="datepicker"
                  value="{{ data['reference-period-start'] }}">
           {% if errors['reference-period-start'] %}
             <span class="error-block">
@@ -125,6 +130,7 @@
         <div style="float:left;">
           <input style="margin-bottom:0;" type="text" name="reference-period-end"
                  id="field-reference-period-end" class="datepicker"
+                 data-toggle="datepicker"
                  value="{{ data['reference-period-end'] }}">
           {% if errors['reference-period-end'] %}
             <span class="error-block">
@@ -135,9 +141,11 @@
         <div style="clear:both;"></div>
       </div>
     </div>
-  
-    {{ datepicker('available-from', 'Available From', value=(data.get('available-from') or h.today())) }}
-  
+
+    {{ datepicker('available-from',
+                  _('Available From'),
+                  value=(data.get('available-from') or h.today())) }}
+
     <div class="small control-group">
       <label class="control-label" for="field-category">{{ required(True) }}{{ _('Category') }}</label>
       <div class="controls">
@@ -152,8 +160,7 @@
         </select>
       </div>
     </div>
-  
-  
+
     <div class="small control-group">
       <label for="field-organizations" class="control-label">{{ required(True) }}{{ _('Metadata Creation Agency') }}</label>
       <a href="#" data-toggle="tooltip" title="{{ _('The agency of the data manager who created the metadata.') }}" class="tip"><i class="icon-question-sign"></i></a>
@@ -170,7 +177,7 @@
         </select>
       </div>
     </div>
-  
+
     <div class="small control-group">
       <label class="control-label" for="field-department">{{ required(True) }}{{ _('Department') }}</label>
       <div class="controls">
@@ -185,7 +192,7 @@
         </select>
       </div>
     </div>
-  
+
     {% if show_visibility_selector %}
       {% block package_metadata_fields_visibility %}
         <div class="small control-group">
@@ -200,35 +207,36 @@
         </div>
       {% endblock %}
     {% endif %}
-  
-  
-  
-    
-    {{ select('type_of_data_collection', 'Type of Data Collection',
-              h.types_of_data_collection(), is_required=True,
-              value=data.get('type_of_data_collection')[0],
-              help=_('Main process used in the collection of statistical data by the data compiling agency.')) }}
-  
-    {{ select('status', 'Status',
-              h.statuses(), is_required=True,
-              value=data.get('status')[0],
-              help=_('The current state of the data.')) }}
-  
-    {{ select('frequency', 'Frequency',
-              h.frequencies(), is_required=True,
-              value=data.get('frequency')[0],
-              help=_('The time interval at which data is published.')) }}
-  
+
+    {#<div class="clearfix">#}
+      {{ select('type_of_data_collection',
+                _('Type of Data Collection'),
+                h.types_of_data_collection(), is_required=True,
+                value=data.get('type_of_data_collection')[0],
+                help=_('Main process used in the collection of statistical data by the data compiling agency.')) }}
+      {{ select('status',
+                _('Status'),
+                h.statuses(), is_required=True,
+                value=data.get('status')[0],
+                help=_('The current state of the data.')) }}
+      {{ select('frequency',
+                _('Frequency'),
+                h.frequencies(), is_required=True,
+                value=data.get('frequency')[0],
+                help=_('The time interval at which data is published.')) }}
+
     <div style="clear:both;"></div>
-  
-    {{ textarea('zzz_administrative_source', 'Survey / Administrative Source',
-                _('Source of the data described in the metadata profile - the name of the survey or administrative register.'),
-                is_required=True)}}
-  
-    {{ textarea('coverage', 'Coverage',
-                _('The definition of the population that the data aims to cover.  It describes data compiled rather than characteristics of the survey.'),
-                is_required=True)}}
-  
+
+    {{ textarea('zzz_administrative_source',
+                _('Survey / Administrative Source'),
+                is_required=True,
+                help=_('Source of the data described in the metadata profile - the name of the survey or administrative register.')) }}
+
+    {{ textarea('coverage',
+                _('Coverage'),
+                is_required=True,
+                help=_('The definition of the population that the data aims to cover.  It describes data compiled rather than characteristics of the survey.')) }}
+
     <div class="control-group control-full{% if errors.keywords %} error{% endif %}">
       <label class="control-label" for="field-tags">{{ required(True) }}Keywords</label>
       <a href="#" data-toggle="tooltip" title="{{ _('One or more words used capturing the essence of the data or its metadata profile.') }}" class="tip"><i class="icon-question-sign"></i></a>
@@ -243,90 +251,102 @@
         {% endif %}
       </div>
     </div>
-  
-    {{ select('security_classification', 'Security Classification',
-              h.security_classifications(), is_required=True,
+
+    {{ select('security_classification',
+              _('Security Classification'),
+              h.security_classifications(),
+              is_required=True,
               value=data.get('security_classification')[0],
               help=_('The extent to which the unauthorised disclosure of the data could be prejudicial or harmful to the interests of the source or other relevant parties.')) }}
-  
-    {{ select('data_granularity', 'Data Granularity',
-              h.data_granularities(), is_required=True,
+
+    {{ select('data_granularity',
+              _('Data Granularity'),
+              h.data_granularities(),
+              is_required=True,
               value=data.get('data_granularity')[0],
-              help=('The level of granularity of the data.  Aggregated Data  refers to unit level data that has been transformed into  quantitative measures Individual  record  refers to  aggregated  observations  or measurements  of  an individual or entity (e.g., profiles of individual business and companies).')) }}
-  
-    {{ select('publish_on_data_gov_sg', 'Publish on Data.gov.sg',
-              h.publish_on_data_gov_sg(), is_required=True,
+              help=_('The level of granularity of the data. Aggregated Data  refers to unit level data that has been transformed into  quantitative measures Individual record refers to aggregated observations or measurements of an individual or entity (e.g., profiles of individual business and companies).')) }}
+
+    {{ select('publish_on_data_gov_sg',
+              _('Publish on Data.gov.sg'),
+              h.publish_on_data_gov_sg(),
+              is_required=True,
               value=data.get('publish_on_data_gov_sg')[0],
-              help=('Indication of whether the metadata and data can be shared with the general public.')) }}
-  
-    {{ textarea('conditions_of_use', 'Conditions of Use',
-                _('Refers to terms, copyright issues and confidentiality constraints related to how the data can be used.'),
-                is_required=True)}}
-  
+              help=_('Indication of whether the metadata and data can be shared with the general public.')) }}
+
+    {{ textarea('conditions_of_use',
+                _('Conditions of Use'),
+                is_required=True,
+                help=_('Refers to terms, copyright issues and confidentiality constraints related to how the data can be used.')) }}
+
     {# TODO: Add optional dropdown autocompletes to this. #}
-    {{ input('unit_of_measure', 'Unit of Measure',
+    {{ input('unit_of_measure',
+             _('Unit of Measure'),
              is_required=True,
              help=_('The unit in which the data values are measured. e.g. °C, kg, SGD or simple number counts.')) }}
-  
-    {{ textarea('comments', 'Comments',
-                _('Supplementary descriptive text to provide more information on the data. E.g. on the appropriate use of the data, website where it is hosted, etc.'))}}
-  
-    {{ input('agency_record_identifier', 'Agency Record Identifier',
-             help=_('An  alpha-numeric  sequence  which  public  sector  agencies  are  currently  using  within  their  agencies  to uniquely identify the associated data.')) }}
-  
-    {{ input('data_provider', 'Data Provider / Distributor',
+
+    {{ textarea('comments',
+                _('Comments'),
+                help=_('Supplementary descriptive text to provide more information on the data. E.g. on the appropriate use of the data, website where it is hosted, etc.'))}}
+
+    {{ input('agency_record_identifier',
+             _('Agency Record Identifier'),
+             help=_('An alpha-numeric sequence which public sector agencies  are currently using within their agencies to uniquely identify the associated data.')) }}
+
+    {{ input('data_provider',
+             _('Data Provider / Distributor'),
              is_required=True,
-             help=_('The  agency  which  produces  data  or  metadata.    E.g.  labour  productivity  is  produced  (computed  and disseminated) by DOS but it is based on data from MOM which is the compiling agency.'))
-           }}
-  
-    {{ input('data_provider_contact_name', 'Contact Name', is_required=True,
-             classes='medium') }}
-    {{ input('data_provider_contact_designation', 'Contact Designation',
-             is_required=True,
-             classes='medium') }}
-    {{ input('data_provider_contact_department', 'Contact Department',
-             is_required=True,
-             classes='medium') }}
+             help=_('The agency which produces data or metadata. E.g. labour productivity is produced (computed and disseminated) by DOS but it is based on data from MOM which is the compiling agency.')) }}
+
+    {{ input('data_provider_contact_name',
+             _('Contact Name'),
+             is_required=True, classes='medium') }}
+    {{ input('data_provider_contact_designation',
+             _('Contact Designation'),
+             is_required=True, classes='medium') }}
+    {{ input('data_provider_contact_department',
+             _('Contact Department'),
+             is_required=True, classes='medium') }}
     {{ input('data_provider_contact_telephone_number',
-             'Contact Telephone Number', is_required=True, type='tel',
-             classes='medium') }}
-    {{ input('data_provider_contact_email_address', 'Contact Email Address',
-             is_required=True, type='email',
-             classes='medium') }}
-  
-    {{ input('data_provider_alternate_contact_name', 'Alternate Contact Name',
-             is_required=True,
-             classes='medium') }}
+             _('Contact Telephone Number'),
+             is_required=True, type='tel', classes='medium') }}
+    {{ input('data_provider_contact_email_address',
+             _('Contact Email Address'),
+             is_required=True, type='email', classes='medium') }}
+
+    {{ input('data_provider_alternate_contact_name',
+             _('Alternate Contact Name'),
+             is_required=True, classes='medium') }}
     {{ input('data_provider_alternate_contact_designation',
-             'Alternate Contact Designation', is_required=True,
-             classes='medium') }}
+             _('Alternate Contact Designation'),
+             is_required=True, classes='medium') }}
     {{ input('data_provider_alternate_contact_department',
-             'Alternate Contact Department', is_required=True,
-             classes='medium') }}
+             _('Alternate Contact Department'),
+             is_required=True, classes='medium') }}
     {{ input('data_provider_alternate_contact_telephone_number',
-             'Alternate Contact Telephone Number', is_required=True,
-             type='tel',
-             classes='medium') }}
+             _('Alternate Contact Telephone Number'),
+             is_required=True, type='tel', classes='medium' ) }}
     {{ input('data_provider_alternate_contact_email_address',
-             'Alternate Contact Email Address', is_required=True,
-             type='email',
-             classes='medium') }}
-  
-    {{ input('data_compiler', 'Data Compiler / Source (if different from Data Provider / Distributor)',
+             _('Alternate Contact Email Address'),
+             is_required=True, type='email', classes='medium') }}
+
+    {{ input('data_compiler',
+             _('Data Compiler / Source (if different from Data Provider / Distributor)'),
              help=_('The agency compiling the data being reported.')) }}
-    {{ input('data_compiler_contact_name', 'Contact Name',
+    {{ input('data_compiler_contact_name',
+             _('Contact Name'),
              classes='medium') }}
-    {{ input('data_compiler_contact_designation', 'Contact Designation',
+    {{ input('data_compiler_contact_designation',
+             _('Contact Designation'),
              classes='medium') }}
-    {{ input('data_compiler_contact_department', 'Contact Department',
+    {{ input('data_compiler_contact_department', _('Contact Department'),
              classes='medium') }}
-    {{ input('data_compiler_contact_telephone_number', 'Contact Telephone Number',
-             type='tel',
-             classes='medium') }}
-    {{ input('data_compiler_contact_email_address', 'Contact Email Address',
-             type='email',
-             classes='medium') }}
-  
+    {{ input('data_compiler_contact_telephone_number',
+             _('Contact Telephone Number'),
+             type='tel', classes='medium') }}
+    {{ input('data_compiler_contact_email_address',
+             _('Contact Email Address'),
+             type='email', classes='medium') }}
+
     <div class="form-actions">
       <p class="action-info small">
         {%- trans -%}
@@ -344,4 +364,4 @@
       <button class="btn btn-primary" type="submit" name="save">{% block save_button_text %}{{ _('Next') }}{% endblock %}</button>
     </div>
   </form>
-  </div>
+</div>
