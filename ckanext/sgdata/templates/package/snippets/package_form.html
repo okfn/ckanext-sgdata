@@ -30,25 +30,8 @@
              {% if is_disabled %}disabled{% endif %}>
       
     </div>
-<<<<<<< HEAD
   </div>
 {% endmacro %}
-
-{% macro select(name, label, options, is_required=False, is_disabled=False, value='', help='') -%}
-  <div class="small control-group">
-    <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
-    {% if help %}<a href="#" data-toggle="tooltip" title="{{ help }}" class="tip"><i class="icon-question-sign"></i></a>{% endif %}
-    <div class="controls">
-      <select id="field-{{ name }}" name="{{ name }}"
-              {% if is_disabled %}disabled{% endif %}>
-        {% for option in options %}
-          <option {% if option == value %}selected{% endif %}>
-            {{ option }}
-          </option>
-        {% endfor %}
-      </select>
-=======
-  {% endmacro %}
   
   {% macro select(name, label, options, is_required=False, disabled=False, value='', help='') -%}
     <div class="small control-group">
@@ -64,7 +47,6 @@
             {% endfor %}
         </select>
       </div>
->>>>>>> master
     </div>
   </div>
 {% endmacro %}
@@ -125,14 +107,8 @@
     {% set show_visibility_selector = dataset_has_organization or (organizations_available and (user_is_sysadmin or dataset_is_draft)) %}
     {% set can_create_unowned_datasets = h.check_config_permission('create_unowned_dataset') %}
     {% set existing_org = data.owner_org or data.group_id %}
-<<<<<<< HEAD
-
-    {{ textarea('notes',
+    {{ textarea('purpose',
                 _('Purpose'),
-=======
-    
-    {{ textarea('purpose', _('Purpose'),
->>>>>>> master
                 help=_('Context under which data is defined or used.  E.g., Survey, Regulatory purposes.'))}}
 
     <div class="large control-group">
