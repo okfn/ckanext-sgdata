@@ -585,6 +585,9 @@ a.tag:hover {
 .masthead .content {
   position: static;
 }
+.masthead .content .navigation {
+  margin-right: 0;
+}
 .masthead .content .nav {
   display: table;
   width: 100%;
