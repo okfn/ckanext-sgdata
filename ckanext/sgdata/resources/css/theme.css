@@ -499,6 +499,11 @@ a.tag:hover {
 .media-grid .media-item .media-heading {
   padding-top: 15px;
   margin-top: 10px;
+  height: 45px;
+  overflow: hidden;
+}
+.media-grid .media-item p {
+  display: none;
 }
 .media-grid .media-item .count {
   padding-bottom: 15px;

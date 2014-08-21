@@ -5,4 +5,7 @@
       <img src="{{ group.image_display_url or h.url_for_static('/base/images/placeholder-group.png') }}" alt="{{ group.name }}">
     </div>
   {% endblock %}
+  {% block title %}
+    <h3 class="media-heading">{{ h.markdown_extract(group.display_name, extract_length=40) }}</h3>
+  {% endblock %}
   
