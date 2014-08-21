@@ -1,9 +1,6 @@
 {% ckan_extends %}
 
-{% block bodytag %}
-{{ super() }}
- class="resource-read"
-{% endblock %}
+{% block bodytag %}{{ super() }} class="resource-read"{% endblock %}
 
 {% block pre_primary %}
   <section class="module module-resource">
@@ -11,8 +8,8 @@
       <div class="toolbar">
         <ol class="breadcrumb">
           {% block breadcrumb_content %}
-          {% snippet 'snippets/home_breadcrumb_item.html' %}
-          {{ super() }}
+            {% snippet 'snippets/home_breadcrumb_item.html' %}
+            {{ super() }}
           {% endblock %}
         </ol>
       </div>

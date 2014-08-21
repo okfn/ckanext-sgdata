@@ -23,3 +23,9 @@ follow these steps:
     `./bin/build-combined-ckan-mo.sh`
 
 * Restart the web server.
+
+## Setup front end
+
+* Dependancies `node` <http://nodejs.org/> & `bower` <http://bower.io/>
+* Then: `bower update`
+* Restart web server

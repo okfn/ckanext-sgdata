@@ -521,6 +521,7 @@ class SGDataPackageController(toolkit.BaseController):
         try:
             toolkit.c.pkg_dict = toolkit.get_action('package_show')(context,
                                                                     data_dict)
+            toolkit.c.pkg = context['package']
         except toolkit.ObjectNotFound:
             toolkit.abort(404, _('Dataset not found'))
         except toolkit.NotAuthorized:

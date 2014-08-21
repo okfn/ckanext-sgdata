@@ -1,0 +1,8 @@
+{
+  "name": "ckanext-sgdata",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery-ui": "1.11.x",
+    "open-sans-fontface": "1.1.x"
+  }
+}

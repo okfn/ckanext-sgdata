@@ -174,7 +174,8 @@ section.grey.horizontal {
 }
 .nav-pills > .active > a,
 .nav-pills > .active > a:hover,
-.nav-pills > .active > a:focus {
+.nav-pills > .active > a:focus,
+.masthead .navigation .nav-pills li.active a {
   background-color: #51a0d8;
 }
 .box-list {

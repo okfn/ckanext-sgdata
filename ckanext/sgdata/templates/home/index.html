@@ -5,7 +5,6 @@
 {% block maintag %}{% endblock %}
 {% block toolbar %}{% endblock %}
 
-
 {% block content %}
   <div class="homepage">
     <div class="container">
@@ -21,11 +20,11 @@
     <section class="grey horizontal">
       <div class="container">
         {{ self.flash() }}
-    
+
         {% block primary_content %}
           <div role="main">
             <div class="container">
-                
+
               <ul class="box-list">
                 <li class="data">
                   <a href="dataset">
@@ -33,14 +32,14 @@
                     <p>Browse, search and filter all datasets</p>
                   </a>
                 </li>
-                
+
                 <li class="agencies">
                   <a href="organization">
                     <h3>Browse Agencies</h3>
                     <p>Browse collections of datasets</p>
                   </a>
                 </li>
-                
+
                 {% if c.userobj %}
                 <li class="profile">
                   <a href="{{ h.url_for(controller='user', action='read', id=c.userobj.name) }}">
@@ -56,7 +55,7 @@
                   </a>
                 </li>
                 {% endif %}
-                
+
                 {% if c.userobj %}
                 <li class="add-data">
                   <a href="dataset/new">
@@ -64,14 +63,14 @@
                     <p>Create a new collection of data files</p>
                   </a>
                 </li>
-                
+
                 <li class="add-agency">
                   <a href="organization/new">
                     <h3>Add an Agency</h3>
                     <p>Create and manage collections of datasets</p>
                   </a>
                 </li>
-                
+
                 <li class="dashboard">
                   <a href="{{ h.url_for(controller='user', action='dashboard') }}">
                     <h3>Dashboard</h3>
@@ -81,9 +80,9 @@
                   </a>
                 </li>
                 {% endif %}
-                
+
               </ul>
-              
+
             </div>
           </div>
         {% endblock %}

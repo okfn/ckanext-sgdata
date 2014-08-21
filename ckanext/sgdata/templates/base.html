@@ -1,19 +1,14 @@
 {% ckan_extends %}
 
 {% block styles %}
-    {{ super() }}
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
-    {% resource 'theme/css/theme.css' %}
-    {% resource 'theme/js/theme.js' %}
-
+  {{ super() }}
+  {% resource 'theme/vendor/open-sans-fontface/open-sans.css' %}
+  {% resource 'theme/vendor/jquery-ui/themes/smoothness/jquery-ui.css' %}
+  {% resource 'theme/css/theme.css' %}
 {% endblock %}
 
 {% block scripts %}
-    {{ super() }}
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
-    <script>
-        $( ".datepicker" ).datepicker();
-    </script>
+  {{ super() }}
+  {% resource 'theme/vendor/jquery-ui/jquery-ui.js' %}
+  {% resource 'theme/js/theme.js' %}
 {% endblock %}
