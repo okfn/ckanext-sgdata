@@ -106,7 +106,7 @@
         {% snippet "snippets/organization.html", organization=pkg.organization, has_context_title=true %}
       {% endif %}
     {% endblock %}
-    {% if pkg.department %}
+    {% if pkg.department and pkg.department != 'none' %}
      {{ h.department(pkg.department) }}
     {% endif %}
 

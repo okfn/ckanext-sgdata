@@ -245,6 +245,13 @@ def departments():
                 'PPD': { 'value': 'PPD', 'label': 'Policy Planning Division'},
                 'PPI': { 'value': 'PPI', 'label': 'Producer Price Indices'},
                 }
+        },
+        'other': {
+            'value': 'other',
+            'label': 'Other agency',
+            'departments': {
+                'none': { 'value': 'none', 'label': 'No department'},
+                }
         }
     }
 
