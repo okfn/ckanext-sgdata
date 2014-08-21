@@ -269,7 +269,10 @@ def last_update_by(pkg_dict):
 
 
 def first_item_only(value, context):
-    return value[0]
+    if value:
+        return value[0]
+    else:
+        return None
 
 
 class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
