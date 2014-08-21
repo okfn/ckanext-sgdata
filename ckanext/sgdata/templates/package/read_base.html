@@ -32,11 +32,12 @@
     {% endif %}
   </div>
 
-  {# {% set identifier = h.sg_data_record_identifier(pkg) %}
-    {% if identifier %}
-      <h2>SG Data Record Identifier</h2>
-      {{ identifier }}
-    {% endif %} #}
+  <div class="module module-narrow module-shallow context-info">
+    <h2 class="module-heading">SG Data Record Identifier</h2>
+    <section class="module-content">
+      {{ pkg.id }}
+    </section>
+  </div>
 
    {% for name, title in ( ('type_of_data_collection', 'Type of Data Collection'),
                            ('frequency', 'Frequency'),
@@ -74,4 +75,3 @@
   {% endblock %}
 
 {% endblock %}
-

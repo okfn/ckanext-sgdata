@@ -340,6 +340,27 @@ a.tag {
     width:182px;
     padding-bottom:0;
     
+    .media-image {
+      height:130px;
+      background-size:contain;
+      background-repeat:no-repeat;
+      background-position:center center;
+      
+      img {
+        display:none;
+      }
+      
+      .ie8 & {
+        background-image:none !important;
+        text-align:center;
+        
+        img {
+          display:block;
+          max-height:100%;
+        }
+      }
+    }
+    
     .media-heading,
     p,
     .count {

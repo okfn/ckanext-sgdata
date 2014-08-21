@@ -1,0 +1,8 @@
+{% ckan_extends %}
+
+  {% block image %}
+    <div class="media-image" style="background-image:url({{ organization.image_display_url or h.url_for_static('/base/images/placeholder-organization.png') }})">
+      <img src="{{ organization.image_display_url or h.url_for_static('/base/images/placeholder-organization.png') }}" alt="{{ organization.name }}">
+    </div>
+  {% endblock %}
+  

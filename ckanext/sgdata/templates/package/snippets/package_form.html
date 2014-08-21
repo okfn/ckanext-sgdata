@@ -24,7 +24,7 @@
     <label class="control-label" for="field-{{ name }}">{{ label }}</label>
     <a href="#" data-toggle="tooltip" title="The date on which the metadata will be made available." class="tip"><i class="icon-question-sign"></i></a>
     <div class="controls">
-      <input type="date" id="field-{{ name }}" name="{{ name }}"
+      <input type="text" id="field-{{ name }}" name="{{ name }}"
              class="datepicker" value="{{ value or data[name] }}"
              data-toggle="datepicker"
              {% if is_disabled %}disabled{% endif %}>
@@ -33,20 +33,19 @@
   </div>
 {% endmacro %}
   
-  {% macro select(name, label, options, is_required=False, disabled=False, value='', help='') -%}
-    <div class="small control-group">
-      <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
-      {% if help %}<a href="#" data-toggle="tooltip" title="{{ help }}" class="tip"><i class="icon-question-sign"></i></a>{% endif %}
-      <div class="controls">
-        <select id="field-{{ name }}" name="{{ name }}"
-                {% if disabled %}disabled{% endif %}>
-          {% for option in options %}
-            <option value="{{ option }}" {% if option == value %}selected{% endif %}>
-              {{ option }}
-            </option>
-            {% endfor %}
-        </select>
-      </div>
+{% macro select(name, label, options, is_required=False, disabled=False, value='', help='') -%}
+  <div class="small control-group">
+    <label class="control-label" for="field-{{ name }}">{{ required(is_required) }}{{ label }}</label>
+    {% if help %}<a href="#" data-toggle="tooltip" title="{{ help }}" class="tip"><i class="icon-question-sign"></i></a>{% endif %}
+    <div class="controls">
+      <select id="field-{{ name }}" name="{{ name }}"
+              {% if disabled %}disabled{% endif %}>
+        {% for option in options %}
+          <option value="{{ option }}" {% if option == value %}selected{% endif %}>
+            {{ option }}
+          </option>
+          {% endfor %}
+      </select>
     </div>
   </div>
 {% endmacro %}
@@ -116,7 +115,7 @@
       <a href="#" data-toggle="tooltip" title="{{ _('Period of time or point in time to which the data is intended to refer.') }}" class="tip"><i class="icon-question-sign"></i></a>
       <div class="controls">
         <div style="float:left;">
-          <input style="margin-bottom:0;" type="date"
+          <input style="margin-bottom:0;" type="text"
                  name="reference-period-start"
                  id="field-reference-period-start" class="datepicker"
                  data-toggle="datepicker"
@@ -129,7 +128,7 @@
         </div>
         <label class="to" for="field-reference-period-end">to</label>
         <div style="float:left;">
-          <input style="margin-bottom:0;" type="date" name="reference-period-end"
+          <input style="margin-bottom:0;" type="text" name="reference-period-end"
                  id="field-reference-period-end" class="datepicker"
                  data-toggle="datepicker"
                  value="{{ data['reference-period-end'] }}">
@@ -209,7 +208,7 @@
       {% endblock %}
     {% endif %}
 
-    <div class="clearfix">
+    {#<div class="clearfix">#}
       {{ select('type_of_data_collection',
                 _('Type of Data Collection'),
                 h.types_of_data_collection(), is_required=True,
@@ -225,9 +224,8 @@
                 h.frequencies(), is_required=True,
                 value=data.get('frequency')[0],
                 help=_('The time interval at which data is published.')) }}
-    </div>
 
-    {#<div style="clear:both;"></div>#}
+    <div style="clear:both;"></div>
 
     {{ textarea('zzz_administrative_source',
                 _('Survey / Administrative Source'),
@@ -363,7 +361,7 @@
           <a class="btn btn-danger pull-left" href="{% url_for controller='package', action='delete', id=data.id %}" data-module="confirm-action" data-module-i18n="{{ locale }}">{% block delete_button_text %}{{ _('Delete') }}{% endblock %}</a>
         {% endif %}
       {% endblock %}
-      <button class="btn btn-primary" type="submit" name="save">{% block save_button_text %}{{ _('Next: Link to data files') }}{% endblock %}</button>
+      <button class="btn btn-primary" type="submit" name="save">{% block save_button_text %}{{ _('Next') }}{% endblock %}</button>
     </div>
   </form>
 </div>

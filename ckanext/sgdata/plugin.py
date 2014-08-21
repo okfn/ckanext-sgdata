@@ -15,6 +15,11 @@ SIMPLE_MANDATORY_TEXT_FIELDS = (
     'conditions_of_use',
     'unit_of_measure',
     'data_provider',
+    'data_provider_contact_name',
+    'data_provider_contact_designation',
+    'data_provider_contact_department',
+    'data_provider_contact_telephone_number',
+    'data_provider_contact_email_address',
     'data_provider_alternate_contact_name',
     'data_provider_alternate_contact_designation',
     'data_provider_alternate_contact_department',
@@ -33,11 +38,6 @@ SIMPLE_OPTIONAL_TEXT_FIELDS = (
     'data_compiler_contact_department',
     'data_compiler_contact_telephone_number',
     'data_compiler_contact_email_address',
-    'data_provider_contact_name',
-    'data_provider_contact_designation',
-    'data_provider_contact_department',
-    'data_provider_contact_telephone_number',
-    'data_provider_contact_email_address',
     'department',
     'purpose',
     )
@@ -278,6 +278,7 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IRoutes, inherit=True)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.ITemplateHelpers)
+    plugins.implements(plugins.IFacets, inherit=True)
 
     # IConfigurer
 
@@ -434,7 +435,7 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
 
         map_.connect(
             'dataset_contact',
-            '/dataset/contact/{dataset_id}',
+            '/dataset/contact/{id}',
             controller='ckanext.sgdata.plugin:SGDataPackageController',
             action='contact')
 
@@ -465,6 +466,20 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
                 'department': department,
                 }
 
+    # IFacets
+
+    def dataset_facets(self, facets_dict, package_type):
+        facets_dict['tags'] = toolkit._('Keywords')
+        return facets_dict
+
+    def group_facets(self, facets_dict, group_type, package_type):
+        facets_dict['tags'] = toolkit._('Keywords')
+        return facets_dict
+
+    def organization_facets(self, facets_dict, organization_type, package_type):
+        facets_dict['tags'] = toolkit._('Keywords')
+        return facets_dict
+
 
 class SGDataPackageController(toolkit.BaseController):
 
@@ -483,12 +498,12 @@ class SGDataPackageController(toolkit.BaseController):
         base.redirect(helpers.url_for(controller='package', action='read',
                                       id=id))
 
-    def contact(self, dataset_id):
+    def contact(self, id):
 
         context = {'model': ckan.model, 'session': ckan.model.Session,
                    'user': toolkit.c.user or toolkit.c.author,
                    'for_view': True, 'auth_user_obj': toolkit.c.userobj}
-        data_dict = {'id': dataset_id}
+        data_dict = {'id': id}
 
         try:
             toolkit.c.pkg_dict = toolkit.get_action('package_show')(context,
@@ -498,6 +513,6 @@ class SGDataPackageController(toolkit.BaseController):
             toolkit.abort(404, _('Dataset not found'))
         except toolkit.NotAuthorized:
             toolkit.abort(401,
-                          ('Unauthorized to read dataset %s') % dataset_id)
+                          ('Unauthorized to read dataset %s') % id)
 
         return toolkit.render('package/contact.html')
