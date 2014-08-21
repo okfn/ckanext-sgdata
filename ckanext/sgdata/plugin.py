@@ -245,6 +245,13 @@ def departments():
                 'PPD': { 'value': 'PPD', 'label': 'Policy Planning Division'},
                 'PPI': { 'value': 'PPI', 'label': 'Producer Price Indices'},
                 }
+        },
+        'other': {
+            'value': 'other',
+            'label': 'Other agency',
+            'departments': {
+                'none': { 'value': 'none', 'label': 'No department'},
+                }
         }
     }
 
@@ -269,7 +276,10 @@ def last_update_by(pkg_dict):
 
 
 def first_item_only(value, context):
-    return value[0]
+    if value:
+        return value[0]
+    else:
+        return None
 
 
 class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
@@ -468,17 +478,20 @@ class SGDatasetForm(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
 
     # IFacets
 
-    def dataset_facets(self, facets_dict, package_type):
+    def _modify_facets_dict(self, facets_dict):
         facets_dict['tags'] = toolkit._('Keywords')
+        del facets_dict['res_format']
+        del facets_dict['license_id']
         return facets_dict
+
+    def dataset_facets(self, facets_dict, package_type):
+        return self._modify_facets_dict(facets_dict)
 
     def group_facets(self, facets_dict, group_type, package_type):
-        facets_dict['tags'] = toolkit._('Keywords')
-        return facets_dict
+        return self._modify_facets_dict(facets_dict)
 
     def organization_facets(self, facets_dict, organization_type, package_type):
-        facets_dict['tags'] = toolkit._('Keywords')
-        return facets_dict
+        return self._modify_facets_dict(facets_dict)
 
 
 class SGDataPackageController(toolkit.BaseController):
