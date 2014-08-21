@@ -28,7 +28,7 @@
     {% endif %}
 
     {% if 'agency_record_identifier' in pkg %}
-      <span class="agency_record_identifier">{{ pkg.agency_record_identifier[0] }}</span>
+      <span class="agency_record_identifier">{{ pkg.agency_record_identifier }}</span>
     {% endif %}
   </div>
 
@@ -50,7 +50,7 @@
         <div class="module module-narrow module-shallow context-info">
           <h2 class="module-heading">{{ title }}</h2>
           <section class="module-content">
-            {{ pkg[name][0] }}
+            {{ pkg[name] }}
           </section>
         </div>
       {% endif %}
