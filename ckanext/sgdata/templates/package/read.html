@@ -27,6 +27,11 @@
 
 {% endblock %}
 
+{% block package_tags %}
+  <h3>{{ _('Keywords') }}</h3>
+  {{ super() }}
+{% endblock %}
+
 {% block package_additional_info %}
 
   <div class="notes embedded-content">
